@@ -18,7 +18,7 @@ all: $(NAME)
 # Building executables
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-	@echo "\033[32;1mCompilation complete \033[5m✓ ✓ ✓\033[0m"
+	@echo "\033[32;1mMalu' and Vanessa's Minishell is ready to roll\033[5m✓ ✓ ✓\033[0m"
 	@echo "\033[35;1mProgram $(NAME) is ready to run.\033[0m"
 
 
