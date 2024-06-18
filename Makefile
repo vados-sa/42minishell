@@ -1,17 +1,18 @@
 NAME = minishell
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -Iincludes
 RM			= rm -rf
 
 # Paths
 OBJDIR = ./objects
+SRCDIR = ./src
 
 # Soure files
-SRC = 
+SRC = $(SRCDIR)/main.c
 
 # Object files
-OBJS = $(SRC:%.c=$(OBJDIR)/%.o)
+OBJS = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
@@ -23,7 +24,7 @@ $(NAME): $(OBJS)
 
 
 # Compilation rule for object files
-$(OBJDIR)/%.o: %.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
