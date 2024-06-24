@@ -6,7 +6,7 @@
 /*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/06/24 13:48:30 by vanessasant      ###   ########.fr       */
+/*   Updated: 2024/06/24 14:36:36 by vanessasant      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,20 @@
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+typedef struct {
+    char **argv; //(ainda checar)
+    char **envp;
+    int input;
+    int output;
+} teste;
+
+typedef struct {
+    char **argv;
+    int argc;
+    int input_fd;
+    int output_fd;
+    int is_builtin;
+} command_t;
 
 #endif
