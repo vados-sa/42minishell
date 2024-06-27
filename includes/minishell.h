@@ -6,7 +6,7 @@
 /*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/06/24 14:36:36 by vanessasant      ###   ########.fr       */
+/*   Updated: 2024/06/26 11:29:06 by vanessasant      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # define EXIT_SUCCESS 0
+# define EXIT_FAILURE 1
 
 # include <stdio.h>
 # include <stdlib.h>
