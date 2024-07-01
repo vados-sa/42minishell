@@ -6,33 +6,39 @@
 /*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/06/24 14:32:25 by vanessasant      ###   ########.fr       */
+/*   Updated: 2024/06/27 15:21:03 by vanessasant      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+void    promt(void)
+{
+	char    *rl;
+
+	while (1)
+	{
+		rl = readline("minishell> ");
+		if (rl == NULL)
+		{
+			printf("\n");
+			exit (EXIT_FAILURE);
+		}
+		if (rl[0] != '\0')
+		{
+			add_history(rl);
+			//Lexing and Parsing
+		}
+		printf("%s\n", rl);
+		free(rl);   
+	}
+}
+
 int	main(void)
 {
-	// Initialize
-    char    *rl;
-    char    *pwd;
-
-    pwd = getcwd(NULL, 0);
-    printf("pwd: %s\n", pwd);
-    // Interpret
-    while (1)
-    {
-        rl = readline("minishell> ");
-        if (rl == NULL)
-        {
-            printf("\n");
-            break ;
-        }
-        printf("%s\n", rl);
-        add_history(rl);
-        free(rl);
-    }
-    // Terminate
-    return (EXIT_SUCCESS);
+	// Initialization
+	// Interpretation
+	promt();
+	// Terminate
+	return (EXIT_SUCCESS);
 }
