@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/06/27 15:21:03 by vanessasant      ###   ########.fr       */
+/*   Updated: 2024/07/02 14:28:26 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,26 @@ void    promt(void)
 		{
 			add_history(rl);
 			//Lexing and Parsing
+			//Exec
 		}
 		printf("%s\n", rl);
-		free(rl);   
+		free(rl);
+		//cleanup   
 	}
 }
 
-int	main(void)
+int	main(int ac, char *av[], char **env)
 {
-	// Initialization
+	if (ac =! 1)
+	{
+		//error
+		return (EXIT_FAILURE);
+	}
+	av = NULL;
+	// Initialize data
+		// exit program if error -> check if mem management is necessary
 	// Interpretation
-	promt();
+	promt(); //cleanup is at the end of the loop
 	// Terminate
 	return (EXIT_SUCCESS);
 }
