@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/02 15:20:30 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/03 13:33:47 by vanessasant      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,26 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct s_database
+typedef struct s_token
 {
-	char	**envp;
-	int		input;
-	int		output;
-}	t_database;
+	char	*type;
+	char	*value;
+}	t_token;
+
+typedef struct s_command
+{
+	char	*name;
+	char	**args;
+}	t_command;
+
+typedef struct s_data
+{
+	char		**envp;
+	int			input;
+	int			output;
+	t_token		token;
+	t_command	command;
+}	t_data;
 
 
 #endif
