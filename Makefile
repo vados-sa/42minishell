@@ -1,8 +1,12 @@
 NAME = minishell
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -Iincludes
-LDFLAGS		= -lreadline
+# Mac:
+CFLAGS		= -Wall -Wextra -Werror -I/usr/local/opt/readline/include
+LDFLAGS		= -L/usr/local/opt/readline/lib -lreadline
+# Linux: 
+#CFLAGS		= -Wall -Wextra -Werror -Iincludes
+#LDFLAGS		= -lreadline
 RM			= rm -rf
 
 # Paths
@@ -10,7 +14,7 @@ OBJDIR = ./objects
 SRCDIR = ./src
 
 # Soure files
-SRC = $(SRCDIR)/main.c
+SRC = $(SRCDIR)/main.c $(SRCDIR)/signals.c
 
 # Object files
 OBJS = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
