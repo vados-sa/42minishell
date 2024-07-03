@@ -6,7 +6,7 @@
 /*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/03 13:33:47 by vanessasant      ###   ########.fr       */
+/*   Updated: 2024/07/03 17:01:19 by vanessasant      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,8 @@ typedef struct s_data
 	t_command	command;
 }	t_data;
 
+
+/*signals.c ******************************************************************/
+void	setup_signal_handlers();
 
 #endif

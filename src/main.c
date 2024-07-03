@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/02 14:28:26 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/07/03 17:04:34 by vanessasant      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    promt(void)
+void    minishell_loop(void) // t_data *data
 {
 	char    *rl;
 
 	while (1)
 	{
 		rl = readline("minishell> ");
-		if (rl == NULL)
+		if (rl == NULL) // rl being NULL means Ctrl-D was pressed, signaling an end-of-file (EOF)
 		{
 			printf("\n");
 			exit (EXIT_FAILURE);
@@ -36,18 +36,16 @@ void    promt(void)
 	}
 }
 
-int	main(int ac, char *av[], char **env)
+int	main(int ac, char *av[]/* , char **env */)
 {
-	if (ac =! 1)
-	{
-		//error
+	//t_data	*data;
+
+	if ((ac != 1))
 		return (EXIT_FAILURE);
-	}
-	av = NULL;
-	// Initialize data
+	(void)av;
+	setup_signal_handlers();
+	// init_env(data, env);
 		// exit program if error -> check if mem management is necessary
-	// Interpretation
-	promt(); //cleanup is at the end of the loop
-	// Terminate
+	minishell_loop();
 	return (EXIT_SUCCESS);
 }
