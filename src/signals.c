@@ -2,7 +2,7 @@
 
 static void signal_handler(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT) // Still have to check for possible allocated memory
 	{
 		rl_replace_line("", 0); // Clear the current input line
 		write(STDOUT_FILENO, "\n", 1);

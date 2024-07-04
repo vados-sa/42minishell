@@ -2,10 +2,10 @@ NAME = minishell
 
 CC			= cc
 # Mac:
-CFLAGS		= -Wall -Wextra -Werror -I/usr/local/opt/readline/include
+CFLAGS		= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -fsanitize=address
 LDFLAGS		= -L/usr/local/opt/readline/lib -lreadline
 # Linux: 
-#CFLAGS		= -Wall -Wextra -Werror -Iincludes
+#CFLAGS		= -Wall -Wextra -Werror -Iincludes -fsanitize=address
 #LDFLAGS		= -lreadline
 RM			= rm -rf
 
