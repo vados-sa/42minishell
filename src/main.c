@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/03 17:04:34 by vanessasant      ###   ########.fr       */
+/*   Updated: 2024/07/12 11:27:36 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    minishell_loop(void) // t_data *data
 
 	while (1)
 	{
-		rl = readline("minishell> ");
+		rl = readline("minishell$ ");
 		if (rl == NULL) // rl being NULL means Ctrl-D was pressed, signaling an end-of-file (EOF)
 		{
 			printf("\n");
@@ -49,6 +49,6 @@ int	main(int ac, char *av[]/* , char **env */)
 	setup_signal_handlers();
 	// init_env(data, env);
 		// exit program if error -> check if mem management is necessary
-	minishell_loop();
+	minishell_loop(/*data*/);
 	return (EXIT_SUCCESS);
 }
