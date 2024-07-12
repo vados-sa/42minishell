@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/12 12:30:49 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/07/12 12:36:27 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	unclosed_quotes(char *input)
 		else if (input[i] == '"' && !sing_quote_open)
 			doub_quote_open = !doub_quote_open;
 	}
+	if (sing_quote_open || doub_quote_open)
+		printf("Unclosed quote found.\n");
 	return (sing_quote_open || doub_quote_open);
 }
 
@@ -38,10 +40,7 @@ int	lexical_analysis(/* t_data *data,  */char *input)
 
 	i = 0;
 	if (unclosed_quotes(input) == 1)
-	{
-		printf("Unclosed quote found.\n");
 		return(/*free_things(), */1);
-	}
 	/* while(input[i])
 	{
 		
