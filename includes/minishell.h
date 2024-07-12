@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/03 17:01:19 by vanessasant      ###   ########.fr       */
+/*   Updated: 2024/07/09 15:50:16 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 typedef struct s_token
 {
-	char	*type;
+	char	*type; //typedef enum struct?
 	char	*value;
 }	t_token;
 
@@ -45,6 +45,7 @@ typedef struct s_command
 typedef struct s_data
 {
 	char		**envp;
+	char		*i_str;
 	int			input;
 	int			output;
 	t_token		token;
