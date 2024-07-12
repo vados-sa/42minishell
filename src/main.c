@@ -41,7 +41,10 @@ int	main(int ac, char *av[]/* , char **env */)
 	//t_data	*data;
 
 	if ((ac != 1))
+	{
+		printf("No arguments allowed!\n");
 		return (EXIT_FAILURE);
+	}
 	(void)av;
 	setup_signal_handlers();
 	// init_env(data, env);
