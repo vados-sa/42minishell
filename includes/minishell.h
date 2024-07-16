@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/09 15:50:16 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:01:03 by vanessasant      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct s_token
-{
-	char	*type; //typedef enum struct?
-	char	*value;
-}	t_token;
-
-typedef struct s_command
-{
-	char	*name;
-	char	**args;
-}	t_command;
-
-typedef struct s_data
-{
-	char		**envp;
-	char		*i_str;
-	int			input;
-	int			output;
-	t_token		token;
-	t_command	command;
-}	t_data;
-
+# include "../includes/libft.h"
+# include "../includes/get_next_line.h"
+# include "../includes/structures.h"
 
 /*signals.c ******************************************************************/
 void	setup_signal_handlers();
