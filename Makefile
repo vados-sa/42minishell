@@ -1,9 +1,10 @@
 NAME = minishell
 
 CC			= cc
-# Mac:
-CFLAGS		= -Wall -Wextra -Werror -I/opt/homebrew/opt/readline/include
-LDFLAGS		= -L/opt/homebrew/opt/readline/lib -lreadline
+# Malu Mac:
+#CFLAGS		= -Wall -Wextra -Werror -I/opt/homebrew/opt/readline/include
+#LDFLAGS		= -L/opt/homebrew/opt/readline/lib -lreadline
+# Vanessa Mac:
 #CFLAGS		= -Wall -Wextra -Werror -I/usr/local/opt/readline/include
 #LDFLAGS		= -L/usr/local/opt/readline/lib -lreadline
 # Linux: 
@@ -34,7 +35,7 @@ $(NAME): $(OBJS)
 	@make bonus -C $(LIBFT_DIR)
 	@make -C $(GNL_DIR)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -I$(HEADERS_DIR) $(LIBFT_DIR)/$(LIBFT) $(GNL_DIR)/$(GNL) -o $(NAME) 
-	@echo "\033[32;1mMalu' and Vanessa's Minishell is ready to roll\033[5m✓ ✓ ✓\033[0m"
+	@echo "\033[32;1mMalu' and Vanessa's Minishell is ready to roll\033[5m ✓ ✓ ✓\033[0m"
 	@echo "\033[35;1mProgram $(NAME) is ready to run.\033[0m"
 
 
