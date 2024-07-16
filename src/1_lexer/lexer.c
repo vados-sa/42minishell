@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/12 12:36:27 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:17:50 by vanessasant      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+typedef struct s_token
+{
+	char	*type; //typedef enum struct?
+	char	*value;
+}	t_token;
+
+typedef struct s_data
+{
+	char		**envp;
+	char		*i_str;
+	int			input;
+	int			output;
+	t_token		token;
+	t_command	command;
+}	t_data;
 
 /*Checks for any unclosed quotes. I none are found, it returns 0.*/
 int	unclosed_quotes(char *input)
@@ -34,16 +50,21 @@ int	unclosed_quotes(char *input)
 	return (sing_quote_open || doub_quote_open);
 }
 
+void	tokenize(/* t_data *data,  */char input)
+{
+	
+}
+
 int	lexical_analysis(/* t_data *data,  */char *input)
 {
 	int	i;
 
-	i = 0;
 	if (unclosed_quotes(input) == 1)
 		return(/*free_things(), */1);
-	/* while(input[i])
+	i = -1;
+	/* while(input[--i])
 	{
-		
+		tokenize(input[i]);
 	} */
 	return (0);
 }
