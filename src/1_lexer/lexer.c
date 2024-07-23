@@ -6,27 +6,11 @@
 /*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/16 14:17:50 by vanessasant      ###   ########.fr       */
+/*   Updated: 2024/07/23 11:11:59 by vanessasant      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-typedef struct s_token
-{
-	char	*type; //typedef enum struct?
-	char	*value;
-}	t_token;
-
-typedef struct s_data
-{
-	char		**envp;
-	char		*i_str;
-	int			input;
-	int			output;
-	t_token		token;
-	t_command	command;
-}	t_data;
 
 /*Checks for any unclosed quotes. I none are found, it returns 0.*/
 int	unclosed_quotes(char *input)
@@ -50,22 +34,44 @@ int	unclosed_quotes(char *input)
 	return (sing_quote_open || doub_quote_open);
 }
 
-void	tokenize(/* t_data *data,  */char input)
+int	skip_white_spaces(char *input, int i)
 {
-	
+	while (input[i] == 32 || (input[i] >= 9 && input[i] <=13))
+		i++;
+	return(i);
+}
+
+int	check_for_operator(char c)
+{
+	if (c == ">" || c == "<" || c == "|")
+		return (1);
+	return (0);
+}
+
+int	tokenize(/* t_data *data,  */char *input)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while(input[i])
+	{
+		i += skip_white_spaces(input, i);
+		j = 0;
+		if (check_for_operator(input[i]) == 1)
+			handle_operator();
+		else
+			read_word();
+	}
+	return (0);
 }
 
 int	lexical_analysis(/* t_data *data,  */char *input)
 {
-	int	i;
-
 	if (unclosed_quotes(input) == 1)
 		return(/*free_things(), */1);
-	i = -1;
-	/* while(input[--i])
-	{
-		tokenize(input[i]);
-	} */
+	tokenize(input);
 	return (0);
 }
 
