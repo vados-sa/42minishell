@@ -1,6 +1,7 @@
 NAME = libft.a
 
-SRC =	$(addsuffix .c, ft_isalnum			\
+SRC =	$(addsuffix .c, ft_isspace			\
+						ft_isalnum			\
 						ft_isalpha			\
 						ft_isascii			\
 						ft_isdigit			\
@@ -36,7 +37,8 @@ SRC =	$(addsuffix .c, ft_isalnum			\
 						ft_putendl_fd		\
 						ft_itoa				\
 						ft_strmapi			\
-						ft_striteri)
+						ft_striteri			\
+						ft_arrlen)
 
 BONUS_SRC = $(addsuffix .c, ft_lstnew		\
 							ft_lstadd_front	\

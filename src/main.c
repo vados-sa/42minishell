@@ -3,42 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/12 11:27:36 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/07/23 14:46:41 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    minishell_loop(void) // t_data *data
+void    minishell_loop(t_data *data, char **env)
 {
-	char    *rl;
-
+	init_data(data, env);
 	while (1)
 	{
-		rl = readline("minishell$ ");
-		if (rl == NULL) // rl being NULL means Ctrl-D was pressed, signaling an end-of-file (EOF)
+		data->args = readline("minishell$ ");
+		if (!data->args) // check: rl being NULL means Ctrl-D was pressed, signaling an end-of-file (EOF)
 		{
 			printf("\n");
 			exit (EXIT_FAILURE);
 		}
-		if (rl[0] != '\0')
+		if (data->args[0]) //check the comparison
+			add_history(data->args);
+		if (lex(data) || parse(data) || execute(data)) //check if needs to be lex(data) or !lex(data)
 		{
-			add_history(rl);
-			//Lexing and Parsing
-			//Exec
+			//free_memory
+			continue ;
 		}
-		printf("%s\n", rl);
-		free(rl);
-		//cleanup   
+		//free_memory
 	}
 }
 
-int	main(int ac, char *av[]/* , char **env */)
+int	main(int ac, char *av[], char **env)
 {
-	//t_data	*data;
+	t_data	data;
 
 	if ((ac != 1))
 	{
@@ -46,9 +44,10 @@ int	main(int ac, char *av[]/* , char **env */)
 		return (EXIT_FAILURE);
 	}
 	(void)av;
-	setup_signal_handlers();
+	setup_signal_handlers(); //look interactive and non interactive
+	ft_memset(&data, 0, sizeof(data));
+	minishell_loop(&data, env);
 	// init_env(data, env);
 		// exit program if error -> check if mem management is necessary
-	minishell_loop(/*data*/);
 	return (EXIT_SUCCESS);
 }
