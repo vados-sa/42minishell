@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:14:46 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/16 14:19:23 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/23 11:23:04 by vanessasant      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ typedef struct s_command
 
 typedef struct s_data
 {
+	char		*args;
 	char		**envp;
 	int			input;
 	int			output;
 	t_token		token;
-	t_command	command;
+	t_command	*command;
 }	t_data;
 
 #endif
