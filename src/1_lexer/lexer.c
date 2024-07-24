@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/24 17:28:28 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:31:02 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ int	lex(t_data *data)
 	cpy_arg = data->args;
 	if (check_input(cpy_arg))
 		return (EXIT_FAILURE);
-	tokenize(cpy_arg);
+	if (tokenize(cpy_arg))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
