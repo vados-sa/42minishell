@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/24 17:31:02 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:36:43 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,6 @@ int	look_for_operator(char c)
 	return (0);
 }
 
-int	handle_operator()
-{
-	//check if there is information after the operator
-	//check if it is only "<" and ">" OR "<<" and ">>"
-	//handle redirection
-	//handle pipe
-	//create token
-}
 
 int	tokenize(char *cpy_arg)
 {
@@ -101,7 +93,6 @@ int	check_input(char *cpy_arg)
 		return (print_error_code(OPER_SINTAX_ERROR, cpy_arg[len - 1], EXIT_FAILURE));
 	return (EXIT_SUCCESS);
 }
-
 
 int	lex(t_data *data)
 {
