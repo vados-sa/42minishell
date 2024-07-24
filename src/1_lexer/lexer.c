@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/24 17:36:43 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:39:07 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ int	look_for_operator(char c)
 
 int	tokenize(char *cpy_arg)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = 0;
-	while(cpy_arg[i])
+	while (cpy_arg[i])
 	{
 		j = i;
 		if (ft_isspace(cpy_arg[i]))
@@ -73,7 +73,7 @@ int	tokenize(char *cpy_arg)
 int	check_input(char *cpy_arg)
 {
 	int	i;
-	int len;
+	int	len;
 
 	i = 0;
 	while (ft_isspace(cpy_arg[i]))
