@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:14:46 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/23 13:59:26 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/24 12:45:10 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_data
 	int			input;
 	int			output;
 	int			exit_status;
-	t_token		token;
+	t_token		*token;
 	t_command	*command;
 }	t_data;
 

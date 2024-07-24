@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vanessasantos <vanessasantos@student.42    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/24 10:36:12 by vanessasant      ###   ########.fr       */
+/*   Updated: 2024/07/24 13:01:16 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
+# define TOKEN_SINTAX_ERROR "syntax error near unexpected token "
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -47,6 +48,6 @@ void	setup_signal_handlers();
 
 
 /*utils***********************************************************************/
-int     print_exit_code(char *message, char tkn, int exit_code);
+int		print_error_code(char *message, char tkn, int exit_code);
 
 #endif

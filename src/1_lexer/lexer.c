@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/23 17:28:16 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:28:28 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,33 @@ int	unclosed_quotes(char *input)
 	{
 		if (input[i] == '\'' && !doub_quote_open)
 			sing_quote_open = !sing_quote_open;
-		else if (input[i] == '"' && !sing_quote_open)
+		else if (input[i] == '\"' && !sing_quote_open)
 			doub_quote_open = !doub_quote_open;
 	}
 	return (sing_quote_open || doub_quote_open);
 }
 
-/* int	skip_white_spaces(char *input, int i)
+int	look_for_quotes(char c)
 {
-	while (input[i] == 32 || (input[i] >= 9 && input[i] <=13))
-		i++;
-	return(i);
-} */
+	if (c == '\'' || c == '\"')
+		return (1);
+	return (0);
+}
 
-int	check_for_operator(char c)
+int	look_for_operator(char c)
 {
 	if (c == ">" || c == "<" || c == "|")
 		return (1);
 	return (0);
+}
+
+int	handle_operator()
+{
+	//check if there is information after the operator
+	//check if it is only "<" and ">" OR "<<" and ">>"
+	//handle redirection
+	//handle pipe
+	//create token
 }
 
 int	tokenize(char *cpy_arg)
@@ -52,22 +61,27 @@ int	tokenize(char *cpy_arg)
 	int	j;
 
 	i = 0;
-	j = 0;
 	while(cpy_arg[i])
 	{
-		i += skip_white_spaces(cpy_arg, i); //check
-		j = 0;
-		if (check_for_operator(cpy_arg[i]) == 1)
-			handle_operator();
+		j = i;
+		if (ft_isspace(cpy_arg[i]))
+			i++;
+		else if (look_for_operator(cpy_arg[i]))
+			i += handle_operator();
+		else if (look_for_quotes(cpy_arg[i]))
+			i += handle_quotes();
 		else
-			read_word();
+			i += handle_word();
+		if (i < j)
+			return (EXIT_FAILURE);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	check_input(char *cpy_arg)
 {
 	int	i;
+	int len;
 
 	i = 0;
 	while (ft_isspace(cpy_arg[i]))
@@ -77,9 +91,15 @@ int	check_input(char *cpy_arg)
 		i++;
 	}
 	if (cpy_arg[i] == '|')
-		return (/*CREATE FUNCTION TO PRINT ERROR AND RETURN ERROR*/);
+		return (print_error_code(PIPE_SINTAX_ERROR, cpy_arg[i], EXIT_FAILURE));
 	if (unclosed_quotes(cpy_arg))
-		return (/*CREATE FUNCTION TO PRINT ERROR AND RETURN ERROR*/);
+		return (print_error_code(QUOTE_SINTAX_ERROR, cpy_arg[i], EXIT_FAILURE));
+	len = ft_strlen(cpy_arg);
+	while (len > 0 && ft_isspace(cpy_arg[len - 1]))
+		len--;
+	if (look_for_operator(cpy_arg[len -1]))
+		return (print_error_code(OPER_SINTAX_ERROR, cpy_arg[len - 1], EXIT_FAILURE));
+	return (EXIT_SUCCESS);
 }
 
 
