@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/24 13:01:16 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:40:19 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
-# define TOKEN_SINTAX_ERROR "syntax error near unexpected token "
+# define PIPE_SINTAX_ERROR "syntax error near unexpected token "
+# define QUOTE_SINTAX_ERROR "syntax error: unclosed quote "
+# define OPER_SINTAX_ERROR "syntax error near unexpected token"
 
 # include <stdio.h>
 # include <stdlib.h>
