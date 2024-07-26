@@ -100,7 +100,7 @@ int main(void) {
         "<>",
         "><",
         "< ",
-        "> ",
+        "> | echo", // should be an error
         "<< more text",
         ">> more text",
 		"<> more text",

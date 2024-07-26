@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/24 17:39:07 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/26 10:17:03 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	look_for_operator(char c)
 }
 
 
-int	tokenize(char *cpy_arg)
+int	tokenize(t_data *data, char *cpy_arg)
 {
 	int	i;
 	int	j;
@@ -103,7 +103,7 @@ int	lex(t_data *data)
 	cpy_arg = data->args;
 	if (check_input(cpy_arg))
 		return (EXIT_FAILURE);
-	if (tokenize(cpy_arg))
+	if (tokenize(data, cpy_arg))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
