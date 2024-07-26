@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/26 10:17:03 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/07/26 16:26:00 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,6 @@ int	tokenize(t_data *data, char *cpy_arg)
 		if (i < j)
 			return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCCESS);
-}
-
-int	check_input(char *cpy_arg)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	while (ft_isspace(cpy_arg[i]))
-	{
-		if (!cpy_arg[i + 1])
-			return (EXIT_FAILURE);
-		i++;
-	}
-	if (cpy_arg[i] == '|')
-		return (print_error_code(PIPE_SINTAX_ERROR, cpy_arg[i], EXIT_FAILURE));
-	if (unclosed_quotes(cpy_arg))
-		return (print_error_code(QUOTE_SINTAX_ERROR, cpy_arg[i], EXIT_FAILURE));
-	len = ft_strlen(cpy_arg);
-	while (len > 0 && ft_isspace(cpy_arg[len - 1]))
-		len--;
-	if (look_for_operator(cpy_arg[len -1]))
-		return (print_error_code(OPER_SINTAX_ERROR, cpy_arg[len - 1], EXIT_FAILURE));
 	return (EXIT_SUCCESS);
 }
 

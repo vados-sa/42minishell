@@ -6,13 +6,13 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 12:55:02 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/24 13:01:24 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/26 16:25:00 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int print_error_code(char *message, char tkn, int exit_code)
+int	print_error_code(char *message, char tkn, int exit_code)
 {
 	printf("%s'%c'\n", message, tkn);
 	return (exit_code);

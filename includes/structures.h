@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:14:46 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/24 12:45:10 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/26 14:36:00 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 typedef struct s_token
 {
-	char	*type;
-	char	*value;
+	char			*value;
+	char			*type;
+	int				type_quote;
+	struct s_token	*next;
 }	t_token;
 
 typedef struct s_command

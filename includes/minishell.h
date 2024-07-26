@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/24 17:40:19 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/26 16:50:41 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
+# define PIPE "|"
+# define HEREDOC "<<"
+# define APPEND ">>"
+# define INPUT "<"
+# define OUTPUT ">"
+# define OTHERS "CFA" //comand-flag-argument
+# define SINGLE_Q '\''
+# define DOUBLE_Q '\"'
 # define PIPE_SINTAX_ERROR "syntax error near unexpected token "
 # define QUOTE_SINTAX_ERROR "syntax error: unclosed quote "
 # define OPER_SINTAX_ERROR "syntax error near unexpected token"
@@ -41,7 +49,19 @@
 void	setup_signal_handlers();
 
 /*1_lexer*********************************************************************/
-
+int		lex(t_data *data);
+int		check_input(char *cpy_arg);
+int		tokenize(t_data *data, char *cpy_arg);
+int		look_for_operator(char c);
+int		look_for_quotes(char c);
+int		unclosed_quotes(char *input);
+int		check_double_operator(char *arg);
+int		assign_type_redirection(char *arg, char **type);
+int		handle_redirection(char *arg, t_token **token);
+int		handle_operator(t_data *data, char *arg, int pos);
+int		handle_quotes(t_data *data, char *arg, int pos);
+int		handle_word(t_data *data, char *arg, int pos);
+t_token	*create_token(int size_lengh, char *str, char *type, char *type_quote);
 
 /*2_parser********************************************************************/
 
