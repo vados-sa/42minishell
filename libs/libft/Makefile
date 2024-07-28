@@ -49,7 +49,8 @@ BONUS_SRC = $(addsuffix .c, ft_lstnew		\
 							ft_lstdelone	\
 							ft_lstclear		\
 							ft_lstiter		\
-							ft_lstmap)
+							ft_lstmap		\
+							ft_lst_last_mod)
 
 OBJS := $(SRC:%.c=%.o)
 

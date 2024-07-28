@@ -6,46 +6,11 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/26 16:26:00 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/28 11:26:04 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/*Checks for any unclosed quotes. I none are found, it returns 0.*/
-int	unclosed_quotes(char *input)
-{
-	int	i;
-	int	sing_quote_open;
-	int	doub_quote_open;
-
-	i = -1;
-	sing_quote_open = 0;
-	doub_quote_open = 0;
-	while (input[++i])
-	{
-		if (input[i] == '\'' && !doub_quote_open)
-			sing_quote_open = !sing_quote_open;
-		else if (input[i] == '\"' && !sing_quote_open)
-			doub_quote_open = !doub_quote_open;
-	}
-	return (sing_quote_open || doub_quote_open);
-}
-
-int	look_for_quotes(char c)
-{
-	if (c == '\'' || c == '\"')
-		return (1);
-	return (0);
-}
-
-int	look_for_operator(char c)
-{
-	if (c == ">" || c == "<" || c == "|")
-		return (1);
-	return (0);
-}
-
 
 int	tokenize(t_data *data, char *cpy_arg)
 {
@@ -59,15 +24,15 @@ int	tokenize(t_data *data, char *cpy_arg)
 		if (ft_isspace(cpy_arg[i]))
 			i++;
 		else if (look_for_operator(cpy_arg[i]))
-			i += handle_operator();
+			i += handle_operator(data, &cpy_arg[i]);
 		else if (look_for_quotes(cpy_arg[i]))
-			i += handle_quotes();
+			i += handle_quotes(data, &cpy_arg[i]);
 		else
-			i += handle_word();
+			i += handle_word(data, &cpy_arg[i]);
 		if (i < j)
-			return (EXIT_FAILURE);
+			return (EXIT_FAIL);
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 int	lex(t_data *data)
@@ -78,20 +43,77 @@ int	lex(t_data *data)
 	i = 0;
 	cpy_arg = data->args;
 	if (check_input(cpy_arg))
-		return (EXIT_FAILURE);
+		return (EXIT_FAIL);
 	if (tokenize(data, cpy_arg))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		return (EXIT_FAIL);
+	return (EXIT_SUCC);
 }
 
-/* int	main(void)
-{
-	char	*rl;
-	/* t_data	*data; 
-
-	rl = "echo \"Hi\"I'm \"Vanessa\"";
-	printf("%s\n", rl);
-	lexical_analysis(/* data,  rl);
-	return (0);
+/* void free_tokens(t_token *token) {
+    t_token *temp;
+    while (token) {
+        temp = token;
+        token = token->next;
+        free(temp->value);
+        free(temp);
+    }
 }
-*/
+
+void print_tokens(t_token  *token) {
+    while (token) {
+        printf("Value: %s, Type: %s, Quote Type: %d\n", token->value, token->type, token->type_quote);
+        token = token->next;
+    }
+}
+
+void run_test(char *input) {
+    t_data data;
+    memset(&data, 0, sizeof(t_data));  // Initialize the data structure to zero
+    data.args = input;
+
+    // Call the lexer
+    printf("Input: %s\n", input);
+    fflush(stdout);
+    if (lex(&data) == EXIT_SUCC) {
+        // Print the tokens
+        printf("Lexing successful. Printing tokens...\n");
+        fflush(stdout);
+        print_tokens(data.token);
+    } else {
+        printf("Lexing failed.\n");
+        fflush(stdout);
+    }
+
+    // Free the allocated tokens
+    free_tokens(data.token);
+    printf("Tokens freed.\n");
+    fflush(stdout);
+}
+
+int main() {
+    printf("Test 1: Basic Command Without Arguments\n");
+    run_test("ls");
+
+    printf("\nTest 2: Basic Command With Arguments\n");
+    run_test("echo Hello World");
+
+    printf("\nTest 3: Command With Redirection\n");
+    run_test("echo Hello > output.txt");
+
+    printf("\nTest 4: Command With Quotes\n");
+    run_test("echo \"Hello World\"");
+
+    printf("\nTest 5: Command With Single Quotes\n");
+    run_test("echo 'Hello World'");
+
+    printf("\nTest 6: Command With Pipe\n");
+    run_test("cat file.txt | grep Hello");
+
+    printf("\nTest 7: Command With Multiple Redirections\n");
+    run_test("cat < input.txt > output.txt");
+
+    return 0;
+}
+
+
+ */

@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:38:10 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/23 15:28:01 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/28 11:28:54 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ size_t		ft_arrlen(char**arr);
 t_list		*ft_lstnew(void*content);
 t_list		*ft_lst_last(t_list*lst);
 t_list		*ft_lstmap(t_list*lst, void *(*f)(void*), void (*del)(void*));
+
+t_token		*ft_lst_last_mod(t_token*lst);
 
 #endif

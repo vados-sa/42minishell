@@ -1,24 +1,12 @@
 #include "../../includes/minishell.h"
 #include <stdio.h>
 
+# define EXIT_SUCCESS 0
+# define EXIT_FAILURE 1
 #define PIPE_SINTAX_ERROR "syntax error near unexpected token "
 #define QUOTE_SINTAX_ERROR "syntax error: unclosed quote "
 #define OPER_SINTAX_ERROR "syntax error near unexpected token"
 
-/* int	check_end_of_string(char *str)
-{
-	if ((*str == '<' || *str == '>') && *str == *(str + 1) && !*(str + 2))
-	{
-		printf("token expected after symbol '%c%c'\n", *str, *str);
-		return (EXIT_FAILURE);
-	}
-	if (!*(str + 1))
-	{
-		printf("token expected after symbol '%c'\n", *str);
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-} */
 
 int	unclosed_quotes(char *input)
 {

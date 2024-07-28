@@ -6,40 +6,11 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/26 16:57:09 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/28 11:24:49 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-
-t_token	*create_token(int size_lengh, char *str, char *type, char *type_quote)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(t_token));
-	if (!token)
-	{
-		perror("failed to allocate memory");
-		return (NULL);
-	}
-	if (size_lengh > 0)
-	{
-		token->value = malloc((size_lengh + 1) * sizeof(char));
-		if (!token->value)
-		{
-			perror("failed to allocate memory"); //check necessity of freeing the token
-			return (NULL);
-		}
-		ft_strlcpy(token->value, str, size_lengh + 1);
-	}
-	else
-		token->value = NULL;
-	token->type = type;
-	token->type_quote = type_quote;
-	token->next = NULL;
-	return (token);
-}
 
 int	assign_type_redirection(char *arg, char **type)
 {
@@ -89,58 +60,56 @@ int	handle_redirection(char *arg, t_token **token)
 	return (i);
 }
 
-int	handle_operator(t_data *data, char *arg, int pos)
+int	handle_operator(t_data *data, char *arg)
 {
 	int		i;
 	t_token	*token;
 
 	i = 0;
-	if (check_double_operator(arg[pos]))
+	if (check_double_operator(&arg[i]))
 		return (-1);
-	if ((arg[pos] == '<' || arg[pos] == '>'))
-		i += handle_redirection(&arg[pos], &token);
-	if (arg[pos] == '|')
+	if ((arg[i] == '<' || arg[i] == '>'))
+		i += handle_redirection(&arg[i], &token);
+	if (arg[i] == '|')
 	{
-		token = create_token(0, &arg[pos], PIPE, NULL); // type quote NULL or NONE?
+		token = create_token(0, &arg[0], PIPE, 0); // type quote NULL or NONE?
 		i++;
 	}
 	if (!token)
 		return (-1); //check if it's correct
-	//create list
+	create_token_list(data, token);
 	return (i);
 }
 
-int	handle_quotes(t_data *data, char *arg, int pos)
+int	handle_quotes(t_data *data, char *arg)
 {
-	char 	*end_quote;
 	int		i;
 	t_token	*token;
 
-	i = pos;
-	end_quote = arg;
-	while (end_quote[i + 1] != arg[pos])
+	i = 0;
+	while (arg[i + 1] != arg[0])
 		i++;
-	if (arg[pos] == '\"')
-		token = create_token(i - pos, &arg[pos], OTHERS, SINGLE_Q);// check if it's correct
+	if (arg[0] == '\"')
+		token = create_token(i, &arg[1], OTHERS, SINGLE_Q);
 	else
-		token = create_token(i - pos, &arg[pos], OTHERS, DOUBLE_Q);// check if it's correct
+		token = create_token(i, &arg[1], OTHERS, DOUBLE_Q);
 	if (!token)
 		return (-1); //check if it's correct
-	//create list
-	return (i - pos);
+	create_token_list(data, token);
+	return (i + 2);
 }
 
-int	handle_word(t_data *data, char *arg, int pos)
+int	handle_word(t_data *data, char *arg)
 {
 	int		i;
 	t_token	*token;
 
-	i = pos;
-	while (arg[i] || !ft_isspace(arg[i]) || !look_for_operator(arg[i]))
+	i = 0;
+	while (arg[i] && !ft_isspace(arg[i]) && !look_for_operator(arg[i]))
 		i++;
-	token = create_token(i - pos, &arg[pos], OTHERS, NULL);
+	token = create_token(i, &arg[0], OTHERS, 0);
 	if (!token)
 		return (-1); //check if it's correct
-	//create list
-	return (i - pos);
+	create_token_list(data, token);
+	return (i);
 }

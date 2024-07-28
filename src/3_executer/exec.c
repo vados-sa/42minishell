@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:58 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/16 13:42:00 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/27 20:49:55 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ int	exec(t_data*data)
 	qt_cmd = ft_lstsize_mod(data->command);
 	fds = create_pipes(qt_cmd);
 	if (!fds)
-		return (EXIT_FAILURE);
+		return (EXIT_FAIL);
 	if (!check_redirections(data))
-		return (EXIT_FAILURE);
+		return (EXIT_FAIL);
 	id_p = (pid_t *)ft_calloc(qt_cmd, sizeof(pid_t));
 	if (!id_p)
-		return (EXIT_FAILURE);
+		return (EXIT_FAIL);
 	//execution
 	//free
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 int	**create_pipes(int qt_cmd)
@@ -73,5 +73,5 @@ int	check_redirections(t_data*data)
 	//check output normal
 	//check output without nothing
 	//check errors
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }

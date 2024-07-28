@@ -146,6 +146,8 @@ void test_handle_redirection(char *arg) {
         printf("Token quote: %d\n", token->type_quote ? token->type_quote : 0);
         printf("Token value: %s\n", token->value);
         printf("Processed length: %d\n", len);
+		printf("Position in string: %c and next %c\n", arg[len], arg[len+1]);
+
         free(token->value);
         free(token);
     } else {
@@ -156,10 +158,10 @@ void test_handle_redirection(char *arg) {
 }
 
 int main() {
-    test_handle_redirection("<<      'example text'");
-    test_handle_redirection(">>     \"another example\"");
+    test_handle_redirection("<<      'example_text.txt'xy");
+    test_handle_redirection(">>     \"another example\"xy");
     test_handle_redirection(">         no quotes");
-    test_handle_redirection("< input");
+    test_handle_redirection("< input x");
 
     return 0;
 }
