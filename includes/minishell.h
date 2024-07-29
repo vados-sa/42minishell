@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/28 11:21:36 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/28 21:26:45 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define DOUBLE_Q '\"'
 # define PIPE_STX_ERROR "syntax error near unexpected token "
 # define QUOTE_STX_ERROR "syntax error: unclosed quote "
-# define OPER_STX_ERROR "syntax error near unexpected token"
+# define OTHER_STX_ERROR "syntax error near unexpected token"
 
 # include <stdio.h>
 # include <stdlib.h>

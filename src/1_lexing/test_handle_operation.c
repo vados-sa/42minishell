@@ -150,7 +150,7 @@ int	check_double_operator(char *arg)
 			return (EXIT_SUCC);
 		else
 		{
-			return (print_error_code(OPER_STX_ERROR, *(arg + 1), EXIT_FAIL));
+			return (print_error_code(OTHER_STX_ERROR, *(arg + 1), EXIT_FAIL));
 		}
 	}
 }
