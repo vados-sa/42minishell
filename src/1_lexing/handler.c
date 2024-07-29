@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/28 11:24:49 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/29 11:57:13 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	assign_type_redirection(char *arg, char **type)
 	}
 	else
 	{
-		if (arg[0] == '>')
+		if (arg[0] == '<')
 			*type = INPUT;
 		else
 			*type = OUTPUT;
@@ -90,9 +90,9 @@ int	handle_quotes(t_data *data, char *arg)
 	while (arg[i + 1] != arg[0])
 		i++;
 	if (arg[0] == '\"')
-		token = create_token(i, &arg[1], OTHERS, SINGLE_Q);
-	else
 		token = create_token(i, &arg[1], OTHERS, DOUBLE_Q);
+	else
+		token = create_token(i, &arg[1], OTHERS, SINGLE_Q);
 	if (!token)
 		return (-1); //check if it's correct
 	create_token_list(data, token);

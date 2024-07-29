@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   lex.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/28 11:26:04 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/29 11:57:47 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void run_test(char *input) {
 
 int main() {
     printf("Test 1: Basic Command Without Arguments\n");
-    run_test("ls");
+    run_test("ls -la");
 
     printf("\nTest 2: Basic Command With Arguments\n");
     run_test("echo Hello World");
@@ -112,8 +112,30 @@ int main() {
     printf("\nTest 7: Command With Multiple Redirections\n");
     run_test("cat < input.txt > output.txt");
 
+	printf("\nTest 8\n");
+    run_test("ls|grep \"search\" >\"output.txt\"");
+
+	printf("\nTest 9\n");
+    run_test("echo    \"Hello     World\"    >     \"my file.txt\"");
+
+	printf("\nTest 11\n");
+    run_test("echo 'Single quotes with \"double quotes\" inside'");
+
+	printf("\nTest 12\n");
+    run_test("echo \"Double quotes with 'single quotes' inside\"");
+
+	printf("\nTest 13\n");
+    run_test("cat   <     \"input file.txt\"    |    grep   \"search_term\"    >    \"output file.txt\"");
+
+	printf("\nTest 14\n");
+    run_test("grep \"term\" < \"input file.txt\" | sort | uniq > \"output file.txt\"");
+
+	printf("\nTest 15\n");
+    run_test("< \"input file.txt\" cat");
+
+	printf("\nTest 16\n");
+    run_test("echo \"This is a \"quoted\" word\" > \"output file.txt\"");
+
     return 0;
 }
-
-
  */
