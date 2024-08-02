@@ -1,6 +1,7 @@
 NAME = libft.a
 
 SRC =	$(addsuffix .c, ft_isspace			\
+						ft_iseven			\
 						ft_isalnum			\
 						ft_isalpha			\
 						ft_isascii			\

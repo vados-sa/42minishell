@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:38:10 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/28 11:28:54 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:21:43 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		*ft_memmove(void*dest, const void*src, size_t len);
 void		*ft_memset(void*s, int c, size_t n);
 void		*ft_calloc(size_t number, size_t size);
 
+int			ft_iseven(int n);
 int			ft_isspace(int c);
 int			ft_isalnum(int c);
 int			ft_isalpha(int c);

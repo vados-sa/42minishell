@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/29 11:57:13 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:23:17 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	handle_operator(t_data *data, char *arg)
 	return (i);
 }
 
-int	handle_quotes(t_data *data, char *arg)
+/* int	handle_quotes(t_data *data, char *arg)
 {
 	int		i;
 	t_token	*token;
@@ -97,7 +97,51 @@ int	handle_quotes(t_data *data, char *arg)
 		return (-1); //check if it's correct
 	create_token_list(data, token);
 	return (i + 2);
+} */
+
+int	outer_quote(char *arg)
+{
+	int	i;
+	int	pos;
+	int	pos_count;
+
+	i = 0;
+	pos = 0;
+	pos_count = 0;
+	while (arg[i])
+	{
+		if (arg[i] == DOUBLE_Q || arg[i] == SINGLE_Q)
+		{
+			pos = i;
+			pos_count++;
+		}
+		if (ft_iseven(pos_count) && (look_for_operator(arg[i]) || !arg[i + 1]))
+		{
+			return (pos);
+		}
+		i++;
+	}
+	return (i);
 }
+
+int	handle_quotes(t_data *data, char *arg)
+{
+	int		i;
+	t_token	*token;
+
+	i = 0;
+	i += outer_quote(arg);
+	printf("check\n");
+	if (arg[0] == '\"')
+		token = create_token(i - 1, &arg[1], OTHERS, DOUBLE_Q);
+	else
+		token = create_token(i - 1, &arg[1], OTHERS, SINGLE_Q);
+	if (!token)
+		return (-1); //check if it's correct
+	create_token_list(data, token);
+	return (i + 1);
+}
+
 
 int	handle_word(t_data *data, char *arg)
 {

@@ -6,38 +6,47 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:46:13 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/23 14:46:35 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:18:57 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	init_data(t_data *data, char **env)
+int	init_data(t_data *data, char **env)
 {
-	init_env(data, env);
-	init_path(data, env);
+	if (init_env(data, env) || init_path(data, env))
+		return (EXIT_FAIL);
+	//DO SOMETHING ABOUT HISTORY
+	data->input_fd = STDIN_FILENO;
+	data->input_value = NULL;
+	data->input_type = STDIN_FILENO;
+	data->output_fd = STDOUT_FILENO;
+	data->output_value = NULL;
+	data->output_type = STDOUT_FILENO;
 	data->exit_status = 0;
+	return (EXIT_SUCC);
 }
 
-void	init_env(t_data *data, char **env)
+int	init_env(t_data *data, char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	data->env = ft_calloc(ft_arrlen(env) + 1, sizeof(char *));
 	if (!data->env)
-		//free_and_exit
+		;//free_and_exit(fail)
 	while (env[i])
 	{
 		data->env[i] = ft_strdup(env[i]);
 		if (!data->env[i])
-			//free_and_exit
+			;//free_and_exit(fail)
 		i++;
 	}
-	env[i] = NULL;	
+	env[i] = NULL;
+	return (EXIT_SUCC);
 }
 
-void	init_path(t_data *data, char **env)
+int	init_path(t_data *data, char **env)
 {
 	int	i;
 
@@ -48,10 +57,11 @@ void	init_path(t_data *data, char **env)
 		{
 			data->path = ft_strdup(data->env[i]);
 			if (!data->path)
-				//free_and_exit
-			return ;
+				;//free_and_exit(fail)
+			return (EXIT_FAIL);
 		}
 		i++;
 	}
 	//error_if_not_find_path
+	return (EXIT_SUCC);
 }

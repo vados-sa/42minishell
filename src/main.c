@@ -6,15 +6,14 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/27 20:49:55 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/02 13:05:09 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    minishell_loop(t_data *data, char **env)
+void	minishell_loop(t_data *data, char **env)
 {
-	init_data(data, env);
 	while (1)
 	{
 		data->args = readline("minishell$ ");
@@ -46,8 +45,8 @@ int	main(int ac, char *av[], char **env)
 	(void)av;
 	setup_signal_handlers(); //look interactive and non interactive
 	ft_memset(&data, 0, sizeof(data));
+	if (init_data(&data, env))
+		return (EXIT_FAIL);
 	minishell_loop(&data, env);
-	// init_env(data, env);
-		// exit program if error -> check if mem management is necessary
 	return (EXIT_SUCC);
 }

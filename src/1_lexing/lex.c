@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/07/29 11:57:47 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:20:20 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,31 @@ int main() {
     run_test("< \"input file.txt\" cat");
 
 	printf("\nTest 16\n");
-    run_test("echo \"This is a \"quoted\" word\" > \"output file.txt\"");
+    run_test("echo \"This is a \"quoted\" < word\" > \"output file.txt\"");
+
+	printf("\nTest 17\n");
+    run_test("ls -la /home/user");
+
+	printf("\nTest 18\n");
+    run_test("ls \"-la\"");
+
+	printf("\nTest 19\n");
+    run_test("ls \"-l\"a");
+
+	printf("\nTest 20\n");
+    run_test("ls -l\"a\"");
+
+	printf("\nTest 20\n");
+    run_test("ls -\"l\"a");
+
+	printf("\nTest 21\n");
+    run_test("find . -name \"*.c\" -print");
+
+	printf("\nTest 22\n");
+    run_test("echo    \"Hello  \"   World\"    >   \"  \"my file.txt\"");
+	
+	printf("\nTest 23\n");
+    run_test("cat <<-END | wc -l");
 
     return 0;
 }

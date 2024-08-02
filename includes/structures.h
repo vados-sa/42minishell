@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:14:46 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/26 14:36:00 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:27:29 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,14 @@ typedef struct s_data
 	char		*args; //check
 	char		**env;
 	char		*path;
-	int			input;
-	int			output;
+	int			input_fd;
+	char		*input_type;
+	int			input_type_quote;
+	char		*input_value;
+	int			output_fd;
+	char		*output_type;
+	int			output_type_quote;
+	char		*output_value;
 	int			exit_status;
 	t_token		*token;
 	t_command	*command;
