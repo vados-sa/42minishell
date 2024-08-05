@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/05 12:00:04 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/05 16:40:36 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	split_token(t_data *data)
 		else if (token->type == OUTPUT)
 			exit_s = open_redir_out(data, token, O_WRONLY | O_TRUNC | O_CREAT);
 		else if (token->type == APPEND)
-			exit_s = open_redir_out(data, token, O_WRONLY | O_TRUNC | O_CREAT);
+			exit_s = open_redir_out(data, token, O_WRONLY | O_APPEND | O_CREAT);
 		else if (token->type == OTHERS)
 			exit_s = split_others_token(data, token, &create_new_command);
 		else
@@ -49,6 +49,11 @@ int	split_token(t_data *data)
 	return (EXIT_SUCC);
 }
 
+void	expand_var(void)
+{
+	
+}
+
 int	open_redir_in(t_data *data, t_token *token, int flag)
 {
 	if (data->input_type != STDIN_FILENO && data->input_type != HEREDOC)
@@ -58,7 +63,8 @@ int	open_redir_in(t_data *data, t_token *token, int flag)
 		;//error_return_fail
 	data->input_type = token->type;
 	data->input_type_quote = token->type_quote;
-	//expand string if quote is not a single quote -->understand better
+	if (token->type_quote != '\'')
+		// expand_var(data, )
 	if (data->input_type != HEREDOC)
 	{
 		data->input_fd = open(data->input_value, flag, 0644);
@@ -77,7 +83,8 @@ int	open_redir_out(t_data *data, t_token *token, int flag)
 		;//error_return_fail
 	data->output_type = token->type;
 	data->output_type_quote = token->type_quote;
-	//expand string if quote is not a single quote -->understand better
+	if (token->type_quote != '\'')
+		// expand_var(data, )
 	data->output_fd = open(data->output_value, flag, 0644);
 	if (!data->output_fd)
 		;//error_return_fail;
