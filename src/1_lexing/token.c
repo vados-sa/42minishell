@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_token.c                                      :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 20:37:38 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/27 22:24:24 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:37:21 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	create_token_list(t_data*data, t_token*new)
 {
 	t_token	*last;
 
-	last = ft_lst_last_mod(data->token);
+	last = ft_lst_last_token(data->token);
 	if (!last)
 	{
 		data->token = new;

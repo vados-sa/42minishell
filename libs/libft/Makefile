@@ -41,17 +41,17 @@ SRC =	$(addsuffix .c, ft_isspace			\
 						ft_striteri			\
 						ft_arrlen)
 
-BONUS_SRC = $(addsuffix .c, ft_lstnew		\
-							ft_lstadd_front	\
-							ft_lstsize		\
-							ft_lstsize_mod	\
-							ft_lst_last		\
-							ft_lstadd_back	\
-							ft_lstdelone	\
-							ft_lstclear		\
-							ft_lstiter		\
-							ft_lstmap		\
-							ft_lst_last_mod)
+BONUS_SRC = $(addsuffix .c, ft_lstnew			\
+							ft_lstadd_front		\
+							ft_lstsize			\
+							ft_lst_last_command	\
+							ft_lst_last_token	\
+							ft_lst_last			\
+							ft_lstadd_back		\
+							ft_lstdelone		\
+							ft_lstclear			\
+							ft_lstiter			\
+							ft_lstmap			)
 
 OBJS := $(SRC:%.c=%.o)
 
