@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/02 14:17:16 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/05 12:00:04 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,26 @@ int	open_redir_out(t_data *data, t_token *token, int flag)
 
 int	split_others_token(t_data *data, t_token *token, int *create_new_command)
 {
-	
+	static t_command	*command;
+
+	if (*create_new_command)
+	{
+		*create_new_command = 0;
+		command = create_command_node();
+		if (!command)
+			return (EXIT_FAIL);
+		if (fill_node())
+			return (EXIT_FAIL);
+	}
+	else if (token->value[0] == '-')
+	{
+		if (fill_node())
+			return (EXIT_FAIL);
+	}
+	else
+	{
+		if (fill_node())
+			return (EXIT_FAIL);
+	}
+	return (EXIT_SUCC);
 }
