@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/02 14:23:17 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:58:32 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ int	handle_quotes(t_data *data, char *arg)
 
 	i = 0;
 	i += outer_quote(arg);
-	printf("check\n");
 	if (arg[0] == '\"')
 		token = create_token(i - 1, &arg[1], OTHERS, DOUBLE_Q);
 	else

@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:38:10 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/05 13:37:04 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/05 18:06:17 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 # include <stdlib.h>
 
 # include "../includes/structures.h"
-
-typedef struct s_list
-{
-	char			*content;
-	struct s_list	*next;
-}	t_list;
 
 void		ft_bzero(void*s, size_t n);
 void		ft_putchar_fd(char c, int fd);

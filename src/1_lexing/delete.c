@@ -5,7 +5,7 @@ int	ft_isspace(int c)
 	return (c == 32 || (c >= 9 && c <= 13));
 }
 
-t_token	*ft_lst_last_mod(t_token*lst)
+t_token	*ft_lst_last_token(t_token*lst)
 {
 	if (!lst)
 		return (NULL);
@@ -80,8 +80,7 @@ size_t	ft_strlen(const char*s)
 	return (i);
 }
 
-int	print_error_code(char *message, char tkn, int exit_code)
+int	ft_iseven(int n)
 {
-	printf("%s'%c'\n", message, tkn);
-	return (exit_code);
+	return (n % 2 == 0);
 }

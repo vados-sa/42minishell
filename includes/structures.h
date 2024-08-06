@@ -6,12 +6,19 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:14:46 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/05 16:20:15 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/05 18:07:39 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+typedef struct s_list
+{
+	char			*content;
+	int				type_quote;
+	struct s_list	*next;
+}	t_list;
 
 typedef struct s_token
 {
@@ -24,7 +31,7 @@ typedef struct s_token
 typedef struct s_command
 {
 	char				*command;
-	int					command_quote;
+	int					type_quote;
 	t_list				*arguments;
 	t_list				*flags;
 	struct s_command	*next;

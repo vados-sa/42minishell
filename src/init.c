@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:46:13 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/02 14:18:57 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/06 13:29:44 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	init_data(t_data *data, char **env)
 	//DO SOMETHING ABOUT HISTORY
 	data->input_fd = STDIN_FILENO;
 	data->input_value = NULL;
-	data->input_type = STDIN_FILENO;
+	data->input_type = STDIN;
 	data->output_fd = STDOUT_FILENO;
 	data->output_value = NULL;
-	data->output_type = STDOUT_FILENO;
+	data->output_type = STDOUT;
 	data->exit_status = 0;
 	return (EXIT_SUCC);
 }

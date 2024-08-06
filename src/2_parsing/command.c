@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:59:32 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/05 17:13:54 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/06 13:42:41 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	create_command_list(t_data *data, t_command *new)
 	last = ft_lst_last_command(data->command);
 	if (!last)
 	{
-		data->token = new;
+		data->command = new;
 		return ;
 	}
 	last->next = new;
@@ -56,37 +56,50 @@ int	fill_node(t_command *node, t_token *token, char *flag)
 {
 	if (!node)
 		return (EXIT_FAILURE);
-	if (flag == 'COMMAND')
+	if (ft_strcmp(flag, "COMMAND") == 0)
 	{
 		node->command = ft_strdup(token->value);
 		if (!node->command)
 			return (EXIT_FAILURE);
-		node->command_quote = token->type_quote;
+		node->type_quote = token->type_quote;
 	}
-	else if (flag == 'FLAG')
+	else if (ft_strcmp(flag, "FLAG") == 0)
 	{
 		if (add_new_list_node(&node->flags, token))
 			return (EXIT_FAILURE);
 	}
-	else if (flag == 'ARGUMENT')
+	else if (ft_strcmp(flag, "ARGUMENT") == 0)
 	{
 		if (ft_strcmp(node->command, "export"))
 		{
 			if (add_new_list_node(&node->arguments, token))
 				return (EXIT_FAIL);
 		}
-		else
-			helper_export_builtin(node, token);
+		//else
+		//	helper_export_builtin(node, token);
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	add_new_list_node()
+int	add_new_list_node(t_list **lst, t_token *token)
 {
-	
+	t_list	*new;
+
+	new = ft_calloc(1, sizeof(t_list));
+	if (!new)
+		return (perror_return_error("malloc new list node"));
+	new->content = ft_strdup(token->value);
+	if (!new->content)
+		return (perror_return_error("ft_strdup new list node"));
+	new->type_quote = token->type_quote;
+	if (!*lst)
+		*lst = new;
+	else
+		ft_lstadd_back(lst, new);
+	return (EXIT_SUCC);
 }
 
-void	help_export_builtin(t_command *command, t_token *token)
+/* void	help_export_builtin(t_command *command, t_token *token)
 {
 	
-}
+} */
