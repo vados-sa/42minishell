@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/07 13:10:53 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/07 17:04:48 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	parse(t_data *data)
 	return (EXIT_SUCC);
 }
 
-void print_commands(t_data data, t_command *command) {
+/* void print_commands(t_data data, t_command *command) {
     while (command) {
         printf("Command: %s\n", command->command);
         t_list *arg = command->arguments;
@@ -296,5 +296,9 @@ int main() {
 	printf("\nTest 25\n");
     run_test("echo \"Hello\" > file1.txt > file2.txt");
 
+	printf("\nTest 26\n");
+    run_test("echo \"Hello\" | > out");
+
     return 0;
 }
+ */

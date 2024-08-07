@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/02 14:20:20 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:38:40 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,9 @@ int main() {
 	printf("\nTest 23\n");
     run_test("cat <<-END | wc -l");
 
+	printf("\nTest 23\n");
+    run_test("echo \"Hello\" | > out");
+	
+
     return 0;
-}
- */
+} */
