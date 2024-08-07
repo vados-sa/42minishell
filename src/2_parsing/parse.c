@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/06 15:40:27 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:48:11 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	remove_possible_quotes(char *str)
 
 	src_pos = 0;
 	dst_pos = 0;
-	while (str[src_pos] != '\0')
+	while (str[src_pos])
 	{
 		if (str[src_pos] != SINGLE_Q && str[src_pos] != DOUBLE_Q)
 		{
@@ -110,7 +110,8 @@ int	split_others_token(t_data *data, t_token *token, int *create_new_command)
 		if (fill_node(command, token, "COMMAND"))
 			return (EXIT_FAIL);
 	}
-	else if (token->value[0] == '-')
+	else if (token->value[0] == '-' && !ft_isspace(token->value[1]) && \
+			token->value[1])
 	{
 		remove_possible_quotes(token->value);
 		if (fill_node(command, token, "FLAG"))
@@ -118,6 +119,7 @@ int	split_others_token(t_data *data, t_token *token, int *create_new_command)
 	}
 	else
 	{
+		remove_possible_quotes(token->value);
 		if (fill_node(command, token, "ARGUMENT"))
 			return (EXIT_FAIL);
 	}
@@ -287,6 +289,12 @@ int main() {
 
     printf("\nTest 23\n");
     run_test("cat <<-END | wc -l");
+
+	printf("\nTest 24\n");
+    run_test("echo - \"\" \"  \" hello");
+
+	printf("\nTest 25\n");
+    run_test("echo \"Hello\" > file1.txt > file2.txt");
 
     return 0;
 }

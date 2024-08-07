@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:59:32 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/06 13:42:41 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:34:18 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ int	fill_node(t_command *node, t_token *token, char *flag)
 	}
 	else if (ft_strcmp(flag, "ARGUMENT") == 0)
 	{
-		if (ft_strcmp(node->command, "export"))
+		if (ft_strcmp(node->command, "export") == 0)
+			;//helper_export_builtin
+		else
 		{
 			if (add_new_list_node(&node->arguments, token))
 				return (EXIT_FAIL);
 		}
-		//else
-		//	helper_export_builtin(node, token);
 	}
 	return (EXIT_SUCCESS);
 }
