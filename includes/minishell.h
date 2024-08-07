@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/06 14:14:30 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/07 13:09:12 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int			fill_node(t_command *node, t_token *token, char *flag);
 int			add_new_list_node(t_list **lst, t_token *token);
 t_command	*create_command_node(t_data *data);
 void		create_command_list(t_data *data, t_command *new);
+int			expand_var(char **str, t_data *data);
 
 /*3_executer******************************************************************/
 
