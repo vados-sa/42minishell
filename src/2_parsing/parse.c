@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/07 11:48:11 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/07 13:10:53 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	open_redir_in(t_data *data, t_token *token, int flag)
 		return (perror_return_error("redirection value"));
 	data->input_type = token->type;
 	data->input_type_quote = token->type_quote;
-	/* if (token->type_quote != '\'')
-		;// expand_var(data, ) */
+	if (token->type_quote != '\'')
+		expand_var(&token->value, data);
 	if (ft_strcmp(data->input_type, HEREDOC) != 0)
 	{
 		data->input_fd = open(data->input_value, flag, 0644);
@@ -70,8 +70,8 @@ int	open_redir_out(t_data *data, t_token *token, int flag)
 		return (perror_return_error("redirection value"));
 	data->output_type = token->type;
 	data->output_type_quote = token->type_quote;
-	/* if (token->type_quote != '\'')
-		;// expand_var(data, ) */
+	if (token->type_quote != '\'')
+		expand_var(&token->value, data);
 	data->output_fd = open(data->output_value, flag, 0644);
 	if (!data->output_fd)
 		return (perror_return_error(data->output_value));
