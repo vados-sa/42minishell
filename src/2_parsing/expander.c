@@ -1,10 +1,5 @@
 #include "../../includes/minishell.h"
 
-typedef struct s_data1 {
-    char **env;
-    int exit_status;
-} t_data1;
-
 int	env_var_len(char *str)
 {
 	int	i;
@@ -14,7 +9,7 @@ int	env_var_len(char *str)
 	len = 0;
 	if (str[1] == '?')
 		return (1);
-	while (str[i] && (ft_isalnum(*str) || str[i] == '_'))
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 	{
 		len++;
 		i++;	
@@ -22,13 +17,13 @@ int	env_var_len(char *str)
 	return (len);
 }
 
-char	*get_exp_env(char *str, int len, char **env_arg) // option 1 -> like theo
+char	*get_exp_env(char *str, int len, char **env_arg)
 {
 	while(*env_arg)
 	{
 		if (!ft_strncmp(str + 1, *env_arg, len)
 			&& (*env_arg)[len] == '=')
-			return(&(*env_arg)[len + 1]);
+			return(*env_arg + len + 1);
 		env_arg++;
 	}
 	return("");
@@ -68,7 +63,7 @@ void	free_str_pieces(char **s1, char **s2, char **s3)
 	}
 }
 
-char	*concat_expanded_var(char **str, int *i, t_data1 *data)
+char	*concat_expanded_var(char **str, int *i, t_data *data)
 {
 	int		len;
 	char	*before_var;
@@ -93,7 +88,7 @@ char	*concat_expanded_var(char **str, int *i, t_data1 *data)
 	return(exp_str);
 }
 
-int	expand_var(char **str, t_data1 *data)
+int	expand_var(char **str, t_data *data)
 {
 	int		i;
 	char 	*temp;
@@ -105,6 +100,7 @@ int	expand_var(char **str, t_data1 *data)
 		if ((*str)[i] == '$')
 		{
 			temp = concat_expanded_var(str, &i, data);
+			printf ("%s\n", temp);
 			if (!temp)
 				return (EXIT_FAILURE);
 			free(*str);
@@ -116,23 +112,54 @@ int	expand_var(char **str, t_data1 *data)
 	return (EXIT_SUCCESS);
 }
 
-int main() {
+/* int main()
+{
     // Sample environment variables
     char *env[] = {
         "HOME=/home/user",
-        "USER=example",
+        "USER=vados-sa",
         "SHELL=/bin/bash",
         "PATH=/usr/bin:/bin",
         NULL
     };
 
-    t_data1 data;
-    data.env = env;
+	// Calculate the number of environment variables
+    int env_count = 0;
+    while (env[env_count]) {
+        env_count++;
+    }
+
+	// Allocate memory for the data.env array
+    t_data data;
+
+	memset(&data, 0, sizeof(t_data));
+	data.env = malloc((env_count + 1) * sizeof(char *));
+	if (!data.env) {
+        perror("malloc");
+        return 1;
+    }
+	int i = 0;
+	while (env[i])
+	{
+		data.env[i] = ft_strdup(env[i]);
+		if (!data.env[i]) {
+            perror("ft_strdup");
+            return 1;
+        }
+		i++;
+	}
+	data.env[env_count] = NULL;
+	data.input_fd = STDIN_FILENO;
+	data.input_value = NULL;
+	data.input_type = STDIN;
+	data.output_fd = STDOUT_FILENO;
+	data.output_value = NULL;
+	data.output_type = STDOUT;
     data.exit_status = 42;
 
     // Test cases
     char *test_cases[] = {
-        "echo $HOME/docs/file.txt",
+        "$HOME/docs/file.txt",
         "$USER is the current user",
         "The shell is $SHELL",
         "Path is set to $PATH",
@@ -141,16 +168,18 @@ int main() {
         NULL
     };
 
-    for (int i = 0; test_cases[i] != NULL; i++) {
-        char *input = strdup(test_cases[i]);
+	i = 0;
+	while (test_cases[i])
+	{
+		char *input = strdup(test_cases[i]);
         printf("Original: %s\n", input);
-        if (expand_var(&input, &data) == EXIT_SUCCESS) {
+        if (expand_var(&input, &data) == EXIT_SUCCESS)
             printf("Expanded: %s\n\n", input);
-        } else {
+        else
             printf("Expansion failed\n\n");
-        }
         free(input);
-    }
+		i++;
+	}
 
     return 0;
-}
+} */
