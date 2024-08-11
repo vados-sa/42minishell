@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:29:30 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/07 13:29:31 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:06:22 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ char	*concat_expanded_var(char **str, int *i, t_data *data)
 		return (NULL);
 	return(exp_str);
 }
+// SAVE ABOVE FUNCTIONS INTO EXPANDER_UTILS.C
 
 int	expand_var(char **str, t_data *data)
 {
@@ -124,6 +125,51 @@ int	expand_var(char **str, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+int	expand_command(t_command *cmd_node, t_data *data)
+{
+	while (cmd_node)
+	{
+		if (cmd_node->type_quote != '\'')
+		{
+			if (expand_var(&cmd_node->command, data))
+				return (EXIT_FAILURE);
+		}
+		cmd_node = cmd_node->next;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	expand_list_of_str(t_list *list, t_data *data)
+{
+	while (list)
+	{
+		if (list->type_quote != '\'')
+		{
+			if (expand_var(&list->content, data))
+				return (EXIT_FAILURE);
+		}
+		list = list->next;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	expand_tokens(t_data *data)
+{
+	t_command	*current_cmd_node;
+
+	current_cmd_node = data->command;
+	while (current_cmd_node)
+	{
+		if (expand_command(current_cmd_node, data))
+			return (EXIT_FAILURE);
+		if (expand_list_of_str(current_cmd_node->arguments, data))
+			return (EXIT_FAILURE);
+		if (expand_lisd_of_str(current_cmd_node->flags, data))
+			return (EXIT_FAILURE);
+		current_cmd_node = current_cmd_node->next;
+	}
+	return (EXIT_SUCCESS);
+}
 /* int main()
 {
     // Sample environment variables

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/07 17:04:48 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:51:09 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int	split_token(t_data *data)
 		else
 			create_new_command = 1;
 		if (exit_s)
-			return (EXIT_FAIL);
+			return (EXIT_FAILURE);
 		token = token->next;
 	}
-	return (EXIT_SUCC);
+	return (EXIT_SUCCESS);
 }
 
 int	open_redir_in(t_data *data, t_token *token, int flag)
@@ -58,7 +58,7 @@ int	open_redir_in(t_data *data, t_token *token, int flag)
 		if (data->input_fd < 0)
 			return (perror_return_error(data->input_value));
 	}
-	return (EXIT_SUCC);
+	return (EXIT_SUCCESS);
 }
 
 int	open_redir_out(t_data *data, t_token *token, int flag)
@@ -75,7 +75,7 @@ int	open_redir_out(t_data *data, t_token *token, int flag)
 	data->output_fd = open(data->output_value, flag, 0644);
 	if (!data->output_fd)
 		return (perror_return_error(data->output_value));
-	return (EXIT_SUCC);
+	return (EXIT_SUCCESS);
 }
 
 void	remove_possible_quotes(char *str)
@@ -106,33 +106,34 @@ int	split_others_token(t_data *data, t_token *token, int *create_new_command)
 		*create_new_command = 0;
 		command = create_command_node(data);
 		if (!command)
-			return (EXIT_FAIL);
+			return (EXIT_FAILURE);
 		if (fill_node(command, token, "COMMAND"))
-			return (EXIT_FAIL);
+			return (EXIT_FAILURE);
 	}
 	else if (token->value[0] == '-' && !ft_isspace(token->value[1]) && \
 			token->value[1])
 	{
 		remove_possible_quotes(token->value);
 		if (fill_node(command, token, "FLAG"))
-			return (EXIT_FAIL);
+			return (EXIT_FAILURE);
 	}
 	else
 	{
 		remove_possible_quotes(token->value);
 		if (fill_node(command, token, "ARGUMENT"))
-			return (EXIT_FAIL);
+			return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCC);
+	return (EXIT_SUCCESS);
 }
 
 int	parse(t_data *data)
 {
 	if (split_token(data))
-		return (EXIT_FAIL);
-	//expand
+		return (EXIT_FAILURE);
+	if (expand_tokens(data))
+		return (EXIT_FAILURE);
 	//handle heredoc
-	return (EXIT_SUCC);
+	return (EXIT_SUCCESS);
 }
 
 /* void print_commands(t_data data, t_command *command) {
@@ -199,8 +200,8 @@ void run_test(char *input) {
     // Call the lexer and parser
     printf("Input: %s\n", input);
     fflush(stdout);
-    if (lex(&data) == EXIT_SUCC) {
-        if (parse(&data) == EXIT_SUCC) {
+    if (lex(&data) == EXIT_SUCCESS) {
+        if (parse(&data) == EXIT_SUCCESS) {
             // Print the commands
             printf("Parsing successful. Printing commands...\n");
             fflush(stdout);
