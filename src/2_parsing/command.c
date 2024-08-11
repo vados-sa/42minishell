@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:59:32 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/07 11:34:18 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/10 19:26:45 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,30 @@ void	create_command_list(t_data *data, t_command *new)
 	last->next = new;
 }
 
-int	fill_node(t_command *node, t_token *token, char *flag)
+int	fill_node(t_command *cmd_node, t_token *token, char *flag)
 {
-	if (!node)
+	if (!cmd_node)
 		return (EXIT_FAILURE);
 	if (ft_strcmp(flag, "COMMAND") == 0)
 	{
-		node->command = ft_strdup(token->value);
-		if (!node->command)
+		cmd_node->command = ft_strdup(token->value);
+		if (!cmd_node->command)
 			return (EXIT_FAILURE);
-		node->type_quote = token->type_quote;
+		cmd_node->type_quote = token->type_quote;
 	}
 	else if (ft_strcmp(flag, "FLAG") == 0)
 	{
-		if (add_new_list_node(&node->flags, token))
+		if (add_new_list_node(&cmd_node->flags, token))
 			return (EXIT_FAILURE);
 	}
 	else if (ft_strcmp(flag, "ARGUMENT") == 0)
 	{
-		if (ft_strcmp(node->command, "export") == 0)
-			;//helper_export_builtin
+		if (ft_strcmp(cmd_node->command, "export") == 0)
+			if (handle_export_builtin_arg(cmd_node, token))
+				(EXIT_FAILURE);
 		else
-		{
-			if (add_new_list_node(&node->arguments, token))
+			if (add_new_list_node(&cmd_node->arguments, token))
 				return (EXIT_FAIL);
-		}
 	}
 	return (EXIT_SUCCESS);
 }
@@ -98,8 +97,3 @@ int	add_new_list_node(t_list **lst, t_token *token)
 		ft_lstadd_back(lst, new);
 	return (EXIT_SUCC);
 }
-
-/* void	help_export_builtin(t_command *command, t_token *token)
-{
-	
-} */
