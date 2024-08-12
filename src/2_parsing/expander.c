@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:29:30 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/11 16:06:22 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/12 22:20:47 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ int	env_var_len(char *str)
 
 	i = 1;
 	len = 0;
-	if (str[1] == '?')
+	if (str[1] == '{')
+		i++;
+	if (str[i] == '?')
 		return (1);
-	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_') && str[i] != '}')
 	{
 		len++;
 		i++;	
@@ -41,22 +43,7 @@ char	*get_exp_env(char *str, int len, char **env_arg)
 	return("");
 }
 
-char	*ft_concat(char *s1, char *s2, char *s3)
-{
-	char *temp;
-	char *result;
-
-	temp = ft_strjoin(s1, s2);
-	if (!temp)
-		return (NULL);
-	result = ft_strjoin(temp, s3);
-	free (temp);
-	if (!result)
-		return (NULL);
-	return (result);
-}
-
-void	free_str_pieces(char **s1, char **s2, char **s3)
+void	free_substr(char **s1, char **s2, char **s3)
 {
 	if (*s1)
 	{
@@ -74,6 +61,52 @@ void	free_str_pieces(char **s1, char **s2, char **s3)
 		*s3 = NULL;
 	}
 }
+// SAVE ABOVE FUNCTIONS INTO EXPANDER_UTILS.C
+
+char	*find_after_var(char *str, int var_len)
+{
+	int		i;
+	char	*after_var;
+
+	i = 0;
+	if (str[i + 1] == '{')
+		after_var = ft_substr(str, i + var_len + 3, ft_strlen(str) - \
+					(var_len + 1) - (i + 1));
+	else
+		after_var = ft_substr(str, i + var_len + 1, ft_strlen(str) - \
+					var_len - i);
+	return (after_var);
+}
+
+char	*find_exp_var(char *str, int var_len, t_data *data)
+{
+	int		i;
+	char	*exp_var;
+	
+	i = 0;
+	if (str[i + 1] == '?' || (str[i + 1] == '{' && str[i + 2] == '?'))
+		exp_var = ft_itoa(data->exit_status);
+	else if (str[i + 1] == '{')
+		exp_var = ft_strdup(get_exp_env(&str[i + 1], var_len, data->env));
+	else
+		exp_var = ft_strdup(get_exp_env(&str[i], var_len, data->env));
+	return (exp_var);
+}
+
+char	*ft_concat(char *s1, char *s2, char *s3)
+{
+	char *temp;
+	char *result;
+
+	temp = ft_strjoin(s1, s2);
+	if (!temp)
+		return (NULL);
+	result = ft_strjoin(temp, s3);
+	free (temp);
+	if (!result)
+		return (NULL);
+	return (result);
+}
 
 char	*concat_expanded_var(char **str, int *i, t_data *data)
 {
@@ -87,19 +120,16 @@ char	*concat_expanded_var(char **str, int *i, t_data *data)
 	if (!len)
 		return (NULL);
 	before_var = ft_substr(*str, 0, *i);
-	after_var = ft_substr(*str, *i + len + 1, ft_strlen(*str) - len - *i);
-	if ((*str)[*i + 1] == '?')
-		exp_var = ft_itoa(data->exit_status);
-	else
-		exp_var = ft_strdup(get_exp_env(&(*str)[*i], len, data->env));
+	after_var = find_after_var(&(*str)[*i], len);
+	exp_var = find_exp_var(&(*str)[*i], len, data);
 	*i += ft_strlen(exp_var) + 1; //check if +1 is not giving any issues
 	exp_str = ft_concat(before_var, exp_var, after_var);
-	free_str_pieces(&before_var, &exp_var, &after_var);
+	free_substr(&before_var, &exp_var, &after_var);
 	if (!exp_str)
 		return (NULL);
 	return(exp_str);
 }
-// SAVE ABOVE FUNCTIONS INTO EXPANDER_UTILS.C
+// SAVE ABOVE FUNCTIONS INTO CONCAT_EXPANDED_VARS.C
 
 int	expand_var(char **str, t_data *data)
 {
@@ -113,7 +143,6 @@ int	expand_var(char **str, t_data *data)
 		if ((*str)[i] == '$')
 		{
 			temp = concat_expanded_var(str, &i, data);
-			printf ("%s\n", temp);
 			if (!temp)
 				return (EXIT_FAILURE);
 			free(*str);
@@ -164,7 +193,7 @@ int	expand_tokens(t_data *data)
 			return (EXIT_FAILURE);
 		if (expand_list_of_str(current_cmd_node->arguments, data))
 			return (EXIT_FAILURE);
-		if (expand_lisd_of_str(current_cmd_node->flags, data))
+		if (expand_list_of_str(current_cmd_node->flags, data))
 			return (EXIT_FAILURE);
 		current_cmd_node = current_cmd_node->next;
 	}
@@ -218,11 +247,17 @@ int	expand_tokens(t_data *data)
     // Test cases
     char *test_cases[] = {
         "$HOME/docs/file.txt",
+		"${HOME}/docs/file.txt",
         "$USER is the current user",
+		"${USER} is the current user",
         "The shell is $SHELL",
+		"The shell is ${SHELL}",
         "Path is set to $PATH",
+        "Path is set to ${PATH}",
         "Exit status was $?",
+        "Exit status was ${?}",
         "Unknown variable $UNKNOWN",
+        "Unknown variable ${UNKNOWN}",
         NULL
     };
 
