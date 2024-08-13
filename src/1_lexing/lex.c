@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/07 16:38:40 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/13 11:14:33 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ int	tokenize(t_data *data, char *cpy_arg)
 int	lex(t_data *data)
 {
 	char	*cpy_arg;
-	int		i;
 
-	i = 0;
 	cpy_arg = data->args;
 	if (check_input(cpy_arg))
 		return (EXIT_FAIL);
@@ -163,6 +161,23 @@ int main() {
 	printf("\nTest 23\n");
     run_test("echo \"Hello\" | > out");
 	
+    printf("\nExport Test 01\n");
+    run_test("export \"VAR=value\"");
+
+    printf("\nExport Test 02\n");
+    run_test("export VAR=\"value\"");
+
+    printf("\nExport Test 03\n");
+    run_test("export \'VAR=value\'");
+
+    printf("\nExport Test 04\n");
+    run_test("export VAR=\'value\'");
+
+    printf("\nExport Test 05\n");
+    run_test("export \"VAR\"=\'value\'vanessa");
+
+    printf("\nExport Test 06\n");
+    run_test("export \"VAR  Hi\"=\'value\'vanessa");
 
     return 0;
 } */

@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/11 15:51:09 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/13 11:13:38 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void run_test(char *input) {
 
     // Free the allocated commands
     free_commands(data.command);
-    printf("Commands freed.\n");
+    //printf("Commands freed.\n");
     fflush(stdout);
 }
 
@@ -300,6 +300,26 @@ int main() {
 	printf("\nTest 26\n");
     run_test("echo \"Hello\" | > out");
 
+	printf("\nExport Test 01\n");
+    run_test("export VAR=value");
+
+	printf("\nExport Test 02\n");
+    run_test("export VAR=\"value with spaces\"");
+
+	printf("\nExport Test 03\n");
+    run_test("export VAR=\'single quoted value\'");
+
+	printf("\nExport Test 04\n");
+    run_test("export PATH=\"$PATH:/new/path\"");
+	
+	printf("\nExport Test 05\n");
+    run_test("export MY_VAR=\"This is ${USER}'s home\"");
+	
+	printf("\nTest 06\n");
+    run_test("export EMPTY_VAR=");
+
+	printf("\nExport Test 07\n");
+    run_test("export \"VAR=value=isso=aquilo\"");
+
     return 0;
-}
- */
+} */
