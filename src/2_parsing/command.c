@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:59:32 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/10 19:26:45 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/13 11:14:03 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ int	fill_node(t_command *cmd_node, t_token *token, char *flag)
 			if (handle_export_builtin_arg(cmd_node, token))
 				(EXIT_FAILURE);
 		else
+		{
 			if (add_new_list_node(&cmd_node->arguments, token))
 				return (EXIT_FAIL);
+		}
 	}
 	return (EXIT_SUCCESS);
 }
