@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/13 11:13:38 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:25:40 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,11 @@ int	parse(t_data *data)
 		return (EXIT_FAILURE);
 	if (expand_tokens(data))
 		return (EXIT_FAILURE);
-	//handle heredoc
+	if (ft_strcmp(data->input_type, HEREDOC) == 0)
+	{
+		if (handle_heredoc(data))
+			return (EXIT_FAIL);
+	}
 	return (EXIT_SUCCESS);
 }
 
