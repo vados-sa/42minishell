@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:23:31 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/14 14:20:21 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/14 15:53:20 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	get_all_file(int fd1, char *limiter)
 {
 	char	*line;
 
-	line = readline(">");
+	line = readline("> ");
 	while (line)
 	{
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0 && \
-			ft_strlen(line) == ft_strlen(limiter) + 1) //CHECK IF THIS LINE IS NECESSARY
+			ft_strlen(line) == ft_strlen(limiter)) //CHECK IF THIS LINE IS NECESSARY
 		{
 			free(line);
 			break ;
@@ -28,7 +28,7 @@ void	get_all_file(int fd1, char *limiter)
 		write(fd1, line, ft_strlen(line));
 		write(fd1, "\n", 1);
 		free(line);
-		line = readline(">");
+		line = readline("> ");
 	}
 	close(fd1);
 }

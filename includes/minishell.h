@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/10 19:26:27 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/14 15:03:51 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,21 @@ int			fill_node(t_command *cmd_node, t_token *token, char *flag);
 int			add_new_list_node(t_list **lst, t_token *token);
 t_command	*create_command_node(t_data *data);
 void		create_command_list(t_data *data, t_command *new);
+int			env_var_len(char *str);
+char		*get_exp_env(char *str, int len, char **env_arg);
+void		free_substr(char **s1, char **s2, char **s3);
+char		*find_after_var(char *str, int var_len);
+char		*find_exp_var(char *str, int var_len, t_data *data);
+char		*ft_concat(char *s1, char *s2, char *s3);
+char		*concat_expanded_var(char **str, int *i, t_data *data);
 int			expand_var(char **str, t_data *data);
+int			expand_command(t_command *cmd_node, t_data *data);
+int			expand_list_of_str(t_list *list, t_data *data);
+int			expand_tokens(t_data *data);
+int			handle_export_builtin_arg(t_command *cmd_node, t_token *token);
+void		get_all_file(int fd1, char *limiter);
+int			handle_heredoc(t_data *data);
+
 
 /*3_executer******************************************************************/
 
