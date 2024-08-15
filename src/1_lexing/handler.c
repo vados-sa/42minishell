@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/06 15:58:32 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:26:23 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,12 @@ int	outer_quote(char *arg)
 	int	pos;
 	int	pos_count;
 
-	i = 0;
-	pos = 0;
-	pos_count = 0;
+	i = 1;
+	pos = 1;
+	pos_count = 1;
 	while (arg[i])
 	{
-		if (arg[i] == DOUBLE_Q || arg[i] == SINGLE_Q)
+		if (arg[i] == arg[0])
 		{
 			pos = i;
 			pos_count++;

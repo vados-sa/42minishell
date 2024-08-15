@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/14 14:25:40 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:17:18 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,7 +290,7 @@ int main() {
     run_test("find . -name \"*.c\" -print");
 
     printf("\nTest 22\n");
-    run_test("echo \"Hello World\" > \"my file.txt\"");
+    run_test("echo    \"Hello  \'   World\"    >   \"my file.txt\"");
 
     printf("\nTest 23\n");
     run_test("cat <<-END | wc -l");
@@ -326,4 +326,5 @@ int main() {
     run_test("export \"VAR=value=isso=aquilo\"");
 
     return 0;
-} */
+}
+ */

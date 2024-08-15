@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/13 11:14:33 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:16:50 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int main() {
     run_test("find . -name \"*.c\" -print");
 
 	printf("\nTest 22\n");
-    run_test("echo    \"Hello  \"   World\"    >   \"  \"my file.txt\"");
+    run_test("echo    \"Hello  \'   World\"    >   \"my file.txt\"");
 	
 	printf("\nTest 23\n");
     run_test("cat <<-END | wc -l");

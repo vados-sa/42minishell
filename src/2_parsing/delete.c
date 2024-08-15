@@ -212,12 +212,7 @@ char	*ft_substr(char const*s, unsigned int start, size_t len)
 	return (str);
 }
 
-size_t	ft_strlen(const char*s)
+int	ft_isalpha(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
