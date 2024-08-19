@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/14 20:17:18 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:26:03 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	split_others_token(t_data *data, t_token *token, int *create_new_command)
 	}
 	else
 	{
-		remove_possible_quotes(token->value);
+		// remove_possible_quotes(token->value); // cannot be here -> CHECK WHEN TO REMOVE
 		if (fill_node(command, token, "ARGUMENT"))
 			return (EXIT_FAILURE);
 	}
@@ -317,13 +317,19 @@ int main() {
     run_test("export PATH=\"$PATH:/new/path\"");
 	
 	printf("\nExport Test 05\n");
-    run_test("export MY_VAR=\"This is ${USER}'s home\"");
-	
-	printf("\nTest 06\n");
-    run_test("export EMPTY_VAR=");
+    run_test("export HELLO MY_VAR=This\" is ${USER}'s home\"");
 
-	printf("\nExport Test 07\n");
+	printf("\nExport Test 06\n");
+    run_test("export VAR=\"hello\"\" vanessa\"santos VAR1=\"hello\"\"malu\"rabelo");
+	
+	printf("\nTest 07\n");
+    run_test("export WRONG_VAR=vanessa dos santos");
+
+	printf("\nExport Test 08\n");
     run_test("export \"VAR=value=isso=aquilo\"");
+
+	printf("\nExport Test 09\n");
+    run_test("export \"VAR=hello\"myname\"is \"vanessa");
 
     return 0;
 }
