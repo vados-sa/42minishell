@@ -6,11 +6,13 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/19 11:26:03 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:03:15 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern char** environ; //remember to take this off
 
 int	split_token(t_data *data)
 {
@@ -140,12 +142,13 @@ int	parse(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-/* void print_commands(t_data data, t_command *command) {
+void print_commands(t_data data, t_command *command) {
     while (command) {
         printf("Command: %s\n", command->command);
         t_list *arg = command->arguments;
         while (arg) {
             printf("  Argument: %s\n", arg->content);
+			printf("quote type: %d\n", arg->type_quote);
             arg = arg->next;
         }
         t_list *flag = command->flags;
@@ -200,6 +203,7 @@ void run_test(char *input) {
 	data.output_type = STDOUT;
 	data.exit_status = 0;
     data.args = input;
+	data.env = environ;
 
     // Call the lexer and parser
     printf("Input: %s\n", input);
@@ -224,9 +228,10 @@ void run_test(char *input) {
     //printf("Commands freed.\n");
     fflush(stdout);
 }
-
-int main() {
-    printf("Test 1: Basic Command Without Arguments\n");
+/*
+int main()
+{
+     printf("Test 1: Basic Command Without Arguments\n");
     run_test("ls -la");
 
     printf("\nTest 2: Basic Command With Arguments\n");
@@ -312,9 +317,9 @@ int main() {
 
 	printf("\nExport Test 03\n");
     run_test("export VAR=\'single quoted value\'");
-
+ 
 	printf("\nExport Test 04\n");
-    run_test("export PATH=\"$PATH:/new/path\"");
+    run_test("export PATH=\'$PATH:/new/path\'");
 	
 	printf("\nExport Test 05\n");
     run_test("export HELLO MY_VAR=This\" is ${USER}'s home\"");
@@ -332,5 +337,4 @@ int main() {
     run_test("export \"VAR=hello\"myname\"is \"vanessa");
 
     return 0;
-}
- */
+}*/

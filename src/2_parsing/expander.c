@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:29:30 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/12 22:20:47 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:02:51 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	env_var_len(char *str)
 
 char	*get_exp_env(char *str, int len, char **env_arg)
 {
+	if (!env_arg)
+	{
+        printf("Environment variable array is NULL\n");
+        return ("");
+    }
 	while(*env_arg)
 	{
 		if (!ft_strncmp(str + 1, *env_arg, len)
@@ -89,7 +94,9 @@ char	*find_exp_var(char *str, int var_len, t_data *data)
 	else if (str[i + 1] == '{')
 		exp_var = ft_strdup(get_exp_env(&str[i + 1], var_len, data->env));
 	else
-		exp_var = ft_strdup(get_exp_env(&str[i], var_len, data->env));
+	{
+		exp_var = ft_strdup(get_exp_env(&str[i], var_len, data->env));  // seg fault is in here
+	}
 	return (exp_var);
 }
 
@@ -138,6 +145,7 @@ int	expand_var(char **str, t_data *data)
 	
 	i = 0;
 	temp = NULL;
+	printf("string being expanded: %s\n", *str);
 	while((*str)[i])
 	{
 		if ((*str)[i] == '$')
