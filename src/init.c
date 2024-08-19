@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:46:13 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/06 13:29:44 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:54:21 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,21 @@
 
 int	init_data(t_data *data, char **env)
 {
-	if (init_env(data, env) || init_path(data, env))
+	int	i;
+
+	i = 0;
+	if (init_env(data, env))
 		return (EXIT_FAIL);
+	if (init_path(data, env))
+	{
+		while (data->env[i])
+		{
+			free(data->env[i]);
+			i++;
+		}
+		free(data->env);
+		return (EXIT_FAIL);
+	}
 	//DO SOMETHING ABOUT HISTORY
 	data->input_fd = STDIN_FILENO;
 	data->input_value = NULL;
@@ -34,15 +47,24 @@ int	init_env(t_data *data, char **env)
 	i = 0;
 	data->env = ft_calloc(ft_arrlen(env) + 1, sizeof(char *));
 	if (!data->env)
-		;//free_and_exit(fail)
+	{
+		perror("Failed to allocate memory for environment variables");
+		return (EXIT_FAIL);
+	}
 	while (env[i])
 	{
 		data->env[i] = ft_strdup(env[i]);
 		if (!data->env[i])
-			;//free_and_exit(fail)
+		{
+			perror("Failed to duplicate environment variable");
+			while (i > 0)
+				free(data->env[--i]);
+			free(data->env);
+			return (EXIT_FAIL);
+		}
 		i++;
 	}
-	env[i] = NULL;
+	data->env[i] = NULL;
 	return (EXIT_SUCC);
 }
 
@@ -57,11 +79,14 @@ int	init_path(t_data *data, char **env)
 		{
 			data->path = ft_strdup(data->env[i]);
 			if (!data->path)
-				;//free_and_exit(fail)
-			return (EXIT_FAIL);
+				return (EXIT_FAIL);
 		}
 		i++;
 	}
-	//error_if_not_find_path
+	if (!data->path)
+	{
+		perror("Failed to find PATH");
+		return (EXIT_FAIL);
+	}
 	return (EXIT_SUCC);
 }
