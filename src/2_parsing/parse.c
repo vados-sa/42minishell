@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/20 14:27:44 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:13:51 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,14 +143,14 @@ int	parse(t_data *data)
 	}
 	return (EXIT_SUCCESS);
 }
-/* 
-void print_commands(t_data data, t_command *command) {
+
+/* void print_commands(t_data data, t_command *command) {
     while (command) {
         printf("Command: %s\n", command->command);
         t_list *arg = command->arguments;
         while (arg) {
             printf("  Argument: %s\n", arg->content);
-			printf("quote type: %d\n", arg->type_quote);
+			//printf("quote type: %d\n", arg->type_quote);
             arg = arg->next;
         }
         t_list *flag = command->flags;
@@ -158,6 +158,13 @@ void print_commands(t_data data, t_command *command) {
             printf("  Flag: %s\n", flag->content);
             flag = flag->next;
         }
+		int	i = 0;
+		printf("  Final command array:\n");
+		while (command->final_av[i])
+		{
+			printf("av[%d] - %s\n", i, command->final_av[i]);
+			i++;
+		}
         command = command->next;
     }
 	printf("INPUT FD: %i\n", data.input_fd);
@@ -339,5 +346,4 @@ int main()
     run_test("export \"VAR=hello\"myname\"is \"vanessa");
 
     return 0;
-}
- */
+} */

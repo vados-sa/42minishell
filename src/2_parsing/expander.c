@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:29:30 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/19 16:02:51 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:45:20 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ int	expand_var(char **str, t_data *data)
 	
 	i = 0;
 	temp = NULL;
-	printf("string being expanded: %s\n", *str);
 	while((*str)[i])
 	{
 		if ((*str)[i] == '$')
