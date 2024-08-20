@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/14 15:03:51 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:31:52 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@
 # include "../includes/libft.h"
 # include "../includes/get_next_line.h"
 # include "../includes/structures.h"
+
+/*init.c*/
+int	init_data(t_data *data, char **env);
+int	init_env(t_data *data, char **env);
 
 /*signals.c ******************************************************************/
 void		setup_signal_handlers();

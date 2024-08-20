@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/19 16:03:15 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:27:44 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ int	parse(t_data *data)
 		return (EXIT_FAILURE);
 	if (expand_tokens(data))
 		return (EXIT_FAILURE);
+	if (organize_final_cmd_array(data))
+		return (EXIT_FAILURE);
 	if (ft_strcmp(data->input_type, HEREDOC) == 0)
 	{
 		if (handle_heredoc(data))
@@ -141,7 +143,7 @@ int	parse(t_data *data)
 	}
 	return (EXIT_SUCCESS);
 }
-
+/* 
 void print_commands(t_data data, t_command *command) {
     while (command) {
         printf("Command: %s\n", command->command);
@@ -228,7 +230,7 @@ void run_test(char *input) {
     //printf("Commands freed.\n");
     fflush(stdout);
 }
-/*
+
 int main()
 {
      printf("Test 1: Basic Command Without Arguments\n");
@@ -337,4 +339,5 @@ int main()
     run_test("export \"VAR=hello\"myname\"is \"vanessa");
 
     return 0;
-}*/
+}
+ */
