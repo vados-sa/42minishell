@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/20 16:21:16 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:20:53 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
 # define PIPE_STX_ERROR "syntax error near unexpected token "
 # define QUOTE_STX_ERROR "syntax error: unclosed quote "
 # define OTHER_STX_ERROR "syntax error near unexpected token"
+//check macros above:
+# define FD_E -1
+# define FD_R 0
+# define FD_W 1
+# define FD_RW 2
 
 # include <stdio.h>
 # include <stdlib.h>
