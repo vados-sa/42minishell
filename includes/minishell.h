@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/19 15:31:52 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:21:16 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int			expand_tokens(t_data *data);
 int			handle_export_builtin_arg(t_command *cmd_node, t_token *token);
 void		get_all_file(int fd1, char *limiter);
 int			handle_heredoc(t_data *data);
+int			organize_final_cmd_array(t_data *data);
 
 
 /*3_executer******************************************************************/
