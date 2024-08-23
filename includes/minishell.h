@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/23 15:52:56 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/23 23:55:28 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,18 @@ int			redirect_io(int **fds, int pos, t_data *data, int cmds_num);
 int			process_not_builtin(int **fds, int pos, int *pid, t_data *data);
 int			process_builtin(int **fds, int pos, t_command *cmd, t_data *data);
 char		*get_cmd_path(t_command *cmd, char**env);
-t_command	*set_correct_cmd(t_command *command, int pos);
 void		child_exec(pid_t *id_p, int pos, t_data *data, int **fds);
 void		execute_command(t_command *cmd, t_data *data);
 void		close_fd(int *fd);
 void		close_unused_fd(int **fds, int pos, int keep, int cmds_num);
 
+int			builtin_env(t_command *cmd, t_data *data);
+int			builtin_pwd(t_command *cmd, t_data *data);
+
 /*utils***********************************************************************/
 int			print_error_code(char *message, char tkn, int exit_code);
 int			perror_return_error(char *message);
-void		free_double_pointer(char**str);
+void		free_double_pointer_char(char**str);
+void		free_double_pointer_int(int**n);
 
 #endif

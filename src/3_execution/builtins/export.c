@@ -1,45 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/23 23:14:58 by mrabelo-         ###   ########.fr       */
+/*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
+/*   Updated: 2024/08/23 23:45:12 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-void	free_double_pointer_char(char**str)
+int	builtin_export(t_command *cmd, t_data *data)
 {
-	int	i;
-
-	i = 0;
-	if (str)
-	{
-		while (str[i])
-		{
-			free(str[i]);
-			i++;
-		}
-		free(str);
-	}
-}
-
-void	free_double_pointer_int(int**n)
-{
-	int	i;
-
-	i = 0;
-	if (n)
-	{
-		while (n[i])
-		{
-			free(n[i]);
-			i++;
-		}
-		free(n);
-	}
+	
 }

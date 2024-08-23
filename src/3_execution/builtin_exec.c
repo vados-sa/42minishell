@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:44:07 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/23 15:47:33 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/23 23:12:35 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ int	execute_builtin(t_command *cmd, t_data *data)
 	return (exit_code);
 }
 
-int	check_if_builtin(t_command *command)
+int	check_if_builtin(t_command *cmd)
 {
-	if (ft_strcmp(command, "cd") || \
-		ft_strcmp(command, "pwd") || \
-		ft_strcmp(command, "echo") || \
-		ft_strcmp(command, "exit") || \
-		ft_strcmp(command, "env") || \
-		ft_strcmp(command, "unset") || \
-		ft_strcmp(command, "export"))
-		return (0);
-	return (1);
+	if (!ft_strcmp(cmd->command, "cd") || \
+		!ft_strcmp(cmd->command, "pwd") || \
+		!ft_strcmp(cmd->command, "echo") || \
+		!ft_strcmp(cmd->command, "exit") || \
+		!ft_strcmp(cmd->command, "env") || \
+		!ft_strcmp(cmd->command, "unset") || \
+		!ft_strcmp(cmd->command, "export"))
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:39:25 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/23 15:45:33 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/23 23:15:48 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	**create_pipes(int qt_cmd)
 		if (!fds[i] || pipe(fds[i]) < 0)
 		{
 			ft_putendl_fd("minishel: error occured while piping", 2);
-			free_double_pointer(fds);
+			free_double_pointer_int(fds);
 			return (NULL);
 		}
 		i++;

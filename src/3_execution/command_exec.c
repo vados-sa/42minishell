@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/23 15:46:44 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/23 23:15:40 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,15 @@
 int	process_not_builtin(int **fds, int pos, int *pid, t_data *data)
 {
 	t_command	*cmd;
+	int			i;
 
-	cmd = set_correct_cmd(data->command, pos);
+	i = 0;
+	cmd = data->command;
+	while (cmd && i < pos)
+	{
+		cmd = cmd->next;
+		i++;
+	}
 	*pid = fork();
 	if (*pid < 0)
 		return (EXIT_FAIL);
@@ -54,7 +61,7 @@ void	execute_command(t_command *cmd, t_data *data)
 	exit (data->exit_status);
 }
 
-char	*get_cmd_path(t_command *cmd, char**env)
+/* char	*get_cmd_path(t_command *cmd, char**env)
 {
 	char	**paths;
 	char	*temp;
@@ -80,17 +87,56 @@ char	*get_cmd_path(t_command *cmd, char**env)
 	ft_putstr_fd("minishell: command not found: ", 2);
 	ft_putendl_fd(cmd->command, 2);
 	return (NULL);
+} */
+
+static char	*join_paths_and_command(char *path, char *command)
+{
+	char	*temp;
+	char	*result;
+
+	temp = ft_strjoin(path, "/");
+	if (!temp)
+		return (NULL);
+	result = ft_strjoin(temp, command);
+	free(temp);
+	return (result);
 }
 
-t_command	*set_correct_cmd(t_command *command, int pos)
+static char	**get_paths(char **env)
 {
-	int	i;
+	int		i;
+	char	**paths;
 
 	i = 0;
-	while (command && i <= pos)
+	while (ft_strncmp("PATH", env[i], 4))
+		i++;
+	paths = ft_split(env[i] + 5, ':');
+	return (paths);
+}
+
+char	*get_cmd_path(t_command *cmd, char **env)
+{
+	char	**paths;
+	char	*result;
+	int		i;
+
+	paths = get_paths(env);
+	if (!paths)
+		return (NULL);
+	i = 0;
+	while (paths[i])
 	{
-		command = command->next;
+		result = join_paths_and_command(paths[i], cmd->command);
+		if (result && access(result, F_OK | X_OK) == 0)
+		{
+			free_double_pointer_char(paths);
+			return (result);
+		}
+		free(result);
 		i++;
 	}
-	return (command);
+	free_double_pointer_char(paths);
+	ft_putstr_fd("minishell: command not found: ", 2);
+	ft_putendl_fd(cmd->command, 2);
+	return (NULL);
 }
