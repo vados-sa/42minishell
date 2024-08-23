@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/20 17:20:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:52:56 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@
 # include "../includes/structures.h"
 
 /*init.c*/
-int	init_data(t_data *data, char **env);
-int	init_env(t_data *data, char **env);
+int			init_data(t_data *data, char **env);
+int			init_env(t_data *data, char **env);
 
 /*signals.c ******************************************************************/
 void		setup_signal_handlers();
@@ -72,7 +72,7 @@ int			handle_redirection(char *arg, t_token **token);
 int			handle_operator(t_data *data, char *arg);
 int			handle_quotes(t_data *data, char *arg);
 int			handle_word(t_data *data, char *arg);
-t_token		*create_token(int size_lengh, char *str, char *type, int type_quote);
+t_token		*create_token(int size_len, char *str, char *type, int type_quote);
 void		create_token_list(t_data*data, t_token*new);
 
 /*2_parser********************************************************************/
@@ -80,34 +80,47 @@ void		create_token_list(t_data*data, t_token*new);
 int			split_token(t_data *data);
 int			open_redir_in(t_data *data, t_token *token, int flag);
 int			open_redir_out(t_data *data, t_token *token, int flag);
-int			split_others_token(t_data *data, t_token *token, int *create_new_command);
+int			split_others_token(t_data *data, t_token *token, int *add_new_cmd);
 int			parse(t_data *data);
 int			fill_node(t_command *cmd_node, t_token *token, char *flag);
 int			add_new_list_node(t_list **lst, t_token *token);
-t_command	*create_command_node(t_data *data);
-void		create_command_list(t_data *data, t_command *new);
-int			env_var_len(char *str);
-char		*get_exp_env(char *str, int len, char **env_arg);
-void		free_substr(char **s1, char **s2, char **s3);
-char		*find_after_var(char *str, int var_len);
-char		*find_exp_var(char *str, int var_len, t_data *data);
-char		*ft_concat(char *s1, char *s2, char *s3);
-char		*concat_expanded_var(char **str, int *i, t_data *data);
 int			expand_var(char **str, t_data *data);
 int			expand_command(t_command *cmd_node, t_data *data);
 int			expand_list_of_str(t_list *list, t_data *data);
 int			expand_tokens(t_data *data);
 int			handle_export_builtin_arg(t_command *cmd_node, t_token *token);
-void		get_all_file(int fd1, char *limiter);
+int			env_var_len(char *str);
 int			handle_heredoc(t_data *data);
 int			organize_final_cmd_array(t_data *data);
-
+t_command	*create_command_node(t_data *data);
+void		create_command_list(t_data *data, t_command *new);
+void		get_all_file(int fd1, char *limiter);
+void		free_substr(char **s1, char **s2, char **s3);
+char		*get_exp_env(char *str, int len, char **env_arg);
+char		*find_after_var(char *str, int var_len);
+char		*find_exp_var(char *str, int var_len, t_data *data);
+char		*ft_concat(char *s1, char *s2, char *s3);
+char		*concat_expanded_var(char **str, int *i, t_data *data);
 
 /*3_executer******************************************************************/
-
+int			exec(t_data*data);
+int			**create_pipes(int qt_cmd);
+int			check_if_builtin(t_command *command);
+int			execute_builtin(t_command *cmd, t_data *data);
+int			processing(int **fds, pid_t *id_p, t_data *data);
+int			redirect_io(int **fds, int pos, t_data *data, int cmds_num);
+int			process_not_builtin(int **fds, int pos, int *pid, t_data *data);
+int			process_builtin(int **fds, int pos, t_command *cmd, t_data *data);
+char		*get_cmd_path(t_command *cmd, char**env);
+t_command	*set_correct_cmd(t_command *command, int pos);
+void		child_exec(pid_t *id_p, int pos, t_data *data, int **fds);
+void		execute_command(t_command *cmd, t_data *data);
+void		close_fd(int *fd);
+void		close_unused_fd(int **fds, int pos, int keep, int cmds_num);
 
 /*utils***********************************************************************/
 int			print_error_code(char *message, char tkn, int exit_code);
 int			perror_return_error(char *message);
+void		free_double_pointer(char**str);
 
 #endif

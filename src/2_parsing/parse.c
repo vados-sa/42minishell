@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/20 17:13:51 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:51:51 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ void	remove_possible_quotes(char *str)
 	str[dst_pos] = '\0';
 }
 
-int	split_others_token(t_data *data, t_token *token, int *create_new_command)
+int	split_others_token(t_data *data, t_token *token, int *add_new_cmd)
 {
 	static t_command	*command;
 
-	if (*create_new_command)
+	if (*add_new_cmd)
 	{
-		*create_new_command = 0;
+		*add_new_cmd = 0;
 		command = create_command_node(data);
 		if (!command)
 			return (EXIT_FAILURE);
