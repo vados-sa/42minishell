@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_arg_for_export.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:37:06 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/19 11:23:16 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:48:02 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
  // for test 09, checar se a string tem typo quote pelo token structure
 int	open_quotes(t_command *cmd_node)
 {
-	t_list	*last_arg;
+	t_list	*lst_arg;
 	int		quote_count;
 	int		i;
-	char 	quote;
+	char	quote;
 
 	quote_count = 0;
 	i = 0;
 	quote = '\0';
-	last_arg = ft_lst_last(cmd_node->arguments);
-	while (last_arg->content[i] != '\'' && last_arg->content[i] != '\"')
+	lst_arg = ft_lst_last(cmd_node->arguments);
+	while (lst_arg->content[i] != '\'' && lst_arg->content[i] != '\"')
 	{
-		if (last_arg->content[i + 1] == '\'' || last_arg->content[i + 1] == '\"')
-			quote = last_arg->content[i + 1];
+		if (lst_arg->content[i + 1] == '\'' || lst_arg->content[i + 1] == '\"')
+			quote = lst_arg->content[i + 1];
 		i++;
 	}
 	if (quote != '\0')
 	{
-		while (last_arg->content[i])
+		while (lst_arg->content[i])
 		{
-			if (last_arg->content[i] == quote)
+			if (lst_arg->content[i] == quote)
 				quote_count++;
 			i++;
 		}
@@ -43,7 +43,7 @@ int	open_quotes(t_command *cmd_node)
 }
 
  // might not handle all cases #crying
-void	closed_quote(char *str, int *add_new_node) 
+void	closed_quote(char *str, int *add_new_node)
 {
 	int		i;
 	char	quote;
@@ -86,14 +86,14 @@ char	*get_equal_sign_pos(t_command *cmd_node)
 {
 	t_list	*ptr;
 	char	*equal_pos;
-	
+
 	ptr = cmd_node->arguments;
 	while (ptr->next)
 		ptr = ptr->next;
 	if (!ptr || !ptr->content)
 	{
-    	printf("Pointer or content is NULL\n");
-    	return NULL;
+		printf("Pointer or content is NULL\n");
+		return (NULL);
 	}
 	equal_pos = ft_strchr(ptr->content, '=');
 	if (!equal_pos)
@@ -105,7 +105,7 @@ int	concat_arguments(t_command *cmd_node, t_token *token, int *add_new_node)
 {
 	t_list	*current_arg;
 	char	*temp;
-	
+
 	current_arg = cmd_node->arguments;
 	while (current_arg->next)
 		current_arg = current_arg->next;
@@ -132,17 +132,17 @@ int	handle_export_builtin_arg(t_command *cmd_node, t_token *token)
 	}
 	else
 	{
-			equal_pos = get_equal_sign_pos(cmd_node);
-			if (equal_pos && *(equal_pos + 1) && open_quotes(cmd_node))
-			{
-				if (concat_arguments(cmd_node, token, &add_new_node))
-					return (EXIT_FAILURE);
-			}
-			else
-			{
-				add_new_list_node(&cmd_node->arguments, token);
-				add_new_node = 0;
-			}
+		equal_pos = get_equal_sign_pos(cmd_node);
+		if (equal_pos && *(equal_pos + 1) && open_quotes(cmd_node))
+		{
+			if (concat_arguments(cmd_node, token, &add_new_node))
+				return (EXIT_FAILURE);
+		}
+		else
+		{
+			add_new_list_node(&cmd_node->arguments, token);
+			add_new_node = 0;
+		}
 	}
 	return (EXIT_SUCCESS);
 }

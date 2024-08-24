@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/19 16:34:29 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:50:09 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char *av[], char **env)
 	setup_signal_handlers(); //look interactive and non interactive
 	ft_memset(&data, 0, sizeof(data));
 	if (init_data(&data, env))
-		return (EXIT_FAIL);
+		return (EXIT_FAIL); //must be exit_minishell
 	minishell_loop(&data, env);
 	return (EXIT_SUCC);
 }

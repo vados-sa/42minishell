@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_checkers.c                                   :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 16:24:42 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/28 21:28:06 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:41:34 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,27 @@ int	unclosed_quotes(char *input)
 	return (sing_quote_open || doub_quote_open);
 }
 
-int	look_for_quotes(char c)
+int	outer_quote(char *arg)
 {
-	if (c == '\'' || c == '\"')
-		return (1);
-	return (0);
-}
+	int	i;
+	int	pos;
+	int	pos_count;
 
-int	look_for_operator(char c)
-{
-	if (c == '>' || c == '<' || c == '|')
-		return (1);
-	return (0);
+	i = 1;
+	pos = 1;
+	pos_count = 1;
+	while (arg[i])
+	{
+		if (arg[i] == arg[0])
+		{
+			pos = i;
+			pos_count++;
+		}
+		if (ft_iseven(pos_count) && (look_for_operator(arg[i]) || !arg[i + 1]))
+		{
+			return (pos);
+		}
+		i++;
+	}
+	return (i);
 }

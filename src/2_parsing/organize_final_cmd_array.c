@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   organize_final_cmd_array.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:29:54 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/20 16:57:42 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:49:11 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	free_final_array(char **final_av, int count)
 		free(final_av[i]);
 		i++;
 	}
-    free(final_av);
+	free(final_av);
 }
 
 static int	add_command_to_array(long *i, t_command *cmd_ptr)
@@ -33,6 +33,7 @@ static int	add_command_to_array(long *i, t_command *cmd_ptr)
 	(*i)++;
 	return (EXIT_SUCCESS);
 }
+
 static int	add_args_to_array(long *i, t_command *cmd_ptr)
 {
 	t_list	*arguments;
@@ -76,13 +77,13 @@ long	get_nbr_of_elements(t_command *cmd_node)
 	long		count;
 	t_list		*args;
 	t_list		*flags;
-	
+
 	count = 1;
 	args = cmd_node->arguments;
 	flags = cmd_node->flags;
 	while (cmd_node)
-	{		
-		while(args)
+	{
+		while (args)
 		{
 			count++;
 			args = args->next;
@@ -102,7 +103,7 @@ int	organize_final_cmd_array(t_data *data)
 	t_command	*cmd_ptr;
 	long		nbr_of_elements;
 	long		i;
-	
+
 	cmd_ptr = data->command;
 	while (cmd_ptr)
 	{
@@ -111,8 +112,8 @@ int	organize_final_cmd_array(t_data *data)
 		if (!cmd_ptr->final_av)
 			return (perror_return_error("Final argv malloc failed"));
 		i = 0;
-		if (add_command_to_array(&i, cmd_ptr) 
-			|| add_args_to_array(&i, cmd_ptr) 
+		if (add_command_to_array(&i, cmd_ptr)
+			|| add_args_to_array(&i, cmd_ptr)
 			|| add_flags_to_array(&i, cmd_ptr))
 			return (EXIT_FAILURE);
 		cmd_ptr->final_av[i] = NULL;

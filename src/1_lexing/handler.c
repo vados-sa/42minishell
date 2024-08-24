@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/14 20:26:23 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:42:43 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	handle_redirection(char *arg, t_token **token)
 	return (i);
 }
 
+// verify if on line 75 in type quote NULL or NONE
+// check line 81 is correct (return -1)
 int	handle_operator(t_data *data, char *arg)
 {
 	int		i;
@@ -72,58 +74,16 @@ int	handle_operator(t_data *data, char *arg)
 		i += handle_redirection(&arg[i], &token);
 	if (arg[i] == '|')
 	{
-		token = create_token(0, &arg[0], PIPE, 0); // type quote NULL or NONE?
+		token = create_token(0, &arg[0], PIPE, 0); 
 		i++;
 	}
 	if (!token)
-		return (-1); //check if it's correct
+		return (-1);
 	create_token_list(data, token);
 	return (i);
 }
 
-/* int	handle_quotes(t_data *data, char *arg)
-{
-	int		i;
-	t_token	*token;
-
-	i = 0;
-	while (arg[i + 1] != arg[0])
-		i++;
-	if (arg[0] == '\"')
-		token = create_token(i, &arg[1], OTHERS, DOUBLE_Q);
-	else
-		token = create_token(i, &arg[1], OTHERS, SINGLE_Q);
-	if (!token)
-		return (-1); //check if it's correct
-	create_token_list(data, token);
-	return (i + 2);
-} */
-
-int	outer_quote(char *arg)
-{
-	int	i;
-	int	pos;
-	int	pos_count;
-
-	i = 1;
-	pos = 1;
-	pos_count = 1;
-	while (arg[i])
-	{
-		if (arg[i] == arg[0])
-		{
-			pos = i;
-			pos_count++;
-		}
-		if (ft_iseven(pos_count) && (look_for_operator(arg[i]) || !arg[i + 1]))
-		{
-			return (pos);
-		}
-		i++;
-	}
-	return (i);
-}
-
+// check line 99 is correct (return -1)
 int	handle_quotes(t_data *data, char *arg)
 {
 	int		i;
@@ -136,12 +96,12 @@ int	handle_quotes(t_data *data, char *arg)
 	else
 		token = create_token(i - 1, &arg[1], OTHERS, SINGLE_Q);
 	if (!token)
-		return (-1); //check if it's correct
+		return (-1);
 	create_token_list(data, token);
 	return (i + 1);
 }
 
-
+// check line 115 is correct (return -1)
 int	handle_word(t_data *data, char *arg)
 {
 	int		i;
@@ -152,7 +112,7 @@ int	handle_word(t_data *data, char *arg)
 		i++;
 	token = create_token(i, &arg[0], OTHERS, 0);
 	if (!token)
-		return (-1); //check if it's correct
+		return (-1);
 	create_token_list(data, token);
 	return (i);
 }

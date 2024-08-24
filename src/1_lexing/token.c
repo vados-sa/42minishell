@@ -6,12 +6,13 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 20:37:38 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/23 15:52:31 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:43:33 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+//check necessity of freeing the token -line 31
 t_token	*create_token(int size_len, char *str, char *type, int type_quote)
 {
 	t_token	*token;
@@ -27,7 +28,7 @@ t_token	*create_token(int size_len, char *str, char *type, int type_quote)
 		token->value = malloc((size_len + 1) * sizeof(char));
 		if (!token->value)
 		{
-			perror("failed to allocate memory"); //check necessity of freeing the token
+			perror("failed to allocate memory");
 			return (NULL);
 		}
 		ft_strlcpy(token->value, str, size_len + 1);

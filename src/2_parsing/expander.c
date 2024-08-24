@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:29:30 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/20 16:45:20 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:45:44 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	env_var_len(char *str)
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_') && str[i] != '}')
 	{
 		len++;
-		i++;	
+		i++;
 	}
 	return (len);
 }
@@ -35,17 +35,16 @@ char	*get_exp_env(char *str, int len, char **env_arg)
 {
 	if (!env_arg)
 	{
-        printf("Environment variable array is NULL\n");
-        return ("");
-    }
-	while(*env_arg)
+		printf("Environment variable array is NULL\n");
+		return ("");
+	}
+	while (*env_arg)
 	{
-		if (!ft_strncmp(str + 1, *env_arg, len)
-			&& (*env_arg)[len] == '=')
-			return(*env_arg + len + 1);
+		if (!ft_strncmp(str + 1, *env_arg, len) && (*env_arg)[len] == '=')
+			return (*env_arg + len + 1);
 		env_arg++;
 	}
-	return("");
+	return ("");
 }
 
 void	free_substr(char **s1, char **s2, char **s3)
@@ -87,7 +86,7 @@ char	*find_exp_var(char *str, int var_len, t_data *data)
 {
 	int		i;
 	char	*exp_var;
-	
+
 	i = 0;
 	if (str[i + 1] == '?' || (str[i + 1] == '{' && str[i + 2] == '?'))
 		exp_var = ft_itoa(data->exit_status);
@@ -102,8 +101,8 @@ char	*find_exp_var(char *str, int var_len, t_data *data)
 
 char	*ft_concat(char *s1, char *s2, char *s3)
 {
-	char *temp;
-	char *result;
+	char	*temp;
+	char	*result;
 
 	temp = ft_strjoin(s1, s2);
 	if (!temp)
@@ -134,7 +133,7 @@ char	*concat_expanded_var(char **str, int *i, t_data *data)
 	free_substr(&before_var, &exp_var, &after_var);
 	if (!exp_str)
 		return (NULL);
-	return(exp_str);
+	return (exp_str);
 }
 // SAVE ABOVE FUNCTIONS INTO CONCAT_EXPANDED_VARS.C
 
@@ -145,7 +144,7 @@ int	expand_var(char **str, t_data *data)
 	
 	i = 0;
 	temp = NULL;
-	while((*str)[i])
+	while ((*str)[i])
 	{
 		if ((*str)[i] == '$')
 		{
