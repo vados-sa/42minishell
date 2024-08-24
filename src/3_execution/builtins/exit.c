@@ -6,11 +6,16 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/24 18:54:21 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:18:25 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+void	minishell_exit(t_data *data, int exit_code)
+{
+	
+}
 
 int	builtin_exit(t_command *cmd, t_data*data)
 {
