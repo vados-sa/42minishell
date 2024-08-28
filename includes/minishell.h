@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/23 23:55:28 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/28 15:06:31 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int			init_data(t_data *data, char **env);
 int			init_env(t_data *data, char **env);
 
 /*signals.c ******************************************************************/
-void		setup_signal_handlers();
+void		signals_non_interactive_handler();
+void		signals_interactive_handler();
 
 /*1_lexer*********************************************************************/
 int			lex(t_data *data);
