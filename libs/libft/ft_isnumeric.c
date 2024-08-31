@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_isnumeric.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/31 15:41:55 by mrabelo-         ###   ########.fr       */
+/*   Created: 2024/08/24 21:34:59 by mrabelo-          #+#    #+#             */
+/*   Updated: 2024/08/24 21:37:31 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../includes/libft.h"
 
-int	builtin_env(t_command *cmd, t_data *data)
+int	ft_isnumeric(char*str)
 {
 	int	i;
 
 	i = 0;
-	if (cmd->flags || cmd->arguments)
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i])
 	{
-		ft_putstr_fd("minishell: env don't support options or arguments\n", 1); //check if it is 1 or 2
-		return (EXIT_FAIL);
-	}
-	while (data->env[i])
-	{
-		printf("%s\n", data->env[i]);
+		if (!ft_isdigit(str[i]))
+			return (0);
 		i++;
 	}
-	return (EXIT_SUCC);
+	return (1);
 }

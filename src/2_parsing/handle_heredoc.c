@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:23:31 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/14 15:53:20 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/08/30 15:19:18 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	handle_heredoc(t_data *data)
 	int	fd[2];
 
 	if (pipe(fd) < 0)
-		perror_return_error("heredoc pipe");
+		return (perror_return_error("heredoc pipe"));
 	data->input_fd = fd[0];
 	get_all_file(fd[1], data->input_value);
 	return (EXIT_SUCC);

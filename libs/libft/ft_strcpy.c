@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/31 15:41:55 by mrabelo-         ###   ########.fr       */
+/*   Created: 2024/08/31 14:41:21 by mrabelo-          #+#    #+#             */
+/*   Updated: 2024/08/31 14:55:39 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../includes/libft.h"
 
-int	builtin_env(t_command *cmd, t_data *data)
+char	*ft_strcpy(char*dest, char*src)
 {
 	int	i;
 
 	i = 0;
-	if (cmd->flags || cmd->arguments)
+	while (src[i])
 	{
-		ft_putstr_fd("minishell: env don't support options or arguments\n", 1); //check if it is 1 or 2
-		return (EXIT_FAIL);
-	}
-	while (data->env[i])
-	{
-		printf("%s\n", data->env[i]);
+		dest[i] = src[i];
 		i++;
 	}
-	return (EXIT_SUCC);
+	dest[i] = '\0';
+	return (dest);
 }

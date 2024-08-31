@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/31 15:41:55 by mrabelo-         ###   ########.fr       */
+/*   Created: 2024/08/31 14:53:33 by mrabelo-          #+#    #+#             */
+/*   Updated: 2024/08/31 14:53:58 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../includes/libft.h"
 
-int	builtin_env(t_command *cmd, t_data *data)
+char	*ft_strcat(char*dest, char*src)
 {
+	int	l;
 	int	i;
 
 	i = 0;
-	if (cmd->flags || cmd->arguments)
+	l = ft_strlen(dest);
+	while (src[i])
 	{
-		ft_putstr_fd("minishell: env don't support options or arguments\n", 1); //check if it is 1 or 2
-		return (EXIT_FAIL);
-	}
-	while (data->env[i])
-	{
-		printf("%s\n", data->env[i]);
+		dest[l + i] = src[i];
 		i++;
 	}
-	return (EXIT_SUCC);
+	dest[l + i] = '\0';
+	return (dest);
 }
