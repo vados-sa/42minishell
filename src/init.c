@@ -6,41 +6,13 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:46:13 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/19 16:54:21 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:20:04 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	init_data(t_data *data, char **env)
-{
-	int	i;
-
-	i = 0;
-	if (init_env(data, env))
-		return (EXIT_FAIL);
-	if (init_path(data, env))
-	{
-		while (data->env[i])
-		{
-			free(data->env[i]);
-			i++;
-		}
-		free(data->env);
-		return (EXIT_FAIL);
-	}
-	//DO SOMETHING ABOUT HISTORY
-	data->input_fd = STDIN_FILENO;
-	data->input_value = NULL;
-	data->input_type = STDIN;
-	data->output_fd = STDOUT_FILENO;
-	data->output_value = NULL;
-	data->output_type = STDOUT;
-	data->exit_status = 0;
-	return (EXIT_SUCC);
-}
-
-int	init_env(t_data *data, char **env)
+static int	init_env(t_data *data, char **env)
 {
 	int	i;
 
@@ -68,7 +40,7 @@ int	init_env(t_data *data, char **env)
 	return (EXIT_SUCC);
 }
 
-int	init_path(t_data *data, char **env)
+static int	init_path(t_data *data, char **env)
 {
 	int	i;
 
@@ -88,5 +60,62 @@ int	init_path(t_data *data, char **env)
 		perror("Failed to find PATH");
 		return (EXIT_FAIL);
 	}
+	return (EXIT_SUCC);
+}
+
+static void	init_histfile(t_data *data, char **env)
+{
+	char	*home_path;
+	char	*histfile_path;
+	
+	home_path = get_env_value("HOME=", data);
+	if (!home_path)
+		printf("Warning: HOME environment variable not set. \
+				History will not be saved.\n");
+	else
+	{
+		histfile_path = ft_strjoin(home_path, "/.minnishell_history");
+		if (histfile_path)
+		{
+			add_value_to_env("HISTFILE=", histfile_path, data);
+			read_history(histfile_path);
+			free(histfile_path);
+			histfile_path = NULL;
+		}
+		free(home_path);
+		home_path = NULL;
+	}
+}
+
+static void	init_io(t_data *data)
+{
+	data->input_fd = STDIN_FILENO;
+	data->input_value = NULL;
+	data->input_type = STDIN;
+	data->output_fd = STDOUT_FILENO;
+	data->output_value = NULL;
+	data->output_type = STDOUT;
+}
+
+int	init_data(t_data *data, char **env)
+{
+	int	i;
+
+	i = 0;
+	if (init_env(data, env))
+		return (EXIT_FAIL);
+	if (init_path(data, env))
+	{
+		while (data->env[i])
+		{
+			free(data->env[i]);
+			i++;
+		}
+		free(data->env);
+		return (EXIT_FAIL);
+	}
+	init_histfile(data, env);
+	init_io(data);
+	data->exit_status = 0;
 	return (EXIT_SUCC);
 }
