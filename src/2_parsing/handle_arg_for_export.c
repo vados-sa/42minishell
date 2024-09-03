@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_arg_for_export.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:37:06 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/24 19:48:02 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:11:17 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,17 +146,3 @@ int	handle_export_builtin_arg(t_command *cmd_node, t_token *token)
 	}
 	return (EXIT_SUCCESS);
 }
-
-// CHECK FOR INVALID IDENTIFIERS
-// this will probably go into export.
-/* if (!ft_isalpha(token->value[i]) && token->value[i] != '_') // invalid indetifier error
-	{
-		printf("bash: export: `%s': not a valid identifier\n", token->value);
-		return (EXIT_FAILURE);
-	}
-	while (token->value[i] || token->value[i] != '=') // FIND '=' OR 'space'
-	{
-		if (!ft_isalnum(token->value[i]) && token->value[i] != '_')
-			return (EXIT_FAILURE); // invalid identifier error
-		i++;
-	} */
