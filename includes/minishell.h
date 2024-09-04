@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/28 15:06:31 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:47:51 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,10 @@ void		close_unused_fd(int **fds, int pos, int keep, int cmds_num);
 
 int			builtin_env(t_command *cmd, t_data *data);
 int			builtin_pwd(t_command *cmd, t_data *data);
+
+char		*get_env_value(char *env_var, t_data *data);
+int			add_value_to_env(char *env_var, char *value, t_data *data);
+int			check_invalid_identifiers(char *arg, char *command);
 
 /*utils***********************************************************************/
 int			print_error_code(char *message, char tkn, int exit_code);

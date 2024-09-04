@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/04 17:31:15 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:50:42 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,15 @@
 
 //CHECK IF QUOTES ARE BEING PRINTED -> IT SHOULD !
 
-static int	check_invalid_identifiers(char *arg)
-{
-	int	i;
-
-	i = 0;
-	if (!arg[0] || (!ft_isalpha(arg[0]) && arg[0] != '_'))
-	{
-		printf("bash: export: `%s': not a valid identifier\n", arg);
-		return (EXIT_FAILURE);
-	}
-	while (arg[i] && arg[i] != '=')
-	{
-		if (!ft_isalnum(arg[i]) && arg[i] != '_')
-			return (EXIT_FAILURE);
-		i++;
-	}
-	return (EXIT_SUCCESS);
-}
-
+/**
+ * @brief Prints all environment variables in a format suitable for 'export' command output.
+ *
+ * This function iterates through the environment variables stored in the `data->env`
+ * array and prints each one prefixed with "declare -x ", which is the format used by the
+ * 'export' command when it is invoked without any arguments.
+ *
+ * @param data The main data structure containing the environment variables array.
+ */
 static void	print_env_var(t_data *data)
 {
 	int	i;
@@ -45,6 +35,18 @@ static void	print_env_var(t_data *data)
 	}
 }
 
+/**
+ * @brief Adds a new environment variable to the environment array.
+ *
+ * This function creates a new environment variable entry in the `data->env` array.
+ * It duplicates the provided `var` string and assigns it to the next available slot
+ * in the array. If the duplication fails, an error is printed.
+ *
+ * @param data The main data structure containing the environment variables array.
+ * @param var The variable to be added to the environment.
+ * @param i The index at which to add the new variable in the `data->env` array.
+ * @return EXIT_SUCCESS if the variable was added successfully, EXIT_FAILURE otherwise.
+ */
 static int	add_new_var(t_data *data, char* var, int i)
 {
 
@@ -58,6 +60,17 @@ static int	add_new_var(t_data *data, char* var, int i)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Updates an existing environment variable or adds a new one if it doesn't exist.
+ *
+ * This function searches for an existing environment variable in the `data->env` array
+ * that matches the name of the provided `var`. If found, it updates the variable's value.
+ * If not found, it calls `add_new_var` to add the new variable to the environment.
+ *
+ * @param var The variable to be updated or added.
+ * @param data The main data structure containing the environment variables array.
+ * @return EXIT_SUCCESS if the variable was updated or added successfully, EXIT_FAILURE otherwise.
+ */
 static int	update_env_array(char *var, t_data *data)
 {
 	int		var_len;
@@ -85,6 +98,18 @@ static int	update_env_array(char *var, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Handles the 'export' builtin command, managing environment variables.
+ *
+ * This function implements the 'export' builtin command. It checks if any flags
+ * are provided (which are not supported), prints all environment variables if
+ * no arguments are given, or updates/adds environment variables based on the
+ * provided arguments.
+ *
+ * @param cmd The command structure containing arguments and flags for 'export'.
+ * @param data The main data structure containing the environment variables array.
+ * @return EXIT_SUCCESS if the command executed successfully, EXIT_FAILURE otherwise.
+ */
 int	builtin_export(t_command *cmd, t_data *data)
 {
 	t_list	*current_arg;
@@ -102,7 +127,7 @@ int	builtin_export(t_command *cmd, t_data *data)
 	}
 	while (current_arg)
 	{
-		if (check_invalid_identifiers(current_arg->content))
+		if (check_invalid_identifiers(current_arg->content, "export"))
 			return(EXIT_FAILURE);
 		// check later if it is a shell variable and, if so, add it to the array
 		if (update_env_array(current_arg->content, data))
