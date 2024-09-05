@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:47:30 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 17:01:19 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,17 @@ void	minishell_loop(t_data *data)
 	{
 		signals_interactive_handler();
 		data->args = readline("minishell$ ");
-		if (!data->args) // check: rl being NULL means Ctrl-D was pressed, signaling an end-of-file (EOF)
-		{ // call a fucniton to exit minishell with a SUCCESS STATUS
-			printf("\n");
-			exit (EXIT_FAIL); //here is supposed to be minishell_exit too
-		}
+		if (!data->args)
+			minishell_exit(data, EXIT_SUCC);
 		signals_non_interactive_handler();
 		if (data->args[0])
 			add_history(data->args);
-		if (lex(data) || parse(data) || exec(data)) //check if needs to be lex(data) or !lex(data)
+		if (lex(data) || parse(data) || exec(data))
 		{
-			//free_memory
+			free_data(data);
 			continue ;
 		}
-		//free_memory
+		free_data(data);
 	}
 }
 

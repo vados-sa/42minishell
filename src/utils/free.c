@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 14:53:28 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:55:54 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_double_pointer_char(char**str)
 {
 	int	i;
 
+	if (!str)
+		return;
 	i = 0;
 	if (str)
 	{
@@ -61,4 +63,31 @@ void	free_substr(char **s1, char **s2, char **s3)
 		free (*s3);
 		*s3 = NULL;
 	}
+}
+
+/**
+ * @brief Frees the t_data structure and all its dynamically allocated members.
+ * 
+ * @param data Pointer to the t_data structure.
+ */
+void	free_data(t_data *data)
+{
+	if (data->args)
+		free(data->args);
+	if (data->env)
+		free_double_pointer_char(data->env);
+	if (data->path)
+		free(data->path);
+	if (data->input_type)
+		free(data->input_type);
+	if (data->input_value)
+		free(data->input_value);
+	if (data->output_type)
+		free(data->output_type);
+	if (data->output_value)
+		free(data->output_value);
+	if (data->token)
+		free_tokens(data->token);
+	if (data->command)
+		free_commands(data->command);
 }

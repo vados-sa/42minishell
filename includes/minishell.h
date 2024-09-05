@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:47:57 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:57:44 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,12 @@ int			builtin_unset(t_command *cmd, t_data *data);
 void		free_double_pointer_char(char**str);
 void		free_double_pointer_int(int**n);
 void		free_substr(char **s1, char **s2, char **s3);
+void		free_data(t_data *data);
+
+/*free_structures.c***********************************************************/
+void		free_list(t_list *list);
+void		free_commands(t_command *commands);
+void		free_tokens(t_token *tokens);
 
 /**print_message.c************************************************************/
 int			print_error_code(char *message, char tkn, int exit_code);
