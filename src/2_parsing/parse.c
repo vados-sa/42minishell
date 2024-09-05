@@ -6,13 +6,11 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/24 19:49:41 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:39:49 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern char** environ; //remember to take this off
 
 int	split_token(t_data *data)
 {

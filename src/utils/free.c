@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/23 23:14:58 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:53:28 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,24 @@ void	free_double_pointer_int(int**n)
 			i++;
 		}
 		free(n);
+	}
+}
+
+void	free_substr(char **s1, char **s2, char **s3)
+{
+	if (*s1)
+	{
+		free (*s1);
+		*s1 = NULL;
+	}
+	if (*s2)
+	{
+		free (*s2);
+		*s2 = NULL;
+	}
+	if (*s3)
+	{
+		free (*s3);
+		*s3 = NULL;
 	}
 }

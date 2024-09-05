@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:23:36 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/03 17:23:37 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:53:55 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,4 @@ char	*get_exp_env(char *str, int len, char **env_arg)
 		env_arg++;
 	}
 	return ("");
-}
-
-void	free_substr(char **s1, char **s2, char **s3)
-{
-	if (*s1)
-	{
-		free (*s1);
-		*s1 = NULL;
-	}
-	if (*s2)
-	{
-		free (*s2);
-		*s2 = NULL;
-	}
-	if (*s3)
-	{
-		free (*s3);
-		*s3 = NULL;
-	}
 }

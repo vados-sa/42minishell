@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:39:34 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/28 15:39:35 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:35:53 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  *
  * @param sig The received signal value (unused in this function)
  */
-static void refresh_line(int sig)
+static void	refresh_line(int sig)
 {
 	(void)sig; // to avoid unused variable warning
 	rl_replace_line("", 0); // Clear the current input line
@@ -34,7 +34,7 @@ static void refresh_line(int sig)
  * @param sig The received signal value
  */
 
-static void display_new_line(int sig)
+static void	display_new_line(int sig)
 {
 	if (sig == SIGQUIT)
 		write(STDERR_FILENO, "Quit (core dumped)\n", 19);
@@ -46,7 +46,7 @@ static void display_new_line(int sig)
  * @brief Sets signal handlers for interactive mode. SIGINT (Ctrl-C) is set to
  * clear the line and redisplay the prompt. SIGQUIT (Ctrl-\) is ignored.
  */
-void	signals_interactive_handler()
+void	signals_interactive_handler(void)
 {
 	signal(SIGINT, refresh_line);
 	signal(SIGQUIT, SIG_IGN);
@@ -58,7 +58,7 @@ void	signals_interactive_handler()
  * Dump" message.
  */
 
-void	signals_non_interactive_handler()
+void	signals_non_interactive_handler(void)
 {
 	signal(SIGINT, display_new_line);
 	signal(SIGQUIT, display_new_line);

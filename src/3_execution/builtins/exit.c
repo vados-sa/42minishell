@@ -6,10 +6,12 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 10:59:52 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:19:18 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include <readline/readline.h>
+# include <readline/history.h>
 #include "../../../includes/minishell.h"
 
 void	minishell_exit(t_data *data, int exit_code)
@@ -17,7 +19,7 @@ void	minishell_exit(t_data *data, int exit_code)
 	char	*file;
 
 	printf("exit\n\n");
-	file = find_path("HISTFILE=", data);
+	file = find_path("HISTFILE=", data->env);
 	if (file)
 		write_history(file + 9);
 	//free
@@ -47,4 +49,5 @@ int	builtin_exit(t_command *cmd, t_data*data)
 		minishell_exit(data, ft_atoi(cmd->arguments->content));
 	}
 	minishell_exit(data, EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }

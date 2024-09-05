@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:58 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/23 23:56:00 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:31:41 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	processing(int **fds, pid_t *id_p, t_data *data)
 	return (EXIT_SUCC);
 }
 
-/* t_command	*create_command(char *cmd, char **args)
+/*t_command	*create_command(char *cmd, char **args)
 {
 	t_command	*new_cmd;
 
@@ -119,7 +119,7 @@ void	add_command(t_data *data, t_command *new_cmd)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
-	char	*args2[] = {"grep", "World", NULL};
+	char	*args2[] = {"cat", "World", NULL};
 	char	*args3[] = {"wc", "-l", NULL};
 
 	(void)argc;
@@ -131,15 +131,15 @@ int	main(int argc, char **argv, char **envp)
 	data.output_fd = STDOUT_FILENO;
 
 	// Create and add commands to the linked list
-	add_command(&data, create_command("grep", args2));
+	add_command(&data, create_command("cat", args2));
 	add_command(&data, create_command("wc", args3));
 
 	// Execute the pipeline
 	if (exec(&data) == EXIT_FAIL)
 	{
 		perror("Execution failed");
-		return (EXIT_FAILURE);
+		return (EXIT_FAIL);
 	}
 
-	return (EXIT_SUCCESS);
-} */
+	return (EXIT_SUCC);
+}*/

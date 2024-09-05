@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:14:46 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/20 14:22:44 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:11:55 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_command
 
 typedef struct s_data
 {
-	char		*args; //check
+	char		*args;
 	char		**env;
 	char		*path;
 	int			input_fd;

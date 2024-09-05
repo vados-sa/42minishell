@@ -6,13 +6,13 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/31 16:57:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:16:16 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-static int	find_path(char *str, char **env)
+char	*find_path(char *str, char **env)
 {
 	size_t	i;
 
@@ -20,10 +20,10 @@ static int	find_path(char *str, char **env)
 	while (env[i])
 	{
 		if (!ft_strncmp(str, env[i], ft_strlen(str)))
-			return (1);
+			return (env[i]);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
 static char	*set_new_path(t_command *cmd, char **env)

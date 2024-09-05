@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:46:13 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/03 17:20:04 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:34:10 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	init_histfile(t_data *data, char **env)
 {
 	char	*home_path;
 	char	*histfile_path;
-	
+
 	home_path = get_env_value("HOME=", data);
 	if (!home_path)
 		printf("Warning: HOME environment variable not set. \

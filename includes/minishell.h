@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 12:19:14 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:23:45 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,88 +52,146 @@
 # include "../includes/get_next_line.h"
 # include "../includes/structures.h"
 
-/*init.c*/
-int			init_data(t_data *data, char **env);
-int			init_env(t_data *data, char **env);
+/**main.c*********************************************************************/
+void		minishell_loop(t_data *data, char **env);
+int			main(int ac, char *av[], char **env);
 
-/*signals.c ******************************************************************/
-void		signals_non_interactive_handler();
-void		signals_interactive_handler();
+/**init.c*********************************************************************/
+int			init_data(t_data *data, char **env);
+
+/**signals.c******************************************************************/
+void		signals_non_interactive_handler(void);
+void		signals_interactive_handler(void);
 
 /*1_lexer*********************************************************************/
-int			lex(t_data *data);
-int			check_input(char *cpy_arg);
-int			tokenize(t_data *data, char *cpy_arg);
-int			look_for_operator(char c);
-int			look_for_quotes(char c);
-int			unclosed_quotes(char *input);
+/**checker.c******************************************************************/
 int			check_double_operator(char *arg);
+int			check_input(char *cpy_arg);
+int			unclosed_quotes(char *input);
+int			outer_quote(char *arg);
+
+/**handler.c******************************************************************/
 int			assign_type_redirection(char *arg, char **type);
 int			handle_redirection(char *arg, t_token **token);
 int			handle_operator(t_data *data, char *arg);
 int			handle_quotes(t_data *data, char *arg);
 int			handle_word(t_data *data, char *arg);
+
+/**lex.c**********************************************************************/
+int			lex(t_data *data);
+int			tokenize(t_data *data, char *cpy_arg);
+
+/**token.c********************************************************************/
 t_token		*create_token(int size_len, char *str, char *type, int type_quote);
 void		create_token_list(t_data*data, t_token*new);
 
-/*2_parser********************************************************************/
 
-int			split_token(t_data *data);
-int			open_redir_in(t_data *data, t_token *token, int flag);
-int			open_redir_out(t_data *data, t_token *token, int flag);
-int			split_others_token(t_data *data, t_token *token, int *add_new_cmd);
-int			parse(t_data *data);
+/*2_parser********************************************************************/
+/**command.c******************************************************************/
 int			fill_node(t_command *cmd_node, t_token *token, char *flag);
 int			add_new_list_node(t_list **lst, t_token *token);
+t_command	*create_command_node(t_data *data);
+void		create_command_list(t_data *data, t_command *new);
+
+/**concat_expanded_vars.c*****************************************************/
+char		*concat_expanded_var(char **str, int *i, t_data *data);
+
+/**expander_utils.c***********************************************************/
+int			env_var_len(char *str);
+char		*get_exp_env(char *str, int len, char **env_arg);
+
+/**expander_utils.c***********************************************************/
 int			expand_var(char **str, t_data *data);
 int			expand_command(t_command *cmd_node, t_data *data);
 int			expand_list_of_str(t_list *list, t_data *data);
 int			expand_tokens(t_data *data);
+
+/**handle_arg_for_export.c****************************************************/
+int			open_quotes(t_command *cmd_node);
+void		closed_quote(char *str, int *add_new_node);
+char		*get_equal_sign_pos(t_command *cmd_node);
+int			concat_arguments(t_command *cmd_node, t_token *token, int *add_new_node);
 int			handle_export_builtin_arg(t_command *cmd_node, t_token *token);
-int			env_var_len(char *str);
-int			handle_heredoc(t_data *data);
-int			organize_final_cmd_array(t_data *data);
-t_command	*create_command_node(t_data *data);
-void		create_command_list(t_data *data, t_command *new);
+
+/**handle_heredoc.c***********************************************************/
 void		get_all_file(int fd1, char *limiter);
-void		free_substr(char **s1, char **s2, char **s3);
-char		*get_exp_env(char *str, int len, char **env_arg);
-char		*find_after_var(char *str, int var_len);
-char		*find_exp_var(char *str, int var_len, t_data *data);
-char		*ft_concat(char *s1, char *s2, char *s3);
-char		*concat_expanded_var(char **str, int *i, t_data *data);
+int			handle_heredoc(t_data *data);
+
+/**organize_final_cmd_array.c*************************************************/
+long		get_nbr_of_elements(t_command *cmd_node);
+int			organize_final_cmd_array(t_data *data);
+
+/**parse.c****************************************************/
+int			split_token(t_data *data);
+int			open_redir_in(t_data *data, t_token *token, int flag);
+int			open_redir_out(t_data *data, t_token *token, int flag);
+void		remove_possible_quotes(char *str);
+int			split_others_token(t_data *data, t_token *token, int *add_new_cmd);
+int			parse(t_data *data);
+
 
 /*3_executer******************************************************************/
-int			exec(t_data*data);
-int			**create_pipes(int qt_cmd);
-int			check_if_builtin(t_command *command);
-int			execute_builtin(t_command *cmd, t_data *data);
-int			processing(int **fds, pid_t *id_p, t_data *data);
-int			redirect_io(int **fds, int pos, t_data *data, int cmds_num);
-int			process_not_builtin(int **fds, int pos, int *pid, t_data *data);
+/*builtin_exec.c**************************************************************/
 int			process_builtin(int **fds, int pos, t_command *cmd, t_data *data);
-char		*get_cmd_path(t_command *cmd, char**env);
-void		child_exec(pid_t *id_p, int pos, t_data *data, int **fds);
+int			execute_builtin(t_command *cmd, t_data *data);
+int			check_if_builtin(t_command *cmd);
+
+/*command_exec.c**************************************************************/
+int			process_not_builtin(int **fds, int pos, int *pid, t_data *data);
 void		execute_command(t_command *cmd, t_data *data);
+
+/*exec.c**********************************************************************/
+int			exec(t_data*data);
+void		child_exec(pid_t *id_p, int pos, t_data *data, int **fds);
+int			processing(int **fds, pid_t *id_p, t_data *data);
+
+/*pipe.c**********************************************************************/
+int			**create_pipes(int qt_cmd);
 void		close_fd(int *fd);
 void		close_unused_fd(int **fds, int pos, int keep, int cmds_num);
+int			redirect_io(int **fds, int pos, t_data *data, int cmds_num);
 
+/**builtins*******************************************************************/
+/***cd.c**********************************************************************/
+char		*find_path(char *str, char **env);
+int			rewrite_path(char *str, char *pwd, char **env);
 int			builtin_cd(t_command *cmd, t_data *data);
+
+/***echo.c********************************************************************/
 int			builtin_echo(t_command *cmd);
+
+/***env.c*********************************************************************/
 int			builtin_env(t_command *cmd, t_data *data);
+
+/***exit.c********************************************************************/
+void		minishell_exit(t_data *data, int exit_code);
 int			builtin_exit(t_command *cmd, t_data*data);
+
+/***export.c******************************************************************/
 int			builtin_export(t_command *cmd, t_data *data);
+
+/***pwd.c*********************************************************************/
 int			builtin_pwd(t_command *cmd, t_data *data);
+
+/***unset.c*******************************************************************/
 int			builtin_unset(t_command *cmd, t_data *data);
 
+/*utils***********************************************************************/
+/**free.c*********************************************************************/
+void		free_double_pointer_char(char**str);
+void		free_double_pointer_int(int**n);
+void		free_substr(char **s1, char **s2, char **s3);
+
+/**print_message.c************************************************************/
+int			print_error_code(char *message, char tkn, int exit_code);
+int			perror_return_error(char *message);
+
+/**utils.c********************************************************************/
+int			look_for_operator(char c);
+int			look_for_quotes(char c);
 char		*get_env_value(char *env_var, t_data *data);
 int			add_value_to_env(char *env_var, char *value, t_data *data);
 int			check_invalid_identifiers(char *arg, char *command);
 
-/*utils***********************************************************************/
-int			print_error_code(char *message, char tkn, int exit_code);
-int			perror_return_error(char *message);
-void		free_double_pointer_char(char**str);
-void		free_double_pointer_int(int**n);
 
 #endif
