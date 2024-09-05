@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:44:07 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:12:45 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:30:04 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	execute_builtin(t_command *cmd, t_data *data)
 	return (exit_code);
 }
 
-v
+int	check_if_builtin(t_command *cmd)
 {
 	if (!ft_strcmp(cmd->command, "cd") || \
 		!ft_strcmp(cmd->command, "pwd") || \

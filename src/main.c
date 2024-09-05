@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 11:05:02 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:25:50 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	minishell_loop(t_data *data, char **env)
 		signals_non_interactive_handler();
 		if (data->args[0])
 			add_history(data->args);
-		if (lex(data) || parse(data) || execute(data)) //check if needs to be lex(data) or !lex(data)
+		if (lex(data) || parse(data) || exec(data)) //check if needs to be lex(data) or !lex(data)
 		{
 			//free_memory
 			continue ;

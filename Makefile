@@ -3,19 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/05 14:44:55 by vados-sa          #+#    #+#              #
-#    Updated: 2024/09/05 14:45:47 by vados-sa         ###   ########.fr        #
+#    Updated: 2024/09/05 15:30:35 by mrabelo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC			= cc
-# Malu Mac:
-#CFLAGS		= -Wall -Wextra -Werror -I/opt/homebrew/opt/readline/include
-#LDFLAGS		= -L/opt/homebrew/opt/readline/lib -lreadline
+#Malu Mac:
+CFLAGS		= -Wall -Wextra -Werror -I/opt/homebrew/opt/readline/include
+LDFLAGS		= -L/opt/homebrew/opt/readline/lib -lreadline
 # Vanessa Mac:
 #CFLAGS		= -Wall -Wextra -Werror -I/usr/local/opt/readline/include
 #LDFLAGS		= -L/usr/local/opt/readline/lib -lreadline
@@ -41,18 +41,18 @@ GNL = libgnl.a
 
 # Soure files
 SRC = $(SRCDIR)/main.c $(SRCDIR)/signals.c \
-	  $(LEXING_DIR)/checker.c $(LEXING_DIR)/delete.c $(LEXING_DIR)/handler.c \
-	  $(LEXING_DIR)/lex.c $(LEXING_DIR)/token.c \
-	  $(PARSING_DIR)/command.c $(PARSING_DIR)/concat_expanded_vars.c \
-	  $(PARSING_DIR)/delete.c $(PARSING_DIR)/expander_utils.c \
-	  $(PARSING_DIR)/expander.c $(PARSING_DIR)/handle_arg_for_export.c \
-	  $(PARSING_DIR)/handle_heredoc.c $(PARSING_DIR)/organize_final_cmd_array.c \
-	  $(PARSING_DIR)/parse.c $(EXECUTION_DIR)/builtin_exec.c \
-	  $(BUILTINS_DIR)/builtin_utils.c $(BUILTINS_DIR)/cd.c $(BUILTINS_DIR)/echo.c \
-	  $(BUILTINS_DIR)/env.c $(BUILTINS_DIR)/exit.c $(BUILTINS_DIR)/export.c \
-	  $(BUILTINS_DIR)/pwd.c $(BUILTINS_DIR)/unset.c $(EXECUTION_DIR)/command_exec.c \
-	  $(EXECUTION_DIR)/exec.c $(EXECUTION_DIR)/pipe.c \
-	  $(UTILS_DIR)/free.c $(UTILS_DIR)/print_message.c $(UTILS_DIR)/utils.c
+	$(LEXING_DIR)/checker.c $(LEXING_DIR)/handler.c \
+	$(LEXING_DIR)/lex.c $(LEXING_DIR)/token.c \
+	$(PARSING_DIR)/command.c $(PARSING_DIR)/concat_expanded_vars.c \
+	$(PARSING_DIR)/expander_utils.c \
+	$(PARSING_DIR)/expander.c $(PARSING_DIR)/handle_arg_for_export.c \
+	$(PARSING_DIR)/handle_heredoc.c $(PARSING_DIR)/organize_final_cmd_array.c \
+	$(PARSING_DIR)/parse.c $(EXECUTION_DIR)/builtin_exec.c \
+	$(BUILTINS_DIR)/cd.c $(BUILTINS_DIR)/echo.c \
+	$(BUILTINS_DIR)/env.c $(BUILTINS_DIR)/exit.c $(BUILTINS_DIR)/export.c \
+	$(BUILTINS_DIR)/pwd.c $(BUILTINS_DIR)/unset.c $(EXECUTION_DIR)/command_exec.c \
+	$(EXECUTION_DIR)/exec.c $(EXECUTION_DIR)/pipe.c \
+	$(UTILS_DIR)/free.c $(UTILS_DIR)/print_message.c $(UTILS_DIR)/utils.c
 
 
 # Object files

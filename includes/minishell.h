@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:23:45 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:29:31 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,14 @@ void		create_command_list(t_data *data, t_command *new);
 
 /**concat_expanded_vars.c*****************************************************/
 char		*concat_expanded_var(char **str, int *i, t_data *data);
+char		*ft_concat(char *s1, char *s2, char *s3);
 
 /**expander_utils.c***********************************************************/
 int			env_var_len(char *str);
 char		*get_exp_env(char *str, int len, char **env_arg);
 
-/**expander_utils.c***********************************************************/
+/**expander.c*****************************************************************/
 int			expand_var(char **str, t_data *data);
-int			expand_command(t_command *cmd_node, t_data *data);
-int			expand_list_of_str(t_list *list, t_data *data);
 int			expand_tokens(t_data *data);
 
 /**handle_arg_for_export.c****************************************************/

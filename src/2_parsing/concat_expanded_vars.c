@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   concat_expanded_vars.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:24:45 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/03 17:25:52 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:28:25 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*find_exp_var(char *str, int var_len, t_data *data)
 	return (exp_var);
 }
 
-static char	*ft_concat(char *s1, char *s2, char *s3)
+char	*ft_concat(char *s1, char *s2, char *s3)
 {
 	char	*temp;
 	char	*result;
