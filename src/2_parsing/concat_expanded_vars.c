@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:24:45 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/05 15:28:25 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:55:44 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,6 @@ static char	*find_exp_var(char *str, int var_len, t_data *data)
 	return (exp_var);
 }
 
-char	*ft_concat(char *s1, char *s2, char *s3)
-{
-	char	*temp;
-	char	*result;
-
-	temp = ft_strjoin(s1, s2);
-	if (!temp)
-		return (NULL);
-	result = ft_strjoin(temp, s3);
-	free (temp);
-	if (!result)
-		return (NULL);
-	return (result);
-}
-
 char	*concat_expanded_var(char **str, int *i, t_data *data)
 {
 	int		len;
@@ -72,7 +57,7 @@ char	*concat_expanded_var(char **str, int *i, t_data *data)
 	after_var = find_after_var(&(*str)[*i], len);
 	exp_var = find_exp_var(&(*str)[*i], len, data);
 	*i += ft_strlen(exp_var) + 1; //check if +1 is not giving any issues
-	exp_str = ft_concat(before_var, exp_var, after_var);
+	exp_str = ft_concat_three_str(before_var, exp_var, after_var);
 	free_substr(&before_var, &exp_var, &after_var);
 	if (!exp_str)
 		return (NULL);

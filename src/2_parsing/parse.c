@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/05 14:39:49 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 17:05:48 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,25 +76,6 @@ int	open_redir_out(t_data *data, t_token *token, int flag)
 	if (!data->output_fd)
 		return (perror_return_error(data->output_value));
 	return (EXIT_SUCCESS);
-}
-
-void	remove_possible_quotes(char *str)
-{
-	int	src_pos;
-	int	dst_pos;
-
-	src_pos = 0;
-	dst_pos = 0;
-	while (str[src_pos])
-	{
-		if (str[src_pos] != SINGLE_Q && str[src_pos] != DOUBLE_Q)
-		{
-			str[dst_pos] = str[src_pos];
-			dst_pos++;
-		}
-		src_pos++;
-	}
-	str[dst_pos] = '\0';
 }
 
 int	split_others_token(t_data *data, t_token *token, int *add_new_cmd)

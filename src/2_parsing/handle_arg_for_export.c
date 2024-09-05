@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_arg_for_export.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:37:06 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/03 17:11:17 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:57:12 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*get_equal_sign_pos(t_command *cmd_node)
 	return (equal_pos);
 }
 
-int	concat_arguments(t_command *cmd_node, t_token *token, int *add_new_node)
+int	concat_args(t_command *cmd_node, t_token *token, int *add_new_node)
 {
 	t_list	*current_arg;
 	char	*temp;
@@ -109,7 +109,7 @@ int	concat_arguments(t_command *cmd_node, t_token *token, int *add_new_node)
 	current_arg = cmd_node->arguments;
 	while (current_arg->next)
 		current_arg = current_arg->next;
-	temp = ft_concat(current_arg->content, " ", token->value);
+	temp = ft_concat_three_str(current_arg->content, " ", token->value);
 	if (!temp)
 		return (EXIT_FAILURE);
 	free (current_arg->content);
@@ -135,7 +135,7 @@ int	handle_export_builtin_arg(t_command *cmd_node, t_token *token)
 		equal_pos = get_equal_sign_pos(cmd_node);
 		if (equal_pos && *(equal_pos + 1) && open_quotes(cmd_node))
 		{
-			if (concat_arguments(cmd_node, token, &add_new_node))
+			if (concat_args(cmd_node, token, &add_new_node))
 				return (EXIT_FAILURE);
 		}
 		else

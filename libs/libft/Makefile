@@ -42,7 +42,8 @@ SRC =	$(addsuffix .c, ft_isspace			\
 						ft_striteri			\
 						ft_arrlen			\
 						ft_strcat			\
-						ft_strcpy)
+						ft_strcpy			\
+						ft_concat_three_str)
 
 BONUS_SRC = $(addsuffix .c, ft_lstnew			\
 							ft_lstadd_front		\

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/05 14:44:55 by vados-sa          #+#    #+#              #
-#    Updated: 2024/09/05 17:00:26 by vados-sa         ###   ########.fr        #
+#    Updated: 2024/09/05 17:09:54 by mrabelo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC = $(SRCDIR)/main.c $(SRCDIR)/init.c $(SRCDIR)/signals.c \
 	$(LEXING_DIR)/checker.c $(LEXING_DIR)/handler.c \
 	$(LEXING_DIR)/lex.c $(LEXING_DIR)/token.c \
 	$(PARSING_DIR)/command.c $(PARSING_DIR)/concat_expanded_vars.c \
-	$(PARSING_DIR)/expander_utils.c \
+	$(PARSING_DIR)/parser_utils.c \
 	$(PARSING_DIR)/expander.c $(PARSING_DIR)/handle_arg_for_export.c \
 	$(PARSING_DIR)/handle_heredoc.c $(PARSING_DIR)/organize_final_cmd_array.c \
 	$(PARSING_DIR)/parse.c $(EXECUTION_DIR)/builtin_exec.c \

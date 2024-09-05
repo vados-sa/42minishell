@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 16:57:44 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 17:10:35 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@
 
 /**main.c*********************************************************************/
 void		minishell_loop(t_data *data);
-int			main(int ac, char *av[], char **env);
 
 /**init.c*********************************************************************/
 int			init_data(t_data *data, char **env);
@@ -97,9 +96,10 @@ void		create_command_list(t_data *data, t_command *new);
 char		*concat_expanded_var(char **str, int *i, t_data *data);
 char		*ft_concat(char *s1, char *s2, char *s3);
 
-/**expander_utils.c***********************************************************/
+/**parser_utils.c***********************************************************/
 int			env_var_len(char *str);
 char		*get_exp_env(char *str, int len, char **env_arg);
+void		remove_possible_quotes(char *str);
 
 /**expander.c*****************************************************************/
 int			expand_var(char **str, t_data *data);
@@ -109,7 +109,7 @@ int			expand_tokens(t_data *data);
 int			open_quotes(t_command *cmd_node);
 void		closed_quote(char *str, int *add_new_node);
 char		*get_equal_sign_pos(t_command *cmd_node);
-int			concat_arguments(t_command *cmd_node, t_token *token, int *add_new_node);
+int			concat_args(t_command *cmd_node, t_token *token, int *add_new_node);
 int			handle_export_builtin_arg(t_command *cmd_node, t_token *token);
 
 /**handle_heredoc.c***********************************************************/
@@ -124,7 +124,6 @@ int			organize_final_cmd_array(t_data *data);
 int			split_token(t_data *data);
 int			open_redir_in(t_data *data, t_token *token, int flag);
 int			open_redir_out(t_data *data, t_token *token, int flag);
-void		remove_possible_quotes(char *str);
 int			split_others_token(t_data *data, t_token *token, int *add_new_cmd);
 int			parse(t_data *data);
 

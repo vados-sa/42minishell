@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:38:10 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/31 16:56:04 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:55:06 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char		*ft_strrchr(const char*s, int c);
 char		*ft_strnstr(const char*s, const char*t, size_t len);
 char		*ft_substr(char const*s, unsigned int start, size_t len);
 char		*ft_strmapi(char const*s, char (*f)(unsigned int, char));
+char		*ft_concat_three_str(char *s1, char *s2, char *s3);
 char		*ft_strtrim(char const*s1, char const*set);
 char		*ft_strjoin(const char*s1, const char*s2);
 char		**ft_split(char const*s, char c);
