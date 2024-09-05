@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/04 17:47:51 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 12:19:14 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,13 @@ void		execute_command(t_command *cmd, t_data *data);
 void		close_fd(int *fd);
 void		close_unused_fd(int **fds, int pos, int keep, int cmds_num);
 
+int			builtin_cd(t_command *cmd, t_data *data);
+int			builtin_echo(t_command *cmd);
 int			builtin_env(t_command *cmd, t_data *data);
+int			builtin_exit(t_command *cmd, t_data*data);
+int			builtin_export(t_command *cmd, t_data *data);
 int			builtin_pwd(t_command *cmd, t_data *data);
+int			builtin_unset(t_command *cmd, t_data *data);
 
 char		*get_env_value(char *env_var, t_data *data);
 int			add_value_to_env(char *env_var, char *value, t_data *data);

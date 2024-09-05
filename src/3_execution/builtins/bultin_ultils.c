@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:07:40 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/04 17:47:32 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:07:50 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,19 @@ int	check_invalid_identifiers(char *arg, char *command)
 	i = 0;
 	if (!arg[0] || (!ft_isalpha(arg[0]) && arg[0] != '_'))
 	{
-		printf("bash: %s: `%s': not a valid identifier\n", command, arg);
+		printf("minishell: %s: `%s': not a valid identifier\n", command, arg);
 		return (EXIT_FAILURE);
 	}
 	while (arg[i] && arg[i] != '=')
 	{
+		if (arg[i] == '=' && !ft_strcmp(command, "export"))
+			break ;
 		if (!ft_isalnum(arg[i]) && arg[i] != '_')
+		{
+			printf("minishell: %s: `%s': not a valid identifier\n", \
+					command, arg);
 			return (EXIT_FAILURE);
+		}
 		i++;
 	}
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/04 17:50:42 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:02:21 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,10 @@ int	builtin_export(t_command *cmd, t_data *data)
 	while (current_arg)
 	{
 		if (check_invalid_identifiers(current_arg->content, "export"))
-			return(EXIT_FAILURE);
+		{
+			current_arg = current_arg->next;
+			continue ;
+		}
 		// check later if it is a shell variable and, if so, add it to the array
 		if (update_env_array(current_arg->content, data))
 			return (EXIT_FAILURE);
