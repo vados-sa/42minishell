@@ -6,13 +6,13 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:25:50 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:47:30 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	minishell_loop(t_data *data, char **env)
+void	minishell_loop(t_data *data)
 {
 	while (1)
 	{
@@ -48,6 +48,6 @@ int	main(int ac, char *av[], char **env)
 	ft_memset(&data, 0, sizeof(data));
 	if (init_data(&data, env))
 		minishell_exit(&data, EXIT_FAIL);
-	minishell_loop(&data, env);
+	minishell_loop(&data);
 	return (EXIT_SUCC);
 }

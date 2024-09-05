@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:39:29 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:47:57 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # include "../includes/structures.h"
 
 /**main.c*********************************************************************/
-void		minishell_loop(t_data *data, char **env);
+void		minishell_loop(t_data *data);
 int			main(int ac, char *av[], char **env);
 
 /**init.c*********************************************************************/
