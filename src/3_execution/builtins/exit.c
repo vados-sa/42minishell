@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/31 15:42:57 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 10:59:52 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 void	minishell_exit(t_data *data, int exit_code)
 {
-	
+	char	*file;
+
+	printf("exit\n\n");
+	file = find_path("HISTFILE=", data);
+	if (file)
+		write_history(file + 9);
+	//free
+	clear_history();
+	exit (exit_code);
 }
 
 int	builtin_exit(t_command *cmd, t_data*data)
@@ -26,7 +34,7 @@ int	builtin_exit(t_command *cmd, t_data*data)
 	}
 	if (cmd->arguments)
 	{
-		if (cmd->arguments->next)
+		if (cmd->arguments->next)  
 		{
 			ft_putstr_fd("minishell: exit with too much arguments\n", 1); //check if it is 1 or 2
 			return (EXIT_FAIL);
