@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 11:59:32 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/19 11:26:27 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/08/31 17:36:49 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,25 @@ void	create_command_list(t_data *data, t_command *new)
 int	fill_node(t_command *cmd_node, t_token *token, char *flag)
 {
 	if (!cmd_node)
-		return (EXIT_FAILURE);
+		return (EXIT_FAIL);
 	if (ft_strcmp(flag, "COMMAND") == 0)
 	{
 		cmd_node->command = ft_strdup(token->value);
 		if (!cmd_node->command)
-			return (EXIT_FAILURE);
+			return (EXIT_FAIL);
 		cmd_node->type_quote = token->type_quote;
 	}
 	else if (ft_strcmp(flag, "FLAG") == 0)
 	{
 		if (add_new_list_node(&cmd_node->flags, token))
-			return (EXIT_FAILURE);
+			return (EXIT_FAIL);
 	}
 	else if (ft_strcmp(flag, "ARGUMENT") == 0)
 	{
 		if (ft_strcmp(cmd_node->command, "export") == 0)
 		{
 			if (handle_export_builtin_arg(cmd_node, token))
-				return (EXIT_FAILURE);
+				return (EXIT_FAIL);
 		}
 		else
 		{
@@ -81,7 +81,7 @@ int	fill_node(t_command *cmd_node, t_token *token, char *flag)
 				return (EXIT_FAIL);
 		}
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 int	add_new_list_node(t_list **lst, t_token *token)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/28 15:06:48 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 11:05:02 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	minishell_loop(t_data *data, char **env)
 		if (!data->args) // check: rl being NULL means Ctrl-D was pressed, signaling an end-of-file (EOF)
 		{ // call a fucniton to exit minishell with a SUCCESS STATUS
 			printf("\n");
-			exit (EXIT_FAIL);
+			exit (EXIT_FAIL); //here is supposed to be minishell_exit too
 		}
 		signals_non_interactive_handler();
 		if (data->args[0])
@@ -47,7 +47,7 @@ int	main(int ac, char *av[], char **env)
 	(void)av;
 	ft_memset(&data, 0, sizeof(data));
 	if (init_data(&data, env))
-		return (EXIT_FAIL); //must be exit_minishell
+		minishell_exit(&data, EXIT_FAIL);
 	minishell_loop(&data, env);
 	return (EXIT_SUCC);
 }
