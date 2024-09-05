@@ -6,12 +6,10 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 14:19:18 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:37:23 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <readline/readline.h>
-# include <readline/history.h>
 #include "../../../includes/minishell.h"
 
 void	minishell_exit(t_data *data, int exit_code)

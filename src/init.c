@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:46:13 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 14:34:10 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:43:35 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	init_env(t_data *data, char **env)
 	return (EXIT_SUCC);
 }
 
-static int	init_path(t_data *data, char **env)
+static int	init_path(t_data *data)
 {
 	int	i;
 
@@ -63,7 +63,7 @@ static int	init_path(t_data *data, char **env)
 	return (EXIT_SUCC);
 }
 
-static void	init_histfile(t_data *data, char **env)
+static void	init_histfile(t_data *data)
 {
 	char	*home_path;
 	char	*histfile_path;
@@ -104,7 +104,7 @@ int	init_data(t_data *data, char **env)
 	i = 0;
 	if (init_env(data, env))
 		return (EXIT_FAIL);
-	if (init_path(data, env))
+	if (init_path(data))
 	{
 		while (data->env[i])
 		{
@@ -114,7 +114,7 @@ int	init_data(t_data *data, char **env)
 		free(data->env);
 		return (EXIT_FAIL);
 	}
-	init_histfile(data, env);
+	init_histfile(data);
 	init_io(data);
 	data->exit_status = 0;
 	return (EXIT_SUCC);

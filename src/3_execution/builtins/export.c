@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/04 18:02:21 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:37:59 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static int	update_env_array(char *var, t_data *data)
 	int		i;
 	char	*equal_pos;
 
+	var_len = 0;
 	while (var[var_len] && var[var_len] != '=')
 		var_len++;
 	i = 0;

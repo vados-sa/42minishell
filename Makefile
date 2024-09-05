@@ -6,7 +6,7 @@
 #    By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/05 14:44:55 by vados-sa          #+#    #+#              #
-#    Updated: 2024/09/05 15:30:35 by mrabelo-         ###   ########.fr        #
+#    Updated: 2024/09/05 15:40:57 by mrabelo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ LIBFT = libft.a
 GNL = libgnl.a
 
 # Soure files
-SRC = $(SRCDIR)/main.c $(SRCDIR)/signals.c \
+SRC = $(SRCDIR)/main.c $(SRCDIR)/init.c $(SRCDIR)/signals.c \
 	$(LEXING_DIR)/checker.c $(LEXING_DIR)/handler.c \
 	$(LEXING_DIR)/lex.c $(LEXING_DIR)/token.c \
 	$(PARSING_DIR)/command.c $(PARSING_DIR)/concat_expanded_vars.c \

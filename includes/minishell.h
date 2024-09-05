@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:29:31 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/05 15:39:29 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int			check_if_builtin(t_command *cmd);
 /*command_exec.c**************************************************************/
 int			process_not_builtin(int **fds, int pos, int *pid, t_data *data);
 void		execute_command(t_command *cmd, t_data *data);
+char		*get_cmd_path(t_command *cmd, char **env);
 
 /*exec.c**********************************************************************/
 int			exec(t_data*data);

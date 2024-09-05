@@ -47,6 +47,7 @@ SRC =	$(addsuffix .c, ft_isspace			\
 BONUS_SRC = $(addsuffix .c, ft_lstnew			\
 							ft_lstadd_front		\
 							ft_lstsize			\
+							ft_lstsize_mod		\
 							ft_lst_last_command	\
 							ft_lst_last_token	\
 							ft_lst_last			\
