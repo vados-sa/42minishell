@@ -3,15 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:29:30 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/06 13:20:16 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:56:08 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Checks whether the given index is inside single quotes in the string.
+ *
+ * Loops through the string up to the specified index to determine if the 
+ * current position is inside a pair of single quotes. Double quotes are 
+ * also considered, but only to ignore them while looking for single quotes.
+ *
+ * @param str The input string.
+ * @param index The index where we check the quoting state.
+ * @return 1 if inside single quotes, 0 otherwise.
+ */
+int	check_single_quote_state(char *str, int index) // solution for single quotes proble. should work, let's see
+{
+	int i;
+	int inside_double_quotes;
+	int inside_single_quotes;
+	
+	i = 0;
+	inside_double_quotes = 0;
+	inside_single_quotes = 0;
+	while (i < index)
+	{
+		if (str[i] == '"' && !inside_single_quotes)
+			inside_double_quotes = !inside_double_quotes;
+		else if (str[i] == '\'' && !inside_double_quotes)
+			inside_single_quotes = !inside_single_quotes;
+		i++;
+	}
+	return (inside_single_quotes);
+}
+
+/**
+ * @brief Expands environment variables within a string unless they are inside single quotes.
+ *
+ * Iterates through the string looking for '$' symbols. If the symbol is not inside
+ * single quotes, the corresponding environment variable is expanded. The string
+ * is updated in place with the expanded content.
+ *
+ * @param str The string containing potential variables to expand.
+ * @param data The main data structure containing environment variables.
+ * @return EXIT_SUCC on success, EXIT_FAIL on failure.
+ */
 int	expand_var(char **str, t_data *data)
 {
 	int		i;
@@ -23,11 +65,16 @@ int	expand_var(char **str, t_data *data)
 	{
 		if ((*str)[i] == '$')
 		{
-			temp = concat_expanded_var(str, &i, data);
-			if (!temp)
-				return (EXIT_FAIL);
-			free(*str);
-			*str = temp;
+			if (check_single_quote_state(*str, i) == 0)
+			{
+				temp = concat_expanded_var(str, &i, data);
+				if (!temp)
+					return (EXIT_FAIL);
+				free(*str);
+				*str = temp;
+			}
+			else
+				i++;
 		}
 		else
 			i++;
@@ -35,6 +82,16 @@ int	expand_var(char **str, t_data *data)
 	return (EXIT_SUCC);
 }
 
+/**
+ * @brief Expands environment variables within command strings.
+ *
+ * Iterates through command nodes and expands any environment variables in the 
+ * command strings unless the command is enclosed in single quotes.
+ *
+ * @param cmd_node The command node to process.
+ * @param data The main data structure containing environment variables.
+ * @return EXIT_SUCC on success, EXIT_FAIL on failure.
+ */
 static int	expand_command(t_command *cmd_node, t_data *data)
 {
 	while (cmd_node)
@@ -49,6 +106,16 @@ static int	expand_command(t_command *cmd_node, t_data *data)
 	return (EXIT_SUCC);
 }
 
+/**
+ * @brief Expands environment variables within a list of strings (arguments or flags).
+ *
+ * Iterates through a linked list of strings and expands any environment variables 
+ * unless the string is enclosed in single quotes.
+ *
+ * @param list The list of strings to process.
+ * @param data The main data structure containing environment variables.
+ * @return EXIT_SUCC on success, EXIT_FAIL on failure.
+ */
 static int	expand_list_of_str(t_list *list, t_data *data)
 {
 	while (list)
@@ -63,6 +130,15 @@ static int	expand_list_of_str(t_list *list, t_data *data)
 	return (EXIT_SUCC);
 }
 
+/**
+ * @brief Expands environment variables in all commands, arguments, and flags.
+ *
+ * Processes all commands, arguments, and flags in the given data structure 
+ * to expand environment variables.
+ *
+ * @param data The main data structure containing commands, arguments, flags, and environment variables.
+ * @return EXIT_SUCC on success, EXIT_FAIL on failure.
+ */
 int	expand_tokens(t_data *data)
 {
 	t_command	*current_cmd_node;
