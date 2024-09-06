@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/06 13:19:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/06 18:10:06 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	add_new_var(t_data *data, char* var, int i)
 {
 
 	data->env[i] = ft_strdup(var);
-	if (data->env[i])
+	if (!data->env[i])
 	{
 		perror("failed to create new enviroment variable.");
 		return (EXIT_FAIL);
