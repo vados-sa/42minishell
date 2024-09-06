@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 17:01:19 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:27:06 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char *av[], char **env)
 
 	if ((ac != 1))
 	{
-		printf("No arguments allowed!\n");
+		perror("no arguments");
 		return (EXIT_FAIL);
 	}
 	(void)av;

@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:46:13 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:43:35 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:20:30 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ static void	init_histfile(t_data *data)
 	char	*home_path;
 	char	*histfile_path;
 
-	home_path = get_env_value("HOME=", data);
+	home_path = find_path("HOME=", data->env);
 	if (!home_path)
 		printf("Warning: HOME environment variable not set. \
 				History will not be saved.\n");
 	else
 	{
-		histfile_path = ft_strjoin(home_path, "/.minnishell_history");
+		histfile_path = ft_strjoin(home_path + 5, "/.minishell_history");
 		if (histfile_path)
 		{
 			add_value_to_env("HISTFILE=", histfile_path, data);

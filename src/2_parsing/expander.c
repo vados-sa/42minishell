@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:29:30 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/05 15:29:16 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:20:16 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	expand_var(char **str, t_data *data)
 {
 	int		i;
-	char 	*temp;
-	
+	char	*temp;
+
 	i = 0;
 	temp = NULL;
 	while ((*str)[i])
@@ -25,14 +25,14 @@ int	expand_var(char **str, t_data *data)
 		{
 			temp = concat_expanded_var(str, &i, data);
 			if (!temp)
-				return (EXIT_FAILURE);
+				return (EXIT_FAIL);
 			free(*str);
 			*str = temp;
 		}
 		else
 			i++;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 static int	expand_command(t_command *cmd_node, t_data *data)
@@ -42,11 +42,11 @@ static int	expand_command(t_command *cmd_node, t_data *data)
 		if (cmd_node->type_quote != '\'')
 		{
 			if (expand_var(&cmd_node->command, data))
-				return (EXIT_FAILURE);
+				return (EXIT_FAIL);
 		}
 		cmd_node = cmd_node->next;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 static int	expand_list_of_str(t_list *list, t_data *data)
@@ -56,11 +56,11 @@ static int	expand_list_of_str(t_list *list, t_data *data)
 		if (list->type_quote != '\'')
 		{
 			if (expand_var(&list->content, data))
-				return (EXIT_FAILURE);
+				return (EXIT_FAIL);
 		}
 		list = list->next;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 int	expand_tokens(t_data *data)
@@ -71,14 +71,14 @@ int	expand_tokens(t_data *data)
 	while (current_cmd_node)
 	{
 		if (expand_command(current_cmd_node, data))
-			return (EXIT_FAILURE);
+			return (EXIT_FAIL);
 		if (expand_list_of_str(current_cmd_node->arguments, data))
-			return (EXIT_FAILURE);
+			return (EXIT_FAIL);
 		if (expand_list_of_str(current_cmd_node->flags, data))
-			return (EXIT_FAILURE);
+			return (EXIT_FAIL);
 		current_cmd_node = current_cmd_node->next;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 /* int main()
 {
@@ -147,7 +147,7 @@ int	expand_tokens(t_data *data)
 	{
 		char *input = strdup(test_cases[i]);
         printf("Original: %s\n", input);
-        if (expand_var(&input, &data) == EXIT_SUCCESS)
+        if (expand_var(&input, &data) == EXIT_SUCC)
             printf("Expanded: %s\n\n", input);
         else
             printf("Expansion failed\n\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_structures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:52:26 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/05 16:55:04 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:14:25 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@ void	free_list(t_list *list)
 	{
 		temp = list;
 		list = list->next;
+		temp->next = NULL;
 		if (temp->content)
+		{
 			free(temp->content);
+			temp->content = NULL;
+		}
 		free(temp);
+		temp = NULL;
 	}
 }
 
@@ -44,8 +49,12 @@ void	free_commands(t_command *commands)
 	{
 		temp = commands;
 		commands = commands->next;
+		temp->next = NULL;
 		if (temp->command)
+		{
 			free(temp->command);
+			temp->command = NULL;
+		}
 		if (temp->arguments)
 			free_list(temp->arguments);
 		if (temp->flags)
@@ -53,6 +62,7 @@ void	free_commands(t_command *commands)
 		if (temp->final_av)
 			free_double_pointer_char(temp->final_av);
 		free(temp);
+		temp = NULL;
 	}
 }
 
@@ -69,10 +79,13 @@ void	free_tokens(t_token *tokens)
 	{
 		temp = tokens;
 		tokens = tokens->next;
+		temp->next = NULL;
 		if (temp->value)
+		{
 			free(temp->value);
-		if (temp->type)
-			free(temp->type);
+			temp->value = NULL;
+		}
 		free(temp);
+		temp = NULL;
 	}
 }

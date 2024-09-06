@@ -6,13 +6,13 @@
 #    By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/05 14:44:55 by vados-sa          #+#    #+#              #
-#    Updated: 2024/09/05 17:09:54 by mrabelo-         ###   ########.fr        #
+#    Updated: 2024/09/06 14:34:07 by mrabelo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC			= cc
+CC			= gcc
 #Malu Mac:
 CFLAGS		= -Wall -Wextra -Werror -I/opt/homebrew/opt/readline/include
 LDFLAGS		= -L/opt/homebrew/opt/readline/lib -lreadline

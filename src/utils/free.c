@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 16:55:54 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:16:03 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,18 @@ void	free_double_pointer_char(char**str)
 	int	i;
 
 	if (!str)
-		return;
+		return ;
 	i = 0;
 	if (str)
 	{
 		while (str[i])
 		{
 			free(str[i]);
+			str[i] = NULL;
 			i++;
 		}
 		free(str);
+		str = NULL;
 	}
 }
 
@@ -40,9 +42,11 @@ void	free_double_pointer_int(int**n)
 		while (n[i])
 		{
 			free(n[i]);
+			n[i] = NULL;
 			i++;
 		}
 		free(n);
+		n = NULL;
 	}
 }
 
@@ -72,22 +76,39 @@ void	free_substr(char **s1, char **s2, char **s3)
  */
 void	free_data(t_data *data)
 {
+	if (!data)
+		return ;
 	if (data->args)
+	{
 		free(data->args);
-	if (data->env)
-		free_double_pointer_char(data->env);
-	if (data->path)
-		free(data->path);
-	if (data->input_type)
-		free(data->input_type);
+		data->args = NULL;
+	}
+	data->input_type = STDIN;
+	data->input_fd = STDIN_FILENO;
 	if (data->input_value)
+	{
 		free(data->input_value);
-	if (data->output_type)
-		free(data->output_type);
+		data->input_value = NULL;
+	}
+	data->output_type = STDOUT;
+	data->output_fd = STDOUT_FILENO;
 	if (data->output_value)
+	{
 		free(data->output_value);
+		data->output_value = NULL;
+	}
 	if (data->token)
 		free_tokens(data->token);
 	if (data->command)
 		free_commands(data->command);
+}
+
+void	free_env_and_path(t_data *data)
+{
+	if (!data)
+		return ;
+	if (data->env)
+		free_double_pointer_char(data->env);
+	if (data->path)
+		free(data->path);
 }

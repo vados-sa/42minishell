@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:39:25 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/23 23:15:48 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:54:22 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ void	close_fd(int *fd)
 {
 	if (*fd <= 2)
 		return ;
-	close(*fd);
+	if (close(*fd) == -1)
+	{
+		ft_putendl_fd("minishell: error while closing fd", 2);
+		return ;
+	}
 	*fd = -1;
 }
 
@@ -91,5 +95,5 @@ int	redirect_io(int **fds, int pos, t_data *data, int cmds_num)
 		if (dup2(fds[pos][1], STDOUT_FILENO) == -1)
 			return (EXIT_FAIL);
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }

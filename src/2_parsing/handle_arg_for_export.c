@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:37:06 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/05 16:57:12 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:19:53 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,11 @@ int	concat_args(t_command *cmd_node, t_token *token, int *add_new_node)
 		current_arg = current_arg->next;
 	temp = ft_concat_three_str(current_arg->content, " ", token->value);
 	if (!temp)
-		return (EXIT_FAILURE);
+		return (EXIT_FAIL);
 	free (current_arg->content);
 	current_arg->content = temp;
 	closed_quote(temp, add_new_node);
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 int	handle_export_builtin_arg(t_command *cmd_node, t_token *token)
@@ -136,7 +136,7 @@ int	handle_export_builtin_arg(t_command *cmd_node, t_token *token)
 		if (equal_pos && *(equal_pos + 1) && open_quotes(cmd_node))
 		{
 			if (concat_args(cmd_node, token, &add_new_node))
-				return (EXIT_FAILURE);
+				return (EXIT_FAIL);
 		}
 		else
 		{
@@ -144,5 +144,5 @@ int	handle_export_builtin_arg(t_command *cmd_node, t_token *token)
 			add_new_node = 0;
 		}
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }

@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 17:10:35 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:23:38 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ void		free_double_pointer_char(char**str);
 void		free_double_pointer_int(int**n);
 void		free_substr(char **s1, char **s2, char **s3);
 void		free_data(t_data *data);
+void		free_env_and_path(t_data *data);
 
 /*free_structures.c***********************************************************/
 void		free_list(t_list *list);
@@ -194,7 +195,6 @@ int			perror_return_error(char *message);
 /**utils.c********************************************************************/
 int			look_for_operator(char c);
 int			look_for_quotes(char c);
-char		*get_env_value(char *env_var, t_data *data);
 int			add_value_to_env(char *env_var, char *value, t_data *data);
 int			check_invalid_identifiers(char *arg, char *command);
 

@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:29:54 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/24 19:49:11 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:19:53 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	add_command_to_array(long *i, t_command *cmd_ptr)
 	if (!cmd_ptr->final_av[*i])
 		return (perror_return_error("add_command_to_array malloc"));
 	(*i)++;
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 static int	add_args_to_array(long *i, t_command *cmd_ptr)
@@ -50,7 +50,7 @@ static int	add_args_to_array(long *i, t_command *cmd_ptr)
 		(*i)++;
 		arguments = arguments->next;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 static int	add_flags_to_array(long *i, t_command *cmd_ptr)
@@ -69,7 +69,7 @@ static int	add_flags_to_array(long *i, t_command *cmd_ptr)
 		(*i)++;
 		flags = flags->next;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 long	get_nbr_of_elements(t_command *cmd_node)
@@ -115,9 +115,9 @@ int	organize_final_cmd_array(t_data *data)
 		if (add_command_to_array(&i, cmd_ptr)
 			|| add_args_to_array(&i, cmd_ptr)
 			|| add_flags_to_array(&i, cmd_ptr))
-			return (EXIT_FAILURE);
+			return (EXIT_FAIL);
 		cmd_ptr->final_av[i] = NULL;
 		cmd_ptr = cmd_ptr->next;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }

@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:44:07 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:30:04 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:20:01 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	process_builtin(int **fds, int pos, t_command *cmd, t_data *data)
 		return (EXIT_FAIL);
 	if (redirect_io(fds, pos, data, ft_lstsize_mod(data->command)))
 		return (EXIT_FAIL);
-	close_unused_fd(fds, pos, FD_RW, pos + 1);
+	//close_unused_fd(fds, pos, FD_RW, pos + 1);
 	exit_code = execute_builtin(cmd, data);
-	close_fd(&fds[pos][0]);
-	close_fd(&fds[pos][1]);
+	//close_fd(&fds[pos][0]);
+	//close_fd(&fds[pos][1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1 || dup2(fd[1], STDOUT_FILENO) == -1)
 		return (EXIT_FAIL);
 	data->exit_status = exit_code;

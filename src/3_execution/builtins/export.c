@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:37:59 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:19:53 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	print_env_var(t_data *data)
  * @param data The main data structure containing the environment variables array.
  * @param var The variable to be added to the environment.
  * @param i The index at which to add the new variable in the `data->env` array.
- * @return EXIT_SUCCESS if the variable was added successfully, EXIT_FAILURE otherwise.
+ * @return EXIT_SUCC if the variable was added successfully, EXIT_FAIL otherwise.
  */
 static int	add_new_var(t_data *data, char* var, int i)
 {
@@ -54,10 +54,10 @@ static int	add_new_var(t_data *data, char* var, int i)
 	if (data->env[i])
 	{
 		perror("failed to create new enviroment variable.");
-		return (EXIT_FAILURE);
+		return (EXIT_FAIL);
 	}
 	data->env[i + 1] = NULL;
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 /**
@@ -69,7 +69,7 @@ static int	add_new_var(t_data *data, char* var, int i)
  *
  * @param var The variable to be updated or added.
  * @param data The main data structure containing the environment variables array.
- * @return EXIT_SUCCESS if the variable was updated or added successfully, EXIT_FAILURE otherwise.
+ * @return EXIT_SUCC if the variable was updated or added successfully, EXIT_FAIL otherwise.
  */
 static int	update_env_array(char *var, t_data *data)
 {
@@ -90,13 +90,13 @@ static int	update_env_array(char *var, t_data *data)
 			free(data->env[i]);
 			data->env[i] = ft_strdup(var);
 			if (!data->env[i])
-				return (EXIT_FAILURE);
-			return (EXIT_SUCCESS);
+				return (EXIT_FAIL);
+			return (EXIT_SUCC);
 		}
 		i++;
 	}
 	add_new_var(data, var, i);
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 /**
@@ -109,7 +109,7 @@ static int	update_env_array(char *var, t_data *data)
  *
  * @param cmd The command structure containing arguments and flags for 'export'.
  * @param data The main data structure containing the environment variables array.
- * @return EXIT_SUCCESS if the command executed successfully, EXIT_FAILURE otherwise.
+ * @return EXIT_SUCC if the command executed successfully, EXIT_FAIL otherwise.
  */
 int	builtin_export(t_command *cmd, t_data *data)
 {
@@ -119,12 +119,12 @@ int	builtin_export(t_command *cmd, t_data *data)
 	if (cmd->flags)
 	{
 		ft_putstr_fd("export doesn't support options", STDERR_FILENO);
-		return (EXIT_FAILURE);
+		return (EXIT_FAIL);
 	}
 	if (!current_arg)
 	{
 		print_env_var(data);
-		return (EXIT_SUCCESS);
+		return (EXIT_SUCC);
 	}
 	while (current_arg)
 	{
@@ -135,8 +135,8 @@ int	builtin_export(t_command *cmd, t_data *data)
 		}
 		// check later if it is a shell variable and, if so, add it to the array
 		if (update_env_array(current_arg->content, data))
-			return (EXIT_FAILURE);
+			return (EXIT_FAIL);
 		current_arg = current_arg->next;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }

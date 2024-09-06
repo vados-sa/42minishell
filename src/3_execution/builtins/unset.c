@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 12:16:30 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:27:13 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ static int	find_env_var_index(char *var, t_data *data)
  *
  * @param var The variable to remove.
  * @param data The main data structure containing the environment variables array.
- * @return EXIT_SUCCESS after attempting to remove the variable.
+ * @return EXIT_SUCC after attempting to remove the variable.
  */
 static int	remove_from_env(char *var, t_data *data)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = find_env_var_index(var, data);
@@ -73,7 +73,7 @@ static int	remove_from_env(char *var, t_data *data)
 		}
 		data->env[j] = NULL;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
 
 /**
@@ -85,7 +85,7 @@ static int	remove_from_env(char *var, t_data *data)
  *
  * @param cmd The current command structure.
  * @param data The main data structure containing the environment variables array.
- * @return EXIT_SUCCESS if all variables were successfully removed, EXIT_FAILURE if there was an error.
+ * @return EXIT_SUCC if all variables were successfully removed, EXIT_FAIL if there was an error.
  */
 int	builtin_unset(t_command *cmd, t_data *data)
 {
@@ -95,7 +95,7 @@ int	builtin_unset(t_command *cmd, t_data *data)
 	if (cmd->flags)
 	{
 		ft_putstr_fd("unset doesn't support options", STDERR_FILENO);
-		return (EXIT_FAILURE);
+		return (EXIT_FAIL);
 	}
 	while (current_arg)
 	{
@@ -107,5 +107,5 @@ int	builtin_unset(t_command *cmd, t_data *data)
 		remove_from_env(current_arg->content, data);
 		current_arg = current_arg->next;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCC);
 }
