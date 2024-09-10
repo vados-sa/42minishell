@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/06 14:23:38 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/10 18:02:21 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,8 @@ void		free_env_and_path(t_data *data);
 
 /*free_structures.c***********************************************************/
 void		free_list(t_list *list);
-void		free_commands(t_command *commands);
-void		free_tokens(t_token *tokens);
+void		free_commands(t_data *data);
+void		free_tokens(t_data *data);
 
 /**print_message.c************************************************************/
 int			print_error_code(char *message, char tkn, int exit_code);

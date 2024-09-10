@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:52:26 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/06 13:14:25 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/10 18:03:20 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief Frees a linked list of t_list nodes.
- * 
+ *
  * @param list Pointer to the head of the linked list.
  */
 void	free_list(t_list *list)
@@ -38,17 +38,17 @@ void	free_list(t_list *list)
 
 /**
  * @brief Frees a linked list of t_command nodes, including arguments, flags, and final_av.
- * 
+ *
  * @param commands Pointer to the head of the linked list.
  */
-void	free_commands(t_command *commands)
+void	free_commands(t_data *data)
 {
 	t_command	*temp;
 
-	while (commands)
+	while (data->command)
 	{
-		temp = commands;
-		commands = commands->next;
+		temp = data->command;
+		data->command = data->command->next;
 		temp->next = NULL;
 		if (temp->command)
 		{
@@ -68,17 +68,17 @@ void	free_commands(t_command *commands)
 
 /**
  * @brief Frees a linked list of t_token nodes.
- * 
+ *
  * @param tokens Pointer to the head of the linked list.
  */
-void	free_tokens(t_token *tokens)
+void	free_tokens(t_data *data)
 {
 	t_token	*temp;
 
-	while (tokens)
+	while (data->token)
 	{
-		temp = tokens;
-		tokens = tokens->next;
+		temp = data->token;
+		data->token = data->token->next;
 		temp->next = NULL;
 		if (temp->value)
 		{

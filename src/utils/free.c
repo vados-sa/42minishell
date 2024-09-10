@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/06 13:16:03 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/10 18:03:52 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	free_substr(char **s1, char **s2, char **s3)
 
 /**
  * @brief Frees the t_data structure and all its dynamically allocated members.
- * 
+ *
  * @param data Pointer to the t_data structure.
  */
 void	free_data(t_data *data)
@@ -98,9 +98,9 @@ void	free_data(t_data *data)
 		data->output_value = NULL;
 	}
 	if (data->token)
-		free_tokens(data->token);
+		free_tokens(data);
 	if (data->command)
-		free_commands(data->command);
+		free_commands(data);
 }
 
 void	free_env_and_path(t_data *data)
