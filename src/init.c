@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:46:13 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/06 14:20:30 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:16:01 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	init_histfile(t_data *data)
 	char	*home_path;
 	char	*histfile_path;
 
-	home_path = find_path("HOME=", data->env);
+	home_path = find_path("HOME=", data);
 	if (!home_path)
 		printf("Warning: HOME environment variable not set. \
 				History will not be saved.\n");
@@ -82,8 +82,8 @@ static void	init_histfile(t_data *data)
 			free(histfile_path);
 			histfile_path = NULL;
 		}
-		free(home_path);
-		home_path = NULL;
+		//free(home_path);
+		//home_path = NULL;
 	}
 }
 
@@ -109,9 +109,11 @@ int	init_data(t_data *data, char **env)
 		while (data->env[i])
 		{
 			free(data->env[i]);
+			data->env[i] = NULL;
 			i++;
 		}
 		free(data->env);
+		data->env = NULL;
 		return (EXIT_FAIL);
 	}
 	init_histfile(data);

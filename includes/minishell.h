@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/10 18:02:21 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:52:10 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,8 @@ int			redirect_io(int **fds, int pos, t_data *data, int cmds_num);
 
 /**builtins*******************************************************************/
 /***cd.c**********************************************************************/
-char		*find_path(char *str, char **env);
-int			rewrite_path(char *str, char *pwd, char **env);
+char		*find_path(char *str, t_data *data);
+int			rewrite_path(char *str, char *pwd, t_data *data);
 int			builtin_cd(t_command *cmd, t_data *data);
 
 /***echo.c********************************************************************/

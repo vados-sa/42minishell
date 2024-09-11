@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/06 13:18:52 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:45:07 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	minishell_exit(t_data *data, int exit_code)
 	char	*file;
 
 	printf("exit\n\n");
-	file = find_path("HISTFILE=", data->env);
+	file = find_path("HISTFILE=", data);
 	if (file)
 		write_history(file + 9);
 	free_data(data);
