@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/11 16:52:17 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:52:29 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ int	process_not_builtin(int **fds, int pos, int *pid, t_data *data)
 			return (EXIT_FAIL);
 		close_unused_fd(fds, pos, FD_RW, ft_lstsize_mod(data->command));
 		execute_command(cmd, data);
+		return (EXIT_SUCC);
 	}
-	if (fds[pos] && fds[pos][0] >= 0)
-		close_fd(&fds[pos][0]);
-	if (fds[pos] && fds[pos][1] >= 0)
-		close_fd(&fds[pos][1]);
-	return (EXIT_FAIL);
+	// if (fds[pos] && fds[pos][0] >= 0)
+	//	close_fd(&fds[pos][0]);
+	// if (fds[pos] && fds[pos][1] >= 0)
+	//	close_fd(&fds[pos][1]);
+	return (EXIT_SUCC);
 }
 
 void	execute_command(t_command *cmd, t_data *data)
