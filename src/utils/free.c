@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/11 13:42:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:48:15 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,24 @@ void	free_double_pointer_char(char**str)
 	str = NULL;
 }
 
-void	free_double_pointer_int(int**n)
+void	free_double_pointer_int(int**n, int qt_cmd)
 {
 	int	i;
 
+	if (!n)
+		return ;
 	i = 0;
-	if (n)
+	while (i < qt_cmd - 1)
 	{
-		while (n[i])
+		if (n[i])
 		{
 			free(n[i]);
 			n[i] = NULL;
-			i++;
 		}
-		free(n);
-		n = NULL;
+		i++;
 	}
+	free(n);
+	n = NULL;
 }
 
 void	free_substr(char **s1, char **s2, char **s3)

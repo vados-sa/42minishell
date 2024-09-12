@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/06 15:49:30 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:52:17 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,34 +63,6 @@ void	execute_command(t_command *cmd, t_data *data)
 	exit (data->exit_status);
 }
 
-/* char	*get_cmd_path(t_command *cmd, char**env)
-{
-	char	**paths;
-	char	*temp;
-	char	*result;
-	int		i;
-
-	i = 0;
-	while (ft_strncmp("PATH", env[i], 4))
-		i++;
-	paths = ft_split(env[i] + 5, ':');
-	i = 0;
-	while (paths[i])
-	{
-		temp = ft_strjoin(paths[i], "/");
-		result = ft_strjoin(temp, cmd->command);
-		free(temp);
-		if (access(result, F_OK | X_OK) == 0)
-			return (result);
-		free(result);
-		i++;
-	}
-	free_double_pointer(paths);
-	ft_putstr_fd("minishell: command not found: ", 2);
-	ft_putendl_fd(cmd->command, 2);
-	return (NULL);
-} */
-
 static char	*join_paths_and_command(char *path, char *command)
 {
 	char	*temp;
@@ -142,3 +114,31 @@ char	*get_cmd_path(t_command *cmd, char **env)
 	ft_putendl_fd(cmd->command, 2);
 	return (NULL);
 }
+
+/* char	*get_cmd_path(t_command *cmd, char**env)
+{
+	char	**paths;
+	char	*temp;
+	char	*result;
+	int		i;
+
+	i = 0;
+	while (ft_strncmp("PATH", env[i], 4))
+		i++;
+	paths = ft_split(env[i] + 5, ':');
+	i = 0;
+	while (paths[i])
+	{
+		temp = ft_strjoin(paths[i], "/");
+		result = ft_strjoin(temp, cmd->command);
+		free(temp);
+		if (access(result, F_OK | X_OK) == 0)
+			return (result);
+		free(result);
+		i++;
+	}
+	free_double_pointer(paths);
+	ft_putstr_fd("minishell: command not found: ", 2);
+	ft_putendl_fd(cmd->command, 2);
+	return (NULL);
+} */

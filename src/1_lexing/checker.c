@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 16:24:42 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/24 19:41:34 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/11 15:35:15 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	check_input(char *cpy_arg)
 	len = ft_strlen(cpy_arg);
 	while (len > 0 && ft_isspace(cpy_arg[len - 1]))
 		len--;
+	if (len == 0)
+		return (EXIT_FAIL);
 	if (look_for_operator(cpy_arg[len -1]))
 		return (print_error_code(OTHER_STX_ERROR, cpy_arg[len -1], EXIT_FAIL));
 	return (EXIT_SUCC);

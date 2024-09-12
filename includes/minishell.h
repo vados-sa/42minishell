@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/11 13:52:10 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:49:06 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ int			builtin_unset(t_command *cmd, t_data *data);
 /*utils***********************************************************************/
 /**free.c*********************************************************************/
 void		free_double_pointer_char(char**str);
-void		free_double_pointer_int(int**n);
+void		free_double_pointer_int(int**n, int qt_cmd);
 void		free_substr(char **s1, char **s2, char **s3);
 void		free_data(t_data *data);
 void		free_env_and_path(t_data *data);

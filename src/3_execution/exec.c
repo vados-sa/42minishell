@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:58 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/06 14:48:31 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:48:41 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	exec(t_data*data)
 	if (!id_p)
 		return (EXIT_FAIL);
 	processing(fds, id_p, data);
-	free_double_pointer_int(fds);
+	free_double_pointer_int(fds, qt_cmd);
 	free(id_p);
 	return (EXIT_SUCC);
 }
