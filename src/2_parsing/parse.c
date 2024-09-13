@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/06 15:12:08 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:21:47 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	split_token(t_data *data)
 	while (token)
 	{
 		exit_s = 0;
+		/* if (token->value)
+			printf("%s\n", token->value);
+		else
+			printf("Token value is null.\n"); */
 		if (token->type[0] == '<')
 			exit_s = open_redir_in(data, token, O_RDONLY);
 		else if (ft_strcmp(token->type, OUTPUT) == 0)
@@ -82,6 +86,8 @@ int	split_others_token(t_data *data, t_token *token, int *add_new_cmd)
 {
 	static t_command	*command;
 
+	if (!token->value)
+		return (EXIT_SUCC);
 	if (*add_new_cmd)
 	{
 		*add_new_cmd = 0;
@@ -100,7 +106,7 @@ int	split_others_token(t_data *data, t_token *token, int *add_new_cmd)
 	}
 	else
 	{
-		// remove_possible_quotes(token->value); // cannot be here -> CHECK WHEN TO REMOVE
+		//remove_possible_quotes(token->value); // cannot be here -> CHECK WHEN TO REMOVE
 		if (fill_node(command, token, "ARGUMENT"))
 			return (EXIT_FAIL);
 	}
