@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:09:51 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/08/14 20:16:50 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:27:02 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	lex(t_data *data)
 	if (check_input(cpy_arg))
 		return (EXIT_FAIL);
 	if (tokenize(data, cpy_arg))
-		return (EXIT_FAIL);
+		return (EXIT_FAIL); 
 	return (EXIT_SUCC);
 }
 
