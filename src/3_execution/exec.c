@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:58 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/12 18:58:39 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/14 19:38:38 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ int	exec(t_data*data)
 	return (EXIT_SUCC);
 }
 
+static void	close_all_pipes(int **fds, int cmds_num)
+{
+	int	i;
+
+	i = 0;
+	while (i < cmds_num - 1)
+	{
+		close_fd(&fds[i][0]);
+		close_fd(&fds[i][1]);
+		i++;
+	}
+}
+
 void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
 {
 	int	i;
@@ -53,11 +66,10 @@ void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
 				else
 					data->exit_status = -1;
 			}
-			//close_fd(&fds[i][0]);
-			//close_fd(&fds[i][1]);
 		}
 		i++;
 	}
+	close_all_pipes(fds, pos);
 }
 
 static int	process_commands(int **fds, pid_t *id_p, t_data *data)
@@ -83,19 +95,6 @@ static int	process_commands(int **fds, pid_t *id_p, t_data *data)
 		command = command->next;
 	}
 	return (EXIT_SUCC);
-}
-
-static void	close_all_pipes(int **fds, int cmds_num)
-{
-	int	i;
-
-	i = 0;
-	while (i < cmds_num - 1)
-	{
-		close_fd(&fds[i][0]);
-		close_fd(&fds[i][1]);
-		i++;
-	}
 }
 
 int	processing(int **fds, pid_t *id_p, t_data *data)
