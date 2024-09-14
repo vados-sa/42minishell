@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/06 18:10:06 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:44:34 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,10 @@ static int	update_env_array(char *var, t_data *data)
 int	builtin_export(t_command *cmd, t_data *data)
 {
 	t_list	*current_arg;
+	int		es_flag;
 
 	current_arg = cmd->arguments;
+	es_flag = 0;
 	if (cmd->flags)
 	{
 		ft_putstr_fd("export doesn't support options", STDERR_FILENO);
@@ -130,6 +132,7 @@ int	builtin_export(t_command *cmd, t_data *data)
 	{
 		if (check_invalid_identifiers(current_arg->content, "export"))
 		{
+			es_flag = 1;
 			current_arg = current_arg->next;
 			continue ;
 		}
@@ -138,5 +141,7 @@ int	builtin_export(t_command *cmd, t_data *data)
 			return (EXIT_FAIL);
 		current_arg = current_arg->next;
 	}
+	if (es_flag)
+		return (EXIT_FAIL);
 	return (EXIT_SUCC);
 }
