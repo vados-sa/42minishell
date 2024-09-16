@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/14 18:44:34 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:48:44 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,38 @@ static int	update_env_array(char *var, t_data *data)
 	add_new_var(data, var, i);
 	return (EXIT_SUCC);
 }
+/**
+ * @brief Loops through the arguments of the 'export' command and processes them.
+ *
+ * This function handles each argument passed to the 'export' command, checks for
+ * invalid identifiers, and updates the environment variables accordingly.
+ *
+ * @param current_arg The list of arguments for the 'export' command.
+ * @param data The main data structure containing the environment variables array.
+ * @return EXIT_SUCC if all arguments are processed successfully, EXIT_FAIL otherwise.
+ */
+static int	loop_args(t_list *current_arg, t_data *data)
+{
+	int	es_flag;
+
+	es_flag = 0;
+	while (current_arg)
+	{
+		if (check_invalid_identifiers(current_arg->content, "export"))
+		{
+			es_flag = 1;
+			current_arg = current_arg->next;
+			continue ;
+		}
+		if (update_env_array(current_arg->content, data))
+			return (EXIT_FAIL);
+		current_arg = current_arg->next;
+	}
+	if (es_flag)
+		return (EXIT_FAIL);
+	return (EXIT_SUCC);
+}
+
 
 /**
  * @brief Handles the 'export' builtin command, managing environment variables.
@@ -113,35 +145,15 @@ static int	update_env_array(char *var, t_data *data)
  */
 int	builtin_export(t_command *cmd, t_data *data)
 {
-	t_list	*current_arg;
-	int		es_flag;
-
-	current_arg = cmd->arguments;
-	es_flag = 0;
 	if (cmd->flags)
 	{
 		ft_putstr_fd("export doesn't support options", STDERR_FILENO);
 		return (EXIT_FAIL);
 	}
-	if (!current_arg)
+	if (!cmd->arguments)
 	{
 		print_env_var(data);
 		return (EXIT_SUCC);
 	}
-	while (current_arg)
-	{
-		if (check_invalid_identifiers(current_arg->content, "export"))
-		{
-			es_flag = 1;
-			current_arg = current_arg->next;
-			continue ;
-		}
-		// check later if it is a shell variable and, if so, add it to the array
-		if (update_env_array(current_arg->content, data))
-			return (EXIT_FAIL);
-		current_arg = current_arg->next;
-	}
-	if (es_flag)
-		return (EXIT_FAIL);
-	return (EXIT_SUCC);
+	return (loop_args(cmd->arguments, data));
 }
