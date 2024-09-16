@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:58 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/14 19:38:38 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:32:20 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,33 @@ static void	close_all_pipes(int **fds, int cmds_num)
 		i++;
 	}
 }
+//code that chatgpt provided 
+void child_exec(pid_t *id_p, int pos, t_data *data, int **fds) {
+    int i;
+    int exit_code;
 
-void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
+    if (!id_p || pos <= 0 || !data || !fds)
+        return;
+
+    i = 0;
+    while (i < pos) {
+        if (id_p[i] > 0) {
+            waitpid(id_p[i], &exit_code, 0);
+            if (i == pos - 1) {
+                if (WIFEXITED(exit_code))
+                    data->exit_status = WEXITSTATUS(exit_code);
+                else if (WIFSIGNALED(exit_code))
+                    data->exit_status = WTERMSIG(exit_code) + 128;
+                else
+                    data->exit_status = -1;
+            }
+        }
+        i++;
+    }
+}
+
+
+/* void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
 {
 	int	i;
 	int	exit_code;
@@ -70,7 +95,7 @@ void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
 		i++;
 	}
 	close_all_pipes(fds, pos);
-}
+} */
 
 static int	process_commands(int **fds, pid_t *id_p, t_data *data)
 {

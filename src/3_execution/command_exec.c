@@ -6,13 +6,43 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/14 19:39:06 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:32:27 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	process_not_builtin(int **fds, int pos, int *pid, t_data *data)
+
+//code that chatgpt provided 
+int process_not_builtin(int **fds, int pos, int *pid, t_data *data) {
+    t_command *cmd;
+    int i;
+
+    i = 0;
+    cmd = data->command;
+    while (cmd && i < pos) {
+        cmd = cmd->next;
+        i++;
+    }
+
+    *pid = fork();
+    if (*pid < 0) {
+        return (EXIT_FAIL);  // Fork failed
+    }
+
+    if (*pid == 0) {  // Child process
+        if (redirect_io(fds, pos, data, ft_lstsize_mod(data->command)) == EXIT_FAIL)
+            exit(EXIT_FAIL);  // Child should exit, not return
+        close_unused_fd(fds, pos, FD_RW, ft_lstsize_mod(data->command));
+        execute_command(cmd, data);  // Execute the actual command
+        exit(data->exit_status);  // Child should exit
+    }
+
+    return (EXIT_SUCC);  // Parent process
+}
+
+
+/* int	process_not_builtin(int **fds, int pos, int *pid, t_data *data)
 {
 	t_command	*cmd;
 	int			i;
@@ -36,7 +66,7 @@ int	process_not_builtin(int **fds, int pos, int *pid, t_data *data)
 		return (EXIT_SUCC);
 	}
 	return (EXIT_SUCC);
-}
+} */
 
 void	execute_command(t_command *cmd, t_data *data)
 {
