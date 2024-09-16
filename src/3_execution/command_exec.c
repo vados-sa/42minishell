@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/12 18:52:29 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/14 19:39:06 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ int	process_not_builtin(int **fds, int pos, int *pid, t_data *data)
 		execute_command(cmd, data);
 		return (EXIT_SUCC);
 	}
-	// if (fds[pos] && fds[pos][0] >= 0)
-	//	close_fd(&fds[pos][0]);
-	// if (fds[pos] && fds[pos][1] >= 0)
-	//	close_fd(&fds[pos][1]);
 	return (EXIT_SUCC);
 }
 
