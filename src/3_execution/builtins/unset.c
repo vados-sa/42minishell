@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/06 13:27:13 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:40:50 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	remove_from_env(char *var, t_data *data)
 		while (data->env[j + 1])
 		{
 			data->env[j] = data->env[j + 1];
-			i++;
+			j++;
 		}
 		data->env[j] = NULL;
 	}
@@ -99,11 +99,6 @@ int	builtin_unset(t_command *cmd, t_data *data)
 	}
 	while (current_arg)
 	{
-		if (check_invalid_identifiers(current_arg->content, "unset"))
-		{
-			current_arg = current_arg->next;
-			continue ;
-		}
 		remove_from_env(current_arg->content, data);
 		current_arg = current_arg->next;
 	}
