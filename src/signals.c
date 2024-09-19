@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:39:34 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/05 14:35:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:48:52 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	refresh_line(int sig)
 static void	display_new_line(int sig)
 {
 	if (sig == SIGQUIT)
-		write(STDERR_FILENO, "Quit (core dumped)\n", 19);
+		write(STDERR_FILENO, "Quit (core dumped)\n", 19); // Apparently needs to be ignored
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 }
