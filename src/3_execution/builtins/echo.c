@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/31 15:42:03 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:42:45 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	builtin_echo(t_command *cmd)
 	if (cmd->flags && (cmd->flags->next || \
 						ft_strcmp(cmd->flags->content, "-n")))
 	{
-		ft_putstr_fd("minishell: cd only support '-n' flag\n", 1); //check if it is 1 or 2
+		ft_putstr_fd("minishell: cd only supports '-n' flag\n", 2);
 		return (EXIT_FAIL);
 	}
 	temp = cmd->arguments;
