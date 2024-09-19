@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   organize_final_cmd_array.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:29:54 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/06 13:19:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:07:23 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ static void	free_final_array(char **final_av, int count)
 	while (i < count)
 	{
 		free(final_av[i]);
+		final_av[i] = NULL;
 		i++;
 	}
 	free(final_av);
+	final_av = NULL;
 }
 
 static int	add_command_to_array(long *i, t_command *cmd_ptr)

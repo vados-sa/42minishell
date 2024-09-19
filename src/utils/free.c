@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/11 16:48:15 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:10:25 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ void	free_double_pointer_char(char**str)
 	i = 0;
 	while (str[i])
 	{
-		free(str[i]);
-		str[i] = NULL;
+		if (str[i])  // Extra safeguard to ensure the pointer is valid
+		{
+			free(str[i]);
+			str[i] = NULL;  // Setting to NULL to avoid double free
+		}
 		i++;
 	}
 	free(str);
@@ -109,5 +112,8 @@ void	free_env_and_path(t_data *data)
 	if (data->env)
 		free_double_pointer_char(data->env);
 	if (data->path)
+	{
 		free(data->path);
+		data->path = NULL;
+	}
 }
