@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/16 17:32:27 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:08:28 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,22 @@ int process_not_builtin(int **fds, int pos, int *pid, t_data *data) {
 
     i = 0;
     cmd = data->command;
-    while (cmd && i < pos) {
+    while (cmd && i < pos)
+	{
         cmd = cmd->next;
         i++;
     }
-
     *pid = fork();
-    if (*pid < 0) {
+    if (*pid < 0)
         return (EXIT_FAIL);  // Fork failed
-    }
-
-    if (*pid == 0) {  // Child process
-        if (redirect_io(fds, pos, data, ft_lstsize_mod(data->command)) == EXIT_FAIL)
+    if (*pid == 0) // Child process
+	{
+        if (redirect_io(fds, pos, data, ft_lstsize_mod(data->command)))
             exit(EXIT_FAIL);  // Child should exit, not return
         close_unused_fd(fds, pos, FD_RW, ft_lstsize_mod(data->command));
         execute_command(cmd, data);  // Execute the actual command
         exit(data->exit_status);  // Child should exit
     }
-
     return (EXIT_SUCC);  // Parent process
 }
 
