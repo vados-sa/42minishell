@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/13 14:12:31 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:48:42 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,29 @@ void	minishell_exit(t_data *data, int exit_code)
 	exit (exit_code);
 }
 
-//check if ft_putstr_fd should be with 1 or 2
 int	builtin_exit(t_command *cmd, t_data*data)
 {
 	if (cmd->flags)
 	{
 		if (!ft_isnumeric(cmd->flags->content) || cmd->flags->next)
 		{
-			ft_putstr_fd("minishell: exit does not support options\n", 1);
+			ft_putstr_fd("minishell: exit does not support options\n", 2);
 			return (EXIT_FAIL);
 		}
 		minishell_exit(data, ft_atoi(cmd->flags->content));
 	}
 	if (cmd->arguments)
 	{
+		//printf("Argument: %s\n", cmd->arguments->content);
 		if (cmd->arguments->next)
 		{
-			ft_putstr_fd("minishell: exit with too much arguments\n", 1);
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 			return (EXIT_FAIL);
 		}
 		if (!ft_isnumeric(cmd->arguments->content))
 		{
-			ft_putstr_fd("minishell: exit argument must be numeric\n", 1);
-			return (EXIT_FAIL);
+			ft_putstr_fd("minishell: numeric argument required\n", 2);
+			return (EXIT_FAIL); // the program needs to exit in this case -> tentei implementar, mas varios fd ficaram abertos -> help Malu!
 		}
 		minishell_exit(data, ft_atoi(cmd->arguments->content));
 	}
