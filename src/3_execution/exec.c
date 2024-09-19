@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:58 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/16 17:32:20 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:12:23 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,31 @@ static void	close_all_pipes(int **fds, int cmds_num)
 	}
 }
 //code that chatgpt provided 
-void child_exec(pid_t *id_p, int pos, t_data *data, int **fds) {
-    int i;
-    int exit_code;
+void child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
+{
+	int i;
+	int exit_code;
 
-    if (!id_p || pos <= 0 || !data || !fds)
-        return;
-
-    i = 0;
-    while (i < pos) {
-        if (id_p[i] > 0) {
-            waitpid(id_p[i], &exit_code, 0);
-            if (i == pos - 1) {
-                if (WIFEXITED(exit_code))
-                    data->exit_status = WEXITSTATUS(exit_code);
-                else if (WIFSIGNALED(exit_code))
-                    data->exit_status = WTERMSIG(exit_code) + 128;
-                else
-                    data->exit_status = -1;
-            }
-        }
-        i++;
-    }
+	if (!id_p || pos <= 0 || !data || !fds)
+	    return ;
+	i = 0;
+	while (i < pos)
+	{
+		if (id_p[i] > 0)
+		{
+	    	waitpid(id_p[i], &exit_code, 0);
+	    	if (i == pos - 1)
+			{
+	    		if (WIFEXITED(exit_code))
+	    			data->exit_status = WEXITSTATUS(exit_code);
+	    		else if (WIFSIGNALED(exit_code))
+	    			data->exit_status = WTERMSIG(exit_code) + 128;
+	    		else
+	    			data->exit_status = -1;
+			}
+		}
+		i++;
+	}
 }
 
 
