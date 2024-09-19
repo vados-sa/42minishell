@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/19 12:07:20 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:30:29 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/types.h>
-# include <sys/errno.h>LEXING PROBLEM
+# include <sys/errno.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <signal.h>
@@ -198,7 +198,7 @@ int			perror_return_error(char *message);
 int			look_for_operator(char c);
 int			look_for_quotes(char c);
 int			add_value_to_env(char *env_var, char *value, t_data *data);
-int			check_invalid_identifiers(char *arg, char *command);
+int			check_invalid_identifiers(char *arg);
 
 
 #endif

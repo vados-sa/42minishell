@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:40:41 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/06 14:23:32 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:27:46 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,27 @@ int	add_value_to_env(char *env_var, char *value, t_data *data)
 	return (1); // enviroment variable not found
 }
 
-int	check_invalid_identifiers(char *arg, char *command)
+int	check_invalid_identifiers(char *arg)
 {
 	int	i;
 
 	i = 0;
 	if (!arg[0] || (!ft_isalpha(arg[0]) && arg[0] != '_'))
 	{
-		printf("minishell: %s: `%s': not a valid identifier\n", command, arg);
+		ft_putstr_fd("minishell: export: `", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		return (EXIT_FAIL);
 	}
 	while (arg[i] && arg[i] != '=')
 	{
-		if (arg[i] == '=' && !ft_strcmp(command, "export"))
+		if (arg[i] == '=')
 			break ;
 		if (!ft_isalnum(arg[i]) && arg[i] != '_')
 		{
-			printf("minishell: %s: `%s': not a valid identifier\n", \
-					command, arg);
+			ft_putstr_fd("minishell: export: `", 2);
+			ft_putstr_fd(arg, 2);
+			ft_putstr_fd("': not a valid identifier\n", 2);
 			return (EXIT_FAIL);
 		}
 		i++;

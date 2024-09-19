@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/16 15:48:44 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:30:49 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static int	loop_args(t_list *current_arg, t_data *data)
 	es_flag = 0;
 	while (current_arg)
 	{
-		if (check_invalid_identifiers(current_arg->content, "export"))
+		if (check_invalid_identifiers(current_arg->content))
 		{
 			es_flag = 1;
 			current_arg = current_arg->next;
