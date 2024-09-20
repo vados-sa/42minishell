@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/06 14:27:06 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:21:59 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	minishell_loop(t_data *data)
 		signals_interactive_handler();
 		data->args = readline("minishell$ ");
 		if (!data->args)
-			minishell_exit(data, EXIT_SUCC);
+			minishell_exit(data, EXIT_SUCC, 0);
 		signals_non_interactive_handler();
 		if (data->args[0])
 			add_history(data->args);
@@ -44,7 +44,7 @@ int	main(int ac, char *av[], char **env)
 	(void)av;
 	ft_memset(&data, 0, sizeof(data));
 	if (init_data(&data, env))
-		minishell_exit(&data, EXIT_FAIL);
+		minishell_exit(&data, EXIT_FAIL, 0);
 	minishell_loop(&data);
 	return (EXIT_SUCC);
 }

@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/19 12:30:29 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:20:29 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int			builtin_echo(t_command *cmd);
 int			builtin_env(t_command *cmd, t_data *data);
 
 /***exit.c********************************************************************/
-void		minishell_exit(t_data *data, int exit_code);
+void		minishell_exit(t_data *data, int exit_code, int flag);
 int			builtin_exit(t_command *cmd, t_data*data);
 
 /***export.c******************************************************************/

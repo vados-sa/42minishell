@@ -6,17 +6,18 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/20 11:30:09 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:25:42 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	minishell_exit(t_data *data, int exit_code)
+void	minishell_exit(t_data *data, int exit_code, int flag)
 {
 	char	*file;
 
-	printf("exit\n\n");
+	if (!flag)
+		printf("exit\n");
 	if (data->saved_stdin >= 0)
 		close_fd(&data->saved_stdin);
 	if (data->saved_stdout >= 0)
@@ -40,7 +41,7 @@ int	builtin_exit(t_command *cmd, t_data*data)
 			ft_putstr_fd("minishell: exit does not support options\n", 2);
 			return (EXIT_FAIL);
 		}
-		minishell_exit(data, ft_atoi(cmd->flags->content));
+		minishell_exit(data, ft_atoi(cmd->flags->content), 0);
 	}
 	if (cmd->arguments)
 	{
@@ -52,11 +53,13 @@ int	builtin_exit(t_command *cmd, t_data*data)
 		}
 		if (!ft_isnumeric(cmd->arguments->content))
 		{
-			ft_putstr_fd("minishell: numeric argument required\n", 2);
-			return (EXIT_FAIL); // the program needs to exit in this case -> tentei implementar, mas varios fd ficaram abertos -> help Malu!
+			ft_putstr_fd("exit\nminishell: exit: ", 2);
+			ft_putstr_fd(cmd->arguments->content, 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
+			minishell_exit(data, 2, 1);
 		}
-		minishell_exit(data, ft_atoi(cmd->arguments->content));
+		minishell_exit(data, ft_atoi(cmd->arguments->content), 0);
 	}
-	minishell_exit(data, EXIT_SUCC);
+	minishell_exit(data, EXIT_SUCC, 0);
 	return (EXIT_SUCC);
 }
