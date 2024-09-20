@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:14:46 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/05 14:11:55 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:28:40 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_data
 	int			output_type_quote;
 	char		*output_value;
 	int			exit_status;
+	int			saved_stdin;
+    int			saved_stdout;
 	t_token		*token;
 	t_command	*command;
 }	t_data;

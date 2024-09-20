@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:44:07 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/19 14:29:06 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:28:20 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int	process_builtin(int **fds, int pos, t_command *cmd, t_data *data)
 {
-	int	fd[2];
+	//int	fd[2];
 	int	exit_code;
 
-	fd[0] = dup(STDIN_FILENO);
-	fd[1] = dup(STDOUT_FILENO);
-	if (fd[0] == -1 || fd[1] == -1)
+	data->saved_stdin = dup(STDIN_FILENO);
+    data->saved_stdout = dup(STDOUT_FILENO);
+	if (data->saved_stdin == -1 || data->saved_stdout == -1)
 		return (EXIT_FAIL);
 	if (redirect_io(fds, pos, data, ft_lstsize_mod(data->command)))
 		return (EXIT_FAIL);
 	//close_unused_fd(fds, pos, FD_RW, pos + 1);
 	exit_code = execute_builtin(cmd, data);
-	if (dup2(fd[0], STDIN_FILENO) == -1 || dup2(fd[1], STDOUT_FILENO) == -1)
+	if (dup2(data->saved_stdin, STDIN_FILENO) == -1 || dup2(data->saved_stdout, STDOUT_FILENO) == -1)
 		return (EXIT_FAIL);
-	close_fd(&fd[0]);
-	close_fd(&fd[1]);
+	close_fd(&data->saved_stdin);
+	close_fd(&data->saved_stdout);
 	data->exit_status = exit_code;
 	return (exit_code);
 }

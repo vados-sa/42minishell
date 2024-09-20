@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/19 12:03:08 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:30:09 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ void	minishell_exit(t_data *data, int exit_code)
 	char	*file;
 
 	printf("exit\n\n");
+	if (data->saved_stdin >= 0)
+		close_fd(&data->saved_stdin);
+	if (data->saved_stdout >= 0)
+		close_fd(&data->saved_stdout);
 	file = find_path("HISTFILE=", data);
 	if (file)
 		write_history(file + 9);
