@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/19 12:40:00 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:59:56 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	builtin_cd(t_command *cmd, t_data *data)
 	if (!path)
 		return (EXIT_FAIL);
 	if (chdir(path))
-		return (perror_return_error("chdir() fail"));
+		return (perror_return_error("minishell: cd"));
 	if (!getcwd(new_pwd, sizeof(new_pwd)))
 		return (perror_return_error("getcwd() error"));
 	if (update_env(new_pwd, old_pwd, data))
