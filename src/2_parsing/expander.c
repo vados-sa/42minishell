@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:29:30 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/14 16:05:36 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:26:42 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	expand_var(char **str, t_data *data)
 	temp = NULL;
 	while ((*str)[i])
 	{
-		if ((*str)[i] == '$' && (*str)[i + 1])
+		if ((*str)[i] == '$' && (*str)[i + 1] && (*str)[i + 1] != ' ')
 		{
 			if (check_single_quote_state(*str, i) == 0)
 			{
