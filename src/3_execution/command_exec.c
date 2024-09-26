@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: malu <malu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:08:28 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:10:36 by malu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,74 @@ int process_not_builtin(int **fds, int pos, int *pid, t_data *data) {
 	return (EXIT_SUCC);
 } */
 
-void	execute_command(t_command *cmd, t_data *data)
+
+void execute_command(t_command *cmd, t_data *data)
+{
+    char *path;
+    DIR *dir;
+
+    if (!cmd || !cmd->command || ft_strlen(cmd->command) == 0)
+    {
+        data->exit_status = 0;
+        return;
+    }
+    path = NULL;
+    if (ft_strchr(cmd->command, '/'))
+    {
+        if (access(cmd->command, F_OK) == 0)
+        {
+            dir = opendir(cmd->command);
+            if (dir != NULL)
+            {
+                closedir(dir);
+                ft_putstr_fd("minishell: ", 2);
+                ft_putstr_fd(cmd->command, 2);
+                ft_putendl_fd(": Is a directory", 2);
+                data->exit_status = 126;
+                exit(data->exit_status);
+            }
+            if (access(cmd->command, X_OK) != 0)
+            {
+                ft_putstr_fd("minishell: ", 2);
+                ft_putstr_fd(cmd->command, 2);
+                ft_putendl_fd(": Permission denied", 2);
+                data->exit_status = 126;
+                exit(data->exit_status);
+            }
+            data->exit_status = execve(cmd->command, cmd->final_av, data->env);
+        }
+        else
+        {
+            data->exit_status = 127;
+            ft_putstr_fd("minishell: ", 2);
+            ft_putstr_fd(cmd->command, 2);
+            ft_putendl_fd(": No such file or directory", 2);
+        }
+    }
+    else
+    {
+        if (data->env)
+            path = get_cmd_path(cmd, data->env);
+        if (path)
+        {
+            data->exit_status = execve(path, cmd->final_av, data->env);
+        }
+        else
+        {
+            ft_putstr_fd("minishell: ", 2);
+            ft_putstr_fd(cmd->command, 2);
+            ft_putendl_fd(": command not found", 2);
+            data->exit_status = 127;
+        }
+    }
+    free(path);
+    exit(data->exit_status);
+}
+
+
+
+
+/* void	execute_command(t_command *cmd, t_data *data)
 {
 	char	*path;
 
@@ -86,7 +153,7 @@ void	execute_command(t_command *cmd, t_data *data)
 		data->exit_status = 127;
 	free (path);
 	exit (data->exit_status);
-}
+} */
 
 static char	*join_paths_and_command(char *path, char *command)
 {

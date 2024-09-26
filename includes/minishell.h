@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: malu <malu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/20 12:20:29 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:25:25 by malu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <string.h>
+# include <dirent.h> 
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
