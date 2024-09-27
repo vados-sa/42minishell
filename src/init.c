@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:46:13 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/27 12:42:28 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:04:42 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,29 +63,6 @@ static int	init_path(t_data *data)
 	return (EXIT_SUCC);
 }
 
-static void	init_histfile(t_data *data)
-{
-	char	*home_path;
-	char	*histfile_path;
-
-	home_path = find_path("HOME=", data);
-	if (!home_path)
-		printf("Warning: HOME environment variable not set. \
-				History will not be saved.\n");
-	else
-	{
-		histfile_path = ft_strjoin(home_path + 5, "/.minishell_history");
-		if (histfile_path)
-		{
-			update_env_array("HISTFILE=", data);
-			add_value_to_env("HISTFILE=", histfile_path, data);
-			read_history(histfile_path);
-			free(histfile_path);
-			histfile_path = NULL;
-		}
-	}
-}
-
 static void	init_io(t_data *data)
 {
 	data->input_fd = STDIN_FILENO;
@@ -115,7 +92,6 @@ int	init_data(t_data *data, char **env)
 		data->env = NULL;
 		return (EXIT_FAIL);
 	}
-	init_histfile(data);
 	init_io(data);
 	data->exit_status = 0;
 	return (EXIT_SUCC);
