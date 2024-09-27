@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:46:13 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/11 14:16:01 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:42:28 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,12 @@ static void	init_histfile(t_data *data)
 		histfile_path = ft_strjoin(home_path + 5, "/.minishell_history");
 		if (histfile_path)
 		{
+			update_env_array("HISTFILE=", data);
 			add_value_to_env("HISTFILE=", histfile_path, data);
 			read_history(histfile_path);
 			free(histfile_path);
 			histfile_path = NULL;
 		}
-		//free(home_path);
-		//home_path = NULL;
 	}
 }
 

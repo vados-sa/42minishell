@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   concat_expanded_vars.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:24:45 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/05 16:55:44 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:35:51 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*concat_expanded_var(char **str, int *i, t_data *data)
 	before_var = ft_substr(*str, 0, *i);
 	after_var = find_after_var(&(*str)[*i], len);
 	exp_var = find_exp_var(&(*str)[*i], len, data);
-	*i += ft_strlen(exp_var) + 1; //check if +1 is not giving any issues
+	*i += ft_strlen(exp_var); // +1 was giving previous issue.
 	exp_str = ft_concat_three_str(before_var, exp_var, after_var);
 	free_substr(&before_var, &exp_var, &after_var);
 	if (!exp_str)

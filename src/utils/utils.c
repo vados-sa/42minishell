@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:40:41 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/19 12:27:46 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:18:08 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	add_value_to_env(char *env_var, char *value, t_data *data)
 		}
 		i++;
 	}
-	return (1); // enviroment variable not found
+	return (1);
 }
 
 int	check_invalid_identifiers(char *arg)

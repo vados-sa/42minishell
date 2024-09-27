@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/19 14:10:25 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:51:14 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,34 @@ void	free_data(t_data *data)
 		free_commands(data);
 }
 
+void	free_double_pointer_char1(char**str)
+{
+	int	i;
+
+	if (!str)
+		return ;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i])  // Extra safeguard to ensure the pointer is valid
+		{
+			//printf("env: %s\n" ,str[i]);
+			free(str[i]);
+			//printf("	freed\n");
+			str[i] = NULL;  // Setting to NULL to avoid double free
+		}
+		i++;
+	}
+	free(str);
+	str = NULL;
+}
+
 void	free_env_and_path(t_data *data)
 {
 	if (!data)
 		return ;
 	if (data->env)
-		free_double_pointer_char(data->env);
+		free_double_pointer_char1(data->env);
 	if (data->path)
 	{
 		free(data->path);

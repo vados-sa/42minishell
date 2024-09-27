@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malu <malu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/26 10:25:25 by malu             ###   ########.fr       */
+/*   Updated: 2024/09/26 18:10:01 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ int			builtin_exit(t_command *cmd, t_data*data);
 
 /***export.c******************************************************************/
 int			builtin_export(t_command *cmd, t_data *data);
+int			update_env_array(char *var, t_data *data);
 
 /***pwd.c*********************************************************************/
 int			builtin_pwd(t_command *cmd, t_data *data);

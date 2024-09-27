@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/19 12:30:49 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:37:14 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 
 //CHECK IF QUOTES ARE BEING PRINTED -> IT SHOULD !
 
-/**
- * @brief Prints all environment variables in a format suitable for 'export' command output.
- *
- * This function iterates through the environment variables stored in the `data->env`
- * array and prints each one prefixed with "declare -x ", which is the format used by the
- * 'export' command when it is invoked without any arguments.
- *
- * @param data The main data structure containing the environment variables array.
- */
 static void	print_env_var(t_data *data)
 {
 	int	i;
@@ -31,47 +22,63 @@ static void	print_env_var(t_data *data)
 	while (data->env[i])
 	{
 		printf("declare -x %s\n", data->env[i]);
-		i++;	
+		i++;
 	}
 }
 
-/**
- * @brief Adds a new environment variable to the environment array.
- *
- * This function creates a new environment variable entry in the `data->env` array.
- * It duplicates the provided `var` string and assigns it to the next available slot
- * in the array. If the duplication fails, an error is printed.
- *
- * @param data The main data structure containing the environment variables array.
- * @param var The variable to be added to the environment.
- * @param i The index at which to add the new variable in the `data->env` array.
- * @return EXIT_SUCC if the variable was added successfully, EXIT_FAIL otherwise.
- */
-static int	add_new_var(t_data *data, char* var, int i)
+static void	copy_env_vars(char **new_env, char **old_env, int env_size)
 {
+	int	i;
 
+	i = 0;
+	while (i < env_size)
+	{
+		new_env[i] = old_env[i];
+		i++;
+	}
+}
+
+/* static void free_old_env(char **old_env, int env_size)
+{
+    int i = 0;
+    while (i < env_size)
+    {
+        free(old_env[i]);
+        i++;
+    }
+    free(old_env);
+} */
+
+static int	add_new_var(t_data *data, char *var, int i)
+{
+	char	**new_env;
+	int		env_size;
+
+	env_size = 0;
+	while (data->env[env_size])
+		env_size++;
+	new_env = malloc(sizeof(char *) * (env_size + 2));
+	if (!new_env)
+	{
+		perror("failed to allocate new environment array");
+		return (EXIT_FAIL);
+	}
+	copy_env_vars(new_env, data->env, env_size);
+	//free_old_env(data->env, env_size);
+	free(data->env);
+	data->env = new_env;
 	data->env[i] = ft_strdup(var);
 	if (!data->env[i])
 	{
-		perror("failed to create new enviroment variable.");
+		perror("failed to create new environment variable.");
+		//free(new_env);
 		return (EXIT_FAIL);
 	}
 	data->env[i + 1] = NULL;
 	return (EXIT_SUCC);
 }
 
-/**
- * @brief Updates an existing environment variable or adds a new one if it doesn't exist.
- *
- * This function searches for an existing environment variable in the `data->env` array
- * that matches the name of the provided `var`. If found, it updates the variable's value.
- * If not found, it calls `add_new_var` to add the new variable to the environment.
- *
- * @param var The variable to be updated or added.
- * @param data The main data structure containing the environment variables array.
- * @return EXIT_SUCC if the variable was updated or added successfully, EXIT_FAIL otherwise.
- */
-static int	update_env_array(char *var, t_data *data)
+int	update_env_array(char *var, t_data *data)
 {
 	int		var_len;
 	int		i;
@@ -81,11 +88,11 @@ static int	update_env_array(char *var, t_data *data)
 	while (var[var_len] && var[var_len] != '=')
 		var_len++;
 	i = 0;
-	while(data->env[i])
+	while (data->env[i])
 	{
 		equal_pos = ft_strchr(data->env[i], '=');
-		if (equal_pos && !ft_strncmp(data->env[i], var, var_len) &&
-			 data->env[i][var_len] == '=')
+		if (equal_pos && !ft_strncmp(data->env[i], var, var_len) && 
+			data->env[i][var_len] == '=')
 		{
 			free(data->env[i]);
 			data->env[i] = ft_strdup(var);
@@ -98,16 +105,7 @@ static int	update_env_array(char *var, t_data *data)
 	add_new_var(data, var, i);
 	return (EXIT_SUCC);
 }
-/**
- * @brief Loops through the arguments of the 'export' command and processes them.
- *
- * This function handles each argument passed to the 'export' command, checks for
- * invalid identifiers, and updates the environment variables accordingly.
- *
- * @param current_arg The list of arguments for the 'export' command.
- * @param data The main data structure containing the environment variables array.
- * @return EXIT_SUCC if all arguments are processed successfully, EXIT_FAIL otherwise.
- */
+
 static int	loop_args(t_list *current_arg, t_data *data)
 {
 	int	es_flag;
