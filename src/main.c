@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: malu <malu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/20 12:21:59 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:03:12 by malu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,13 @@ void	minishell_loop(t_data *data)
 		signals_non_interactive_handler();
 		if (data->args[0])
 			add_history(data->args);
-		if (lex(data) || parse(data) || exec(data))
+		if ((lex(data) && !data->args) || parse(data))
+		{
+			free_data(data);
+			data->exit_status = 1;
+			continue ;
+		}
+		if (exec(data))
 		{
 			free_data(data);
 			continue ;
