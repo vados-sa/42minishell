@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   command_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malu <malu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/26 11:10:36 by malu             ###   ########.fr       */
+/*   Updated: 2024/09/28 17:58:08 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 
-//code that chatgpt provided 
+//code that chatgpt provided
 int process_not_builtin(int **fds, int pos, int *pid, t_data *data) {
     t_command *cmd;
     int i;
@@ -34,7 +34,7 @@ int process_not_builtin(int **fds, int pos, int *pid, t_data *data) {
             exit(EXIT_FAIL);  // Child should exit, not return
         close_unused_fd(fds, pos, FD_RW, ft_lstsize_mod(data->command));
         execute_command(cmd, data);  // Execute the actual command
-        exit(data->exit_status);  // Child should exit
+        return (data->exit_status); // se colocar return resolve o memory leak mas atrapalha o ctrl+d
     }
     return (EXIT_SUCC);  // Parent process
 }
@@ -127,7 +127,8 @@ void execute_command(t_command *cmd, t_data *data)
         }
     }
     free(path);
-    exit(data->exit_status);
+    return ; //resolve o memory leak mas atrapalha o ctrl+d
+	//exit(data->exit_status);
 }
 
 
@@ -202,8 +203,8 @@ char	*get_cmd_path(t_command *cmd, char **env)
 		i++;
 	}
 	free_double_pointer_char(paths);
-	ft_putstr_fd("minishell: command not found: ", 2);
-	ft_putendl_fd(cmd->command, 2);
+	//ft_putstr_fd("minishell: command not found: ", 2);
+	//ft_putendl_fd(cmd->command, 2);
 	return (NULL);
 }
 
