@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:39:34 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/17 16:48:52 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:57:59 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
  */
 static void	refresh_line(int sig)
 {
-	(void)sig; // to avoid unused variable warning
-	rl_replace_line("", 0); // Clear the current input line
-	rl_on_new_line(); // Move the cursor to a new line
+	(void)sig;
+	rl_replace_line("", 0);
+	rl_on_new_line();
 	write(STDOUT_FILENO, "\n", 1);
-    rl_redisplay(); // Redisplay the prompt
+	rl_redisplay();
 }
 
 /**
@@ -37,7 +37,7 @@ static void	refresh_line(int sig)
 static void	display_new_line(int sig)
 {
 	if (sig == SIGQUIT)
-		write(STDERR_FILENO, "Quit (core dumped)\n", 19); // Apparently needs to be ignored
+		write(STDERR_FILENO, "Quit (core dumped)\n", 19);
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 }
