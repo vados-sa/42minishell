@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 15:07:37 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:15:03 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ int			open_redir_out(t_data *data, t_token *token, int flag);
 int			split_others_token(t_data *data, t_token *token, int *add_new_cmd);
 int			parse(t_data *data);
 
-
 /*3_executer******************************************************************/
 /*builtin_exec.c**************************************************************/
 int			process_builtin(int **fds, int pos, t_command *cmd, t_data *data);
@@ -210,6 +209,5 @@ int			look_for_operator(char c);
 int			look_for_quotes(char c);
 int			add_value_to_env(char *env_var, char *value, t_data *data);
 int			check_invalid_identifiers(char *arg);
-
 
 #endif
