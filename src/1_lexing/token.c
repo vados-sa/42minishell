@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 20:37:38 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/24 19:43:33 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:23:05 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//check necessity of freeing the token -line 31
 t_token	*create_token(int size_len, char *str, char *type, int type_quote)
 {
 	t_token	*token;
