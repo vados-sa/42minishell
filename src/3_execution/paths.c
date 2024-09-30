@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:08:54 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 15:09:33 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:38:31 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ char	*get_cmd_path(t_command *cmd, char **env)
 		result = join_paths_and_command(paths[i], cmd->command);
 		if (result && access(result, F_OK | X_OK) == 0)
 		{
-			free_double_pointer_char(paths);
+			free_double_pointer_char(&paths);
 			return (result);
 		}
 		free(result);
 		i++;
 	}
-	free_double_pointer_char(paths);
+	free_double_pointer_char(&paths);
 	return (NULL);
 }

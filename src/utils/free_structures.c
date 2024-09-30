@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:52:26 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/30 13:18:04 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:39:08 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	free_commands(t_data *data)
 		if (temp->flags)
 			free_list(temp->flags);
 		if (temp->final_av)
-			free_double_pointer_char(temp->final_av);
+			free_double_pointer_char(&temp->final_av);
 		free(temp);
 		temp = NULL;
 	}

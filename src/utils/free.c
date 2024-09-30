@@ -6,30 +6,30 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 13:23:17 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:39:17 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	free_double_pointer_char(char**str)
+void	free_double_pointer_char(char ***str)
 {
 	int	i;
 
-	if (!str)
+	if (!str || !*str)
 		return ;
 	i = 0;
-	while (str[i])
+	while ((*str)[i])
 	{
-		if (str[i])
+		if ((*str)[i])
 		{
-			free(str[i]);
-			str[i] = NULL;
+			free((*str)[i]);
+			(*str)[i] = NULL;
 		}
 		i++;
 	}
-	free(str);
-	str = NULL;
+	free(*str);
+	*str = NULL;
 }
 
 void	free_double_pointer_int(int**n, int qt_cmd)
@@ -110,7 +110,7 @@ void	free_env_and_path(t_data *data)
 	if (!data)
 		return ;
 	if (data->env)
-		free_double_pointer_char(data->env);
+		free_double_pointer_char(&data->env);
 	if (data->path)
 	{
 		free(data->path);

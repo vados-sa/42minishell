@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 15:15:03 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:36:58 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ void		copy_env_vars(char **new_env, char **old_env, int env_size);
 
 /*utils***********************************************************************/
 /**free.c*********************************************************************/
-void		free_double_pointer_char(char**str);
+void		free_double_pointer_char(char ***str);
 void		free_double_pointer_int(int**n, int qt_cmd);
 void		free_substr(char **s1, char **s2, char **s3);
 void		free_data(t_data *data);
