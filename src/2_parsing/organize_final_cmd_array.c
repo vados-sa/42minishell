@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:29:54 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/19 14:07:23 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:13:50 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,32 +72,6 @@ static int	add_flags_to_array(long *i, t_command *cmd_ptr)
 		flags = flags->next;
 	}
 	return (EXIT_SUCC);
-}
-
-long	get_nbr_of_elements(t_command *cmd_node)
-{
-	long		count;
-	t_list		*args;
-	t_list		*flags;
-
-	count = 1;
-	args = cmd_node->arguments;
-	flags = cmd_node->flags;
-	while (cmd_node)
-	{
-		while (args)
-		{
-			count++;
-			args = args->next;
-		}
-		while (flags)
-		{
-			count++;
-			flags = flags->next;
-		}
-		cmd_node = cmd_node->next;
-	}
-	return (count);
 }
 
 int	organize_final_cmd_array(t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:23:36 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/05 17:05:54 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:13:06 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,30 @@ void	remove_possible_quotes(char *str)
 		src_pos++;
 	}
 	str[dst_pos] = '\0';
+}
+
+long	get_nbr_of_elements(t_command *cmd_node)
+{
+	long		count;
+	t_list		*args;
+	t_list		*flags;
+
+	count = 1;
+	args = cmd_node->arguments;
+	flags = cmd_node->flags;
+	while (cmd_node)
+	{
+		while (args)
+		{
+			count++;
+			args = args->next;
+		}
+		while (flags)
+		{
+			count++;
+			flags = flags->next;
+		}
+		cmd_node = cmd_node->next;
+	}
+	return (count);
 }

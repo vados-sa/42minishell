@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 12:11:16 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:13:39 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ char		*ft_concat(char *s1, char *s2, char *s3);
 int			env_var_len(char *str);
 char		*get_exp_env(char *str, int len, char **env_arg);
 void		remove_possible_quotes(char *str);
+long		get_nbr_of_elements(t_command *cmd_node);
 
 /**expander.c*****************************************************************/
 int			expand_var(char **str, t_data *data);
@@ -109,17 +110,18 @@ int			expand_tokens(t_data *data);
 
 /**handle_arg_for_export.c****************************************************/
 int			open_quotes(t_command *cmd_node);
-void		closed_quote(char *str, int *add_new_node);
 char		*get_equal_sign_pos(t_command *cmd_node);
 int			concat_args(t_command *cmd_node, t_token *token, int *add_new_node);
 int			handle_export_builtin_arg(t_command *cmd_node, t_token *token);
+
+/**arg_for_export_utils.c*****************************************************/
+void		closed_quote(char *str, int *add_new_node);
 
 /**handle_heredoc.c***********************************************************/
 void		get_all_file(int fd1, char *limiter);
 int			handle_heredoc(t_data *data);
 
 /**organize_final_cmd_array.c*************************************************/
-long		get_nbr_of_elements(t_command *cmd_node);
 int			organize_final_cmd_array(t_data *data);
 
 /**parse.c****************************************************/

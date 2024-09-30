@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:23:31 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/30 15:19:18 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:16:00 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	get_all_file(int fd1, char *limiter)
 	while (line)
 	{
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0 && \
-			ft_strlen(line) == ft_strlen(limiter)) //CHECK IF THIS LINE IS NECESSARY
+			ft_strlen(line) == ft_strlen(limiter))
 		{
 			free(line);
 			break ;
@@ -43,4 +43,3 @@ int	handle_heredoc(t_data *data)
 	get_all_file(fd[1], data->input_value);
 	return (EXIT_SUCC);
 }
-

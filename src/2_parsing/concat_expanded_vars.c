@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:24:45 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/27 12:35:51 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:39:41 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*concat_expanded_var(char **str, int *i, t_data *data)
 	before_var = ft_substr(*str, 0, *i);
 	after_var = find_after_var(&(*str)[*i], len);
 	exp_var = find_exp_var(&(*str)[*i], len, data);
-	*i += ft_strlen(exp_var); // +1 was giving previous issue.
+	*i += ft_strlen(exp_var);
 	exp_str = ft_concat_three_str(before_var, exp_var, after_var);
 	free_substr(&before_var, &exp_var, &after_var);
 	if (!exp_str)

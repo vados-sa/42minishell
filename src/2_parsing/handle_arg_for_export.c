@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   handle_arg_for_export.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:37:06 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/06 13:19:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:45:24 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
- // for test 09, checar se a string tem typo quote pelo token structure
 int	open_quotes(t_command *cmd_node)
 {
 	t_list	*lst_arg;
@@ -40,46 +39,6 @@ int	open_quotes(t_command *cmd_node)
 		}
 	}
 	return (quote_count % 2 != 0);
-}
-
- // might not handle all cases #crying
-void	closed_quote(char *str, int *add_new_node)
-{
-	int		i;
-	char	quote;
-	int		quote_qnt;
-
-	i = 0;
-	quote = '\0';
-	quote_qnt = 0;
-	if (!str)
-	{
-		printf("closed_quote: string is NULL\n");
-		return ;
-	}
-	while (str[i])
-	{
-		if (str[i] == '\'' || str[i] == '\"')
-		{
-			quote = str[i];
-			quote_qnt++;
-			break ;
-		}
-		i++;
-	}
-	if (quote_qnt == 0)
-	{
-		*add_new_node = 1;
-		return ;
-	}
-	i++;
-	while (str[i])
-	{
-		if (str[i] == quote)
-			*add_new_node = 1;
-		i++;
-	}
-	*add_new_node = 0;
 }
 
 char	*get_equal_sign_pos(t_command *cmd_node)
