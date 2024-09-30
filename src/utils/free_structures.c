@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   free_structures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:52:26 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/10 18:03:20 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:18:04 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/**
- * @brief Frees a linked list of t_list nodes.
- *
- * @param list Pointer to the head of the linked list.
- */
 void	free_list(t_list *list)
 {
 	t_list	*temp;
@@ -36,11 +31,6 @@ void	free_list(t_list *list)
 	}
 }
 
-/**
- * @brief Frees a linked list of t_command nodes, including arguments, flags, and final_av.
- *
- * @param commands Pointer to the head of the linked list.
- */
 void	free_commands(t_data *data)
 {
 	t_command	*temp;
@@ -66,11 +56,6 @@ void	free_commands(t_data *data)
 	}
 }
 
-/**
- * @brief Frees a linked list of t_token nodes.
- *
- * @param tokens Pointer to the head of the linked list.
- */
 void	free_tokens(t_data *data)
 {
 	t_token	*temp;

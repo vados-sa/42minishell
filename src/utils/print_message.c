@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 12:55:02 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/06 13:19:21 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:19:13 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,3 @@ int	perror_return_error(char *message)
 	perror(message);
 	return (EXIT_FAIL);
 }
-
-
-/* #define TOKEN_SINTAX_ERROR "syntax error near unexpected token "
-#define ERROR_EXIT 1
-int main(void)
-{
-    char tkn = '|';
-    return(print_exit_code(TOKEN_SINTAX_ERROR, tkn, ERROR_EXIT));
-} */
