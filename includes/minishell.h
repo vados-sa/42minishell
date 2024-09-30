@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 15:04:14 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:07:37 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <string.h>
-# include <dirent.h> 
+# include <dirent.h>
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -203,6 +203,7 @@ void		free_tokens(t_data *data);
 /**print_message.c************************************************************/
 int			print_error_code(char *message, char tkn, int exit_code);
 int			perror_return_error(char *message);
+void		pe_status(t_data *data, char *cmd, char *message, int status);
 
 /**utils.c********************************************************************/
 int			look_for_operator(char c);

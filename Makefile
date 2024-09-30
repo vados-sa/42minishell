@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/05 14:44:55 by vados-sa          #+#    #+#              #
-#    Updated: 2024/09/30 15:04:51 by vados-sa         ###   ########.fr        #
+#    Updated: 2024/09/30 15:11:02 by mrabelo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRC = $(SRCDIR)/main.c $(SRCDIR)/init.c $(SRCDIR)/signals.c \
 	$(BUILTINS_DIR)/env.c $(BUILTINS_DIR)/exit.c $(BUILTINS_DIR)/export.c \
 	$(BUILTINS_DIR)/pwd.c $(BUILTINS_DIR)/unset.c $(EXECUTION_DIR)/command_exec.c \
 	$(BUILTINS_DIR)/builtins_utils.c \
-	$(EXECUTION_DIR)/exec.c $(EXECUTION_DIR)/pipe.c $(EXECUTION_DIR)/close_fd.c \
+	$(EXECUTION_DIR)/paths.c $(EXECUTION_DIR)/exec.c \
+	$(EXECUTION_DIR)/pipe.c $(EXECUTION_DIR)/close_fd.c \
 	$(UTILS_DIR)/free.c $(UTILS_DIR)/free_structures.c $(UTILS_DIR)/print_message.c $(UTILS_DIR)/utils.c
 
 
