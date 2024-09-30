@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:14:46 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/20 11:28:40 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:02:18 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_data
 	char		*output_value;
 	int			exit_status;
 	int			saved_stdin;
-    int			saved_stdout;
+	int			saved_stdout;
 	t_token		*token;
 	t_command	*command;
 }	t_data;

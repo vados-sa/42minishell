@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/26 18:10:01 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:03:09 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define FD_W 1
 # define FD_RW 2
 
-#define PATH_MAX 4096
+# define PATH_MAX 4096
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -86,7 +86,6 @@ int			tokenize(t_data *data, char *cpy_arg);
 /**token.c********************************************************************/
 t_token		*create_token(int size_len, char *str, char *type, int type_quote);
 void		create_token_list(t_data*data, t_token*new);
-
 
 /*2_parser********************************************************************/
 /**command.c******************************************************************/
