@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: malu <malu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:50 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/13 17:21:47 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:17:58 by malu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,63 @@ int	split_others_token(t_data *data, t_token *token, int *add_new_cmd)
 	return (EXIT_SUCC);
 }
 
+static int	remove_empty_initial_tokens(t_data *data)
+{
+	t_command	*cmd;
+	t_command	*prev;
+	t_command	*temp;
+	t_list		*tmp_arg;
+
+	cmd = data->command;
+	prev = NULL;
+	while (cmd)
+	{
+		while (cmd->command && cmd->command[0] == '\0')
+		{
+			free(cmd->command);
+			if (cmd->arguments)
+			{
+				cmd->command = ft_strdup(cmd->arguments->content);
+				tmp_arg = cmd->arguments;
+				cmd->arguments = cmd->arguments->next;
+				free(tmp_arg->content);
+				free(tmp_arg);
+			}
+			else
+			{
+				cmd->command = NULL;
+				break ;
+			}
+		}
+		if (!cmd->command && !cmd->arguments && !cmd->flags)
+		{
+			temp = cmd;
+			if (prev)
+				prev->next = cmd->next;
+			else
+				data->command = cmd->next;
+			cmd = cmd->next;
+			free(temp->command);
+			free_list(temp->arguments);
+			free_list(temp->flags);
+			free(temp);
+		}
+		else
+		{
+			prev = cmd;
+			cmd = cmd->next;
+		}
+	}
+	return (EXIT_SUCC);
+}
+
 int	parse(t_data *data)
 {
 	if (split_token(data))
 		return (EXIT_FAIL);
 	if (expand_tokens(data))
+		return (EXIT_FAIL);
+	if (remove_empty_initial_tokens(data))
 		return (EXIT_FAIL);
 	if (organize_final_cmd_array(data))
 		return (EXIT_FAIL);
