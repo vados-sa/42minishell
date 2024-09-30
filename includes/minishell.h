@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 14:44:48 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:04:14 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,13 +176,16 @@ int			builtin_exit(t_command *cmd, t_data*data);
 
 /***export.c******************************************************************/
 int			builtin_export(t_command *cmd, t_data *data);
-int			update_env_array(char *var, t_data *data);
 
 /***pwd.c*********************************************************************/
 int			builtin_pwd(t_command *cmd, t_data *data);
 
 /***unset.c*******************************************************************/
 int			builtin_unset(t_command *cmd, t_data *data);
+
+/***bultin_utils.c************************************************************/
+void		print_env_var(t_data *data);
+void		copy_env_vars(char **new_env, char **old_env, int env_size);
 
 /*utils***********************************************************************/
 /**free.c*********************************************************************/
