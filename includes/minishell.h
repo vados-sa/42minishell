@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 13:35:01 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:44:48 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # define OUTPUT ">"
 # define STDIN "IN"
 # define STDOUT "OUT"
-# define OTHERS "CFA" //comand-flag-argument
-# define SINGLE_Q '\''
-# define DOUBLE_Q '\"'
+# define OTHERS "CFA" // comand-flag-argument
+# define SINGLE_Q 39 // int representation of \'
+# define DOUBLE_Q 34 // int representation of \"
 # define PIPE_STX_ERROR "syntax error near unexpected token "
 # define QUOTE_STX_ERROR "syntax error: unclosed quote "
 # define OTHER_STX_ERROR "syntax error near unexpected token"
