@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 19:25:52 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:09:47 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int	process_not_builtin(int **fds, int pos, int *pid, t_data *data)
 			exit(EXIT_FAIL);
 		close_unused_fd(fds, pos, FD_RW, ft_lstsize_mod(data->command));
 		execute_command(cmd, data);
-		free_data(data);
-		free_env_and_path(data);
 		return (data->exit_status);
 	}
 	return (EXIT_SUCC);
@@ -94,7 +92,5 @@ void	execute_command(t_command *cmd, t_data *data)
 			pe_status(data, cmd->command, ": command not found", 127);
 	}
 	free(path);
-	free_data(data);
-	free_env_and_path(data);
 	exit(data->exit_status);
 }
