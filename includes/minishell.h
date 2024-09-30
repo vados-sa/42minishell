@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 13:13:39 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:35:01 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,21 +138,25 @@ int			process_builtin(int **fds, int pos, t_command *cmd, t_data *data);
 int			execute_builtin(t_command *cmd, t_data *data);
 int			check_if_builtin(t_command *cmd);
 
-/*command_exec.c**************************************************************/
+/**command_exec.c**************************************************************/
 int			process_not_builtin(int **fds, int pos, int *pid, t_data *data);
 void		execute_command(t_command *cmd, t_data *data);
 char		*get_cmd_path(t_command *cmd, char **env);
 
-/*exec.c**********************************************************************/
+/**exec.c**********************************************************************/
 int			exec(t_data*data);
 void		child_exec(pid_t *id_p, int pos, t_data *data, int **fds);
 int			processing(int **fds, pid_t *id_p, t_data *data);
 
-/*pipe.c**********************************************************************/
+/**pipe.c**********************************************************************/
 int			**create_pipes(int qt_cmd);
 void		close_fd(int *fd);
 void		close_unused_fd(int **fds, int pos, int keep, int cmds_num);
 int			redirect_io(int **fds, int pos, t_data *data, int cmds_num);
+
+/**close_fd.c*****************************************************************/
+void		close_unused_fd(int **fds, int pos, int keep, int cmds_num);
+void		close_fd(int *fd);
 
 /**builtins*******************************************************************/
 /***cd.c**********************************************************************/

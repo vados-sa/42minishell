@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:58 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/18 17:12:23 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:37:08 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,33 @@ static void	close_all_pipes(int **fds, int cmds_num)
 		i++;
 	}
 }
-//code that chatgpt provided 
-void child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
+
+void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
 {
-	int i;
-	int exit_code;
+	int	i;
+	int	exit_code;
 
 	if (!id_p || pos <= 0 || !data || !fds)
-	    return ;
+		return ;
 	i = 0;
 	while (i < pos)
 	{
 		if (id_p[i] > 0)
 		{
-	    	waitpid(id_p[i], &exit_code, 0);
-	    	if (i == pos - 1)
+			waitpid(id_p[i], &exit_code, 0);
+			if (i == pos - 1)
 			{
-	    		if (WIFEXITED(exit_code))
-	    			data->exit_status = WEXITSTATUS(exit_code);
-	    		else if (WIFSIGNALED(exit_code))
-	    			data->exit_status = WTERMSIG(exit_code) + 128;
-	    		else
-	    			data->exit_status = -1;
+				if (WIFEXITED(exit_code))
+					data->exit_status = WEXITSTATUS(exit_code);
+				else if (WIFSIGNALED(exit_code))
+					data->exit_status = WTERMSIG(exit_code) + 128;
+				else
+					data->exit_status = -1;
 			}
 		}
 		i++;
 	}
 }
-
 
 /* void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
 {
@@ -139,7 +138,6 @@ int	processing(int **fds, pid_t *id_p, t_data *data)
 	return (EXIT_SUCC);
 }
 
-
 /* int	processing(int **fds, pid_t *id_p, t_data *data)
 {
 	t_command	*command;
@@ -167,59 +165,3 @@ int	processing(int **fds, pid_t *id_p, t_data *data)
 	child_exec(id_p, i, data, fds);
 	return (EXIT_SUCC);
 } */
-
-/*t_command	*create_command(char *cmd, char **args)
-{
-	t_command	*new_cmd;
-
-	new_cmd = (t_command *)malloc(sizeof(t_command));
-	if (!new_cmd)
-		return (NULL);
-	new_cmd->command = cmd;
-	new_cmd->final_av = args;
-	new_cmd->next = NULL;
-	return (new_cmd);
-}
-
-void	add_command(t_data *data, t_command *new_cmd)
-{
-	t_command	*temp;
-
-	if (!data->command)
-		data->command = new_cmd;
-	else
-	{
-		temp = data->command;
-		while (temp->next)
-			temp = temp->next;
-		temp->next = new_cmd;
-	}
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	t_data	data;
-	char	*args2[] = {"cat", "World", NULL};
-	char	*args3[] = {"wc", "-l", NULL};
-
-	(void)argc;
-	(void)argv;
-
-	data.command = NULL;
-	data.env = envp;
-	data.input_fd = STDIN_FILENO;
-	data.output_fd = STDOUT_FILENO;
-
-	// Create and add commands to the linked list
-	add_command(&data, create_command("cat", args2));
-	add_command(&data, create_command("wc", args3));
-
-	// Execute the pipeline
-	if (exec(&data) == EXIT_FAIL)
-	{
-		perror("Execution failed");
-		return (EXIT_FAIL);
-	}
-
-	return (EXIT_SUCC);
-}*/

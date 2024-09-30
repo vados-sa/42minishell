@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:44:07 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/20 11:28:20 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:29:50 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	process_builtin(int **fds, int pos, t_command *cmd, t_data *data)
 		return (EXIT_FAIL);
 	//close_unused_fd(fds, pos, FD_RW, pos + 1);
 	exit_code = execute_builtin(cmd, data);
-	if (dup2(data->saved_stdin, STDIN_FILENO) == -1 || dup2(data->saved_stdout, STDOUT_FILENO) == -1)
+	if (dup2(data->saved_stdin, STDIN_FILENO) == -1 || 
+		dup2(data->saved_stdout, STDOUT_FILENO) == -1)
 		return (EXIT_FAIL);
 	close_fd(&data->saved_stdin);
 	close_fd(&data->saved_stdout);

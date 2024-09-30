@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/27 12:37:14 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:38:57 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,6 @@ static void	copy_env_vars(char **new_env, char **old_env, int env_size)
 		i++;
 	}
 }
-
-/* static void free_old_env(char **old_env, int env_size)
-{
-    int i = 0;
-    while (i < env_size)
-    {
-        free(old_env[i]);
-        i++;
-    }
-    free(old_env);
-} */
 
 static int	add_new_var(t_data *data, char *var, int i)
 {
@@ -128,19 +117,6 @@ static int	loop_args(t_list *current_arg, t_data *data)
 	return (EXIT_SUCC);
 }
 
-
-/**
- * @brief Handles the 'export' builtin command, managing environment variables.
- *
- * This function implements the 'export' builtin command. It checks if any flags
- * are provided (which are not supported), prints all environment variables if
- * no arguments are given, or updates/adds environment variables based on the
- * provided arguments.
- *
- * @param cmd The command structure containing arguments and flags for 'export'.
- * @param data The main data structure containing the environment variables array.
- * @return EXIT_SUCC if the command executed successfully, EXIT_FAIL otherwise.
- */
 int	builtin_export(t_command *cmd, t_data *data)
 {
 	if (cmd->flags)

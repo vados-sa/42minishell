@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:39:25 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/12 17:42:05 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:36:43 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,69 +39,6 @@ int	**create_pipes(int qt_cmd)
 	}
 	return (fds);
 }
-
-void	close_fd(int *fd)
-{
-	if (!fd || *fd <= 2)
-		return ;
-	if (close(*fd) == -1)
-	{
-		ft_putendl_fd("minishell: error while closing fd", 2);
-		return ;
-	}
-	*fd = -1;
-}
-
-void	close_unused_fd(int **fds, int pos, int keep, int cmds_num)
-{
-	int	i;
-
-	if (!fds || pos < 0 || cmds_num < 1 || keep > FD_RW || keep < FD_E)
-		return ;
-	i = 0;
-	while (i < cmds_num - 1)
-	{
-		if (i != pos - 1)
-			close_fd(&fds[i][0]);
-		if (i != pos)
-			close_fd(&fds[i][1]);
-		i++;
-	}
-	if (keep != FD_R && pos < cmds_num - 1)
-		close_fd(&fds[pos][0]);
-	if (keep != FD_W && pos < cmds_num - 1)
-		close_fd(&fds[pos][1]);
-}
-
-/* int	redirect_io(int **fds, int pos, t_data *data, int cmds_num)
-{
-	if (pos == 0)
-	{
-		if (dup2(data->input_fd, STDIN_FILENO) == -1)
-			return (EXIT_FAIL);
-		close_fd(&data->input_fd);
-	}
-	else
-	{
-		if (dup2(fds[pos - 1][0], STDIN_FILENO) == -1)
-			return (EXIT_FAIL);
-		close_fd(&fds[pos - 1][0]);
-	}
-	if (pos == cmds_num - 1)
-	{
-		if (dup2(data->output_fd, STDOUT_FILENO) == -1)
-			return (EXIT_FAIL);
-		close_fd(&data->output_fd);
-	}
-	else
-	{
-		if (dup2(fds[pos][1], STDOUT_FILENO) == -1)
-			return (EXIT_FAIL);
-		close_fd(&fds[pos][1]);
-	}
-	return (EXIT_SUCC);
-} */
-
 
 static int	redirect_input(int **fds, int pos, t_data *data)
 {
