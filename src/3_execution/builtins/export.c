@@ -6,37 +6,11 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 13:38:57 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:00:58 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-//CHECK IF QUOTES ARE BEING PRINTED -> IT SHOULD !
-
-static void	print_env_var(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->env[i])
-	{
-		printf("declare -x %s\n", data->env[i]);
-		i++;
-	}
-}
-
-static void	copy_env_vars(char **new_env, char **old_env, int env_size)
-{
-	int	i;
-
-	i = 0;
-	while (i < env_size)
-	{
-		new_env[i] = old_env[i];
-		i++;
-	}
-}
 
 static int	add_new_var(t_data *data, char *var, int i)
 {
@@ -53,13 +27,13 @@ static int	add_new_var(t_data *data, char *var, int i)
 		return (EXIT_FAIL);
 	}
 	copy_env_vars(new_env, data->env, env_size);
-	//free_old_env(data->env, env_size);
 	free(data->env);
 	data->env = new_env;
 	data->env[i] = ft_strdup(var);
 	if (!data->env[i])
 	{
 		perror("failed to create new environment variable.");
+		free_double_pointer_char(data->env); // check if it doesn't causes mem leaks
 		//free(new_env);
 		return (EXIT_FAIL);
 	}
@@ -67,7 +41,7 @@ static int	add_new_var(t_data *data, char *var, int i)
 	return (EXIT_SUCC);
 }
 
-int	update_env_array(char *var, t_data *data)
+static int	update_env_array(char *var, t_data *data)
 {
 	int		var_len;
 	int		i;
