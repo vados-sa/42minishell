@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 12:45:17 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/07/23 13:00:31 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:01:31 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_arrlen(char**arr)
 	while (arr[i])
 	{
 		len = 0;
-		while(arr[i][len] != '\0')
+		while (arr[i][len] != '\0')
 			len++;
 		i++;
 	}
