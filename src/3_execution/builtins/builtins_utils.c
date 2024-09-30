@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:59:13 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/30 15:00:56 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:06:38 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	print_env_var(t_data *data)
 	}
 }
 
+/*utility function for export*/
 void	copy_env_vars(char **new_env, char **old_env, int env_size)
 {
 	int	i;
