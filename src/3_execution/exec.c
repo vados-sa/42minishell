@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:58 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/30 13:37:08 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/09/30 19:20:04 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,34 +71,6 @@ void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
 	}
 }
 
-/* void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
-{
-	int	i;
-	int	exit_code;
-
-	if (!id_p || pos <= 0 || !data || !fds)
-		return ;
-	i = 0;
-	while (i < pos)
-	{
-		if (id_p[i] > 0)
-		{
-			waitpid(id_p[i], &exit_code, 0);
-			if (i == pos - 1)
-			{
-				if (WIFEXITED(exit_code))
-					data->exit_status = WEXITSTATUS(exit_code);
-				else if (WIFSIGNALED(exit_code))
-					data->exit_status = WTERMSIG(exit_code) + 128;
-				else
-					data->exit_status = -1;
-			}
-		}
-		i++;
-	}
-	close_all_pipes(fds, pos);
-} */
-
 static int	process_commands(int **fds, pid_t *id_p, t_data *data)
 {
 	t_command	*command;
@@ -137,31 +109,3 @@ int	processing(int **fds, pid_t *id_p, t_data *data)
 	child_exec(id_p, cmds_num, data, fds);
 	return (EXIT_SUCC);
 }
-
-/* int	processing(int **fds, pid_t *id_p, t_data *data)
-{
-	t_command	*command;
-	int			i;
-
-	if (!fds || !id_p || !data)
-		return (EXIT_FAIL); //check necessity
-	command = data->command;
-	i = 0;
-	while (command)
-	{
-		if (check_if_builtin(command))
-		{
-			if (process_builtin(fds, i, command, data))
-				return (EXIT_FAIL);
-		}
-		else
-		{
-			if (process_not_builtin(fds, i, &id_p[i], data))
-				return (EXIT_FAIL);
-		}
-		i++;
-		command = command->next;
-	}
-	child_exec(id_p, i, data, fds);
-	return (EXIT_SUCC);
-} */
