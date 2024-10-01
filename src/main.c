@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malu <malu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/27 14:03:12 by malu             ###   ########.fr       */
+/*   Updated: 2024/10/01 15:59:18 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	minishell_loop(t_data *data)
 		if ((lex(data) && !data->args) || parse(data))
 		{
 			free_data(data);
-			data->exit_status = 1;
+			if (data->exit_status != 130)
+				data->exit_status = 1;
 			continue ;
 		}
 		if (exec(data))
