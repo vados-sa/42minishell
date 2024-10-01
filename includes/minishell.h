@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 15:36:58 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:08:32 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ int			init_data(t_data *data, char **env);
 /**signals.c******************************************************************/
 void		signals_non_interactive_handler(void);
 void		signals_interactive_handler(void);
+
+/**signals_heredoc.c**********************************************************/
+void		signals_heredoc_handler(void);
 
 /*1_lexer*********************************************************************/
 /**checker.c******************************************************************/
