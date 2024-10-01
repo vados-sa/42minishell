@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 13:48:53 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:02:30 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	process_not_builtin(int **fds, int pos, int *pid, t_data *data)
 		execute_command(cmd, data);
 		free_data(data);
 		free_env_and_path(data);
-		return (data->exit_status);
+		exit (data->exit_status);
 	}
 	return (EXIT_SUCC);
 }

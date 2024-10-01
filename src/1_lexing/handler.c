@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/08/31 17:34:34 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:46:58 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	handle_operator(t_data *data, char *arg)
 		return (-1);
 	if ((arg[i] == '<' || arg[i] == '>'))
 		i += handle_redirection(&arg[i], &token);
-	if (arg[i] == '|')
+	else if (arg[i] == '|')
 	{
 		token = create_token(0, &arg[0], PIPE, 0);
 		i++;
