@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/05 14:44:55 by vados-sa          #+#    #+#              #
-#    Updated: 2024/09/30 15:11:02 by mrabelo-         ###   ########.fr        #
+#    Updated: 2024/10/01 11:02:56 by vados-sa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ LIBFT = libft.a
 GNL = libgnl.a
 
 # Soure files
-SRC = $(SRCDIR)/main.c $(SRCDIR)/init.c $(SRCDIR)/signals.c \
+SRC = $(SRCDIR)/main.c $(SRCDIR)/init.c $(SRCDIR)/signals.c $(SRCDIR)/signals_heredoc.c \
 	$(LEXING_DIR)/checker.c $(LEXING_DIR)/handler.c \
 	$(LEXING_DIR)/lex.c $(LEXING_DIR)/token.c \
 	$(PARSING_DIR)/command.c $(PARSING_DIR)/concat_expanded_vars.c \
