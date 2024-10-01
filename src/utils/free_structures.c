@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_structures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:52:26 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/30 15:39:08 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:04:41 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,17 @@ void	free_tokens(t_data *data)
 		temp = NULL;
 	}
 }
+
+void	free_env_and_path(t_data *data)
+{
+	if (!data)
+		return ;
+	if (data->env)
+		free_double_pointer_char(&data->env);
+	if (data->path)
+	{
+		free(data->path);
+		data->path = NULL;
+	}
+}
+

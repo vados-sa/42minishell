@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:58 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/10/01 15:09:59 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:52:32 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,17 @@
 int	exec(t_data*data)
 {
 	int		qt_cmd;
-	int		**fds;
-	pid_t	*id_p;
 
 	qt_cmd = ft_lstsize_mod(data->command);
-	fds = create_pipes(qt_cmd);
-	if (!fds)
+	data->fds = create_pipes(qt_cmd);
+	if (!data->fds)
 		return (EXIT_FAIL);
-	id_p = (pid_t *)ft_calloc((qt_cmd), sizeof(pid_t));
-	if (!id_p)
+	data->id_p = (pid_t *)ft_calloc((qt_cmd), sizeof(pid_t));
+	if (!data->id_p)
 		return (EXIT_FAIL);
-	processing(fds, id_p, data);
-	free_double_pointer_int(fds, qt_cmd);
-	free(id_p);
+	processing(data);
+	free_double_pointer_int(data->fds, qt_cmd);
+	free(data->id_p);
 	return (EXIT_SUCC);
 }
 
@@ -44,19 +42,19 @@ static void	close_all_pipes(int **fds, int cmds_num)
 	}
 }
 
-void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
+void	child_exec(int pos, t_data *data)
 {
 	int	i;
 	int	exit_code;
 
-	if (!id_p || pos <= 0 || !data || !fds)
+	if (!data->id_p || pos <= 0 || !data || !data->fds)
 		return ;
 	i = 0;
 	while (i < pos)
 	{
-		if (id_p[i] > 0)
+		if (data->id_p[i] > 0)
 		{
-			waitpid(id_p[i], &exit_code, 0);
+			waitpid(data->id_p[i], &exit_code, 0);
 			if (i == pos - 1)
 			{
 				if (WIFEXITED(exit_code))
@@ -71,7 +69,7 @@ void	child_exec(pid_t *id_p, int pos, t_data *data, int **fds)
 	}
 }
 
-static int	process_commands(int **fds, pid_t *id_p, t_data *data)
+static int	process_commands(t_data *data)
 {
 	t_command	*command;
 	int			i;
@@ -82,12 +80,12 @@ static int	process_commands(int **fds, pid_t *id_p, t_data *data)
 	{
 		if (check_if_builtin(command))
 		{
-			if (process_builtin(fds, i, command, data))
+			if (process_builtin(i, command, data))
 				return (EXIT_FAIL);
 		}
 		else
 		{
-			if (process_not_builtin(fds, i, &id_p[i], data))
+			if (process_not_builtin(i, data))
 				return (EXIT_FAIL);
 		}
 		i++;
@@ -96,16 +94,16 @@ static int	process_commands(int **fds, pid_t *id_p, t_data *data)
 	return (EXIT_SUCC);
 }
 
-int	processing(int **fds, pid_t *id_p, t_data *data)
+int	processing(t_data *data)
 {
 	int	cmds_num;
 
-	if (!fds || !id_p || !data)
+	if (!data->fds || !data->id_p || !data)
 		return (EXIT_FAIL);
 	cmds_num = ft_lstsize_mod(data->command);
-	if (process_commands(fds, id_p, data) == EXIT_FAIL)
+	if (process_commands(data) == EXIT_FAIL)
 		return (EXIT_FAIL);
-	close_all_pipes(fds, cmds_num);
-	child_exec(id_p, cmds_num, data, fds);
+	close_all_pipes(data->fds, cmds_num);
+	child_exec(cmds_num, data);
 	return (EXIT_SUCC);
 }

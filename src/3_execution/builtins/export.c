@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 15:38:55 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:10:48 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	update_env_array(char *var, t_data *data)
 	while (data->env[i])
 	{
 		equal_pos = ft_strchr(data->env[i], '=');
-		if (equal_pos && !ft_strncmp(data->env[i], var, var_len) && 
+		if (equal_pos && !ft_strncmp(data->env[i], var, var_len) &&
 			data->env[i][var_len] == '=')
 		{
 			free(data->env[i]);
@@ -94,7 +94,7 @@ int	builtin_export(t_command *cmd, t_data *data)
 {
 	if (cmd->flags)
 	{
-		ft_putstr_fd("export doesn't support options", STDERR_FILENO);
+		ft_putstr_fd("export doesn't support options\n", STDERR_FILENO);
 		return (EXIT_FAIL);
 	}
 	if (!cmd->arguments)

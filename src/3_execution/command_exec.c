@@ -6,14 +6,14 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 15:02:30 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:05:04 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 // if put return on line 37, fix memory leak but breaks ctrl+d
-int	process_not_builtin(int **fds, int pos, int *pid, t_data *data)
+int	process_not_builtin(int pos, t_data *data)
 {
 	t_command	*cmd;
 	int			i;
@@ -25,17 +25,16 @@ int	process_not_builtin(int **fds, int pos, int *pid, t_data *data)
 		cmd = cmd->next;
 		i++;
 	}
-	*pid = fork();
-	if (*pid < 0)
+	data->id_p[pos] = fork();
+	if (data->id_p[pos] < 0)
 		return (EXIT_FAIL);
-	if (*pid == 0)
+	if (data->id_p[pos] == 0)
 	{
-		if (redirect_io(fds, pos, data, ft_lstsize_mod(data->command)))
+		if (redirect_io(data->fds, pos, data, ft_lstsize_mod(data->command)))
 			exit(EXIT_FAIL);
-		close_unused_fd(fds, pos, FD_RW, ft_lstsize_mod(data->command));
+		close_unused_fd(data->fds, pos, FD_RW, ft_lstsize_mod(data->command));
 		execute_command(cmd, data);
-		free_data(data);
-		free_env_and_path(data);
+		free_everything(data);
 		exit (data->exit_status);
 	}
 	return (EXIT_SUCC);
@@ -94,7 +93,6 @@ void	execute_command(t_command *cmd, t_data *data)
 			pe_status(data, cmd->command, ": command not found", 127);
 	}
 	free(path);
-	free_data(data);
-	free_env_and_path(data);
+	free_everything(data);
 	exit(data->exit_status);
 }

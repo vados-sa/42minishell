@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 15:08:32 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:04:12 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,19 +136,19 @@ int			parse(t_data *data);
 
 /*3_executer******************************************************************/
 /*builtin_exec.c**************************************************************/
-int			process_builtin(int **fds, int pos, t_command *cmd, t_data *data);
+int			process_builtin(int pos, t_command *cmd, t_data *data);
 int			execute_builtin(t_command *cmd, t_data *data);
 int			check_if_builtin(t_command *cmd);
 
 /**command_exec.c**************************************************************/
-int			process_not_builtin(int **fds, int pos, int *pid, t_data *data);
+int			process_not_builtin(int pos, t_data *data);
 void		execute_command(t_command *cmd, t_data *data);
 char		*get_cmd_path(t_command *cmd, char **env);
 
 /**exec.c**********************************************************************/
 int			exec(t_data*data);
-void		child_exec(pid_t *id_p, int pos, t_data *data, int **fds);
-int			processing(int **fds, pid_t *id_p, t_data *data);
+void		child_exec(int pos, t_data *data);
+int			processing(t_data *data);
 
 /**pipe.c**********************************************************************/
 int			**create_pipes(int qt_cmd);
@@ -195,12 +195,13 @@ void		free_double_pointer_char(char ***str);
 void		free_double_pointer_int(int**n, int qt_cmd);
 void		free_substr(char **s1, char **s2, char **s3);
 void		free_data(t_data *data);
-void		free_env_and_path(t_data *data);
+void		free_everything(t_data *data);
 
 /*free_structures.c***********************************************************/
 void		free_list(t_list *list);
 void		free_commands(t_data *data);
 void		free_tokens(t_data *data);
+void		free_env_and_path(t_data *data);
 
 /**print_message.c************************************************************/
 int			print_error_code(char *message, char tkn, int exit_code);

@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/26 18:15:34 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:59:12 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	minishell_exit(t_data *data, int exit_code, int flag)
 		write_history(file + 9);
 	free_data(data);
 	free_env_and_path(data);
+	free_double_pointer_int(data->fds, ft_lstsize_mod(data->command));
+	free(data->id_p);
 	clear_history();
 	exit (exit_code);
 }

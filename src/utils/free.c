@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 15:39:17 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:04:46 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,10 @@ void	free_data(t_data *data)
 		free_commands(data);
 }
 
-void	free_env_and_path(t_data *data)
+void	free_everything(t_data *data)
 {
-	if (!data)
-		return ;
-	if (data->env)
-		free_double_pointer_char(&data->env);
-	if (data->path)
-	{
-		free(data->path);
-		data->path = NULL;
-	}
+	free_data(data);
+	free_env_and_path(data);
+	free_double_pointer_int(data->fds, ft_lstsize_mod(data->command));
+	free(data->id_p);
 }

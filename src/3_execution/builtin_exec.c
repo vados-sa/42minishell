@@ -6,13 +6,13 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:44:07 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 14:15:29 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:41:27 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	process_builtin(int **fds, int pos, t_command *cmd, t_data *data)
+int	process_builtin(int pos, t_command *cmd, t_data *data)
 {
 	int	exit_code;
 
@@ -20,7 +20,7 @@ int	process_builtin(int **fds, int pos, t_command *cmd, t_data *data)
 	data->saved_stdout = dup(STDOUT_FILENO);
 	if (data->saved_stdin == -1 || data->saved_stdout == -1)
 		return (EXIT_FAIL);
-	if (redirect_io(fds, pos, data, ft_lstsize_mod(data->command)))
+	if (redirect_io(data->fds, pos, data, ft_lstsize_mod(data->command)))
 		return (EXIT_FAIL);
 	exit_code = execute_builtin(cmd, data);
 	if (dup2(data->saved_stdin, STDIN_FILENO) == -1 || \
