@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 15:46:58 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:56:17 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,26 @@ int	handle_word(t_data *data, char *arg)
 {
 	int		i;
 	t_token	*token;
+	char	quote;
 
 	i = 0;
-	while (arg[i] && !ft_isspace(arg[i]) && !look_for_operator(arg[i]))
+	quote = 0;
+	while (arg[i] && (!ft_isspace(arg[i]) || quote) && \
+			!look_for_operator(arg[i]))
+	{
+		if (look_for_quotes(arg[i]))
+		{
+			if (!quote)
+				quote = arg[i];
+			else if (arg[i] == quote)
+				quote = 0;
+		}
 		i++;
+	}
 	token = create_token(i, &arg[0], OTHERS, 0);
 	if (!token)
 		return (-1);
 	create_token_list(data, token);
 	return (i);
 }
+
