@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 17:04:46 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/05 19:23:00 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,7 @@ void	free_data(t_data *data)
 		free(data->output_value);
 		data->output_value = NULL;
 	}
-	if (data->token)
-		free_tokens(data);
-	if (data->command)
-		free_commands(data);
+	free_structures(data);
 }
 
 void	free_everything(t_data *data)

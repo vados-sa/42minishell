@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:14:46 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 16:35:14 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:35:14 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ typedef struct s_command
 	char				**final_av;
 }	t_command;
 
+typedef struct s_fd_node
+{
+	int					fd;
+	struct s_fd_node	*next;
+}	t_fd_node;
+
 typedef struct s_data
 {
 	char		*args;
@@ -58,6 +64,7 @@ typedef struct s_data
 	pid_t		*id_p;
 	t_token		*token;
 	t_command	*command;
+	t_fd_node	*open_fds;
 }	t_data;
 
 #endif

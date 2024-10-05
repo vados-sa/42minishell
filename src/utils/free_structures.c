@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:52:26 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/10/05 18:21:30 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/05 19:23:14 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,14 @@ void	free_env_and_path(t_data *data)
 		free(data->path);
 		data->path = NULL;
 	}
+}
+
+void	free_structures(t_data *data)
+{
+	if (data->token)
+		free_tokens(data);
+	if (data->command)
+		free_commands(data);
+	if (data->open_fds)
+		close_all_fds(data);
 }

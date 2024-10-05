@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/05 18:18:39 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/05 19:43:08 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,12 @@ void		closed_quote(char *str, int *add_new_node);
 /**handle_heredoc.c***********************************************************/
 int			handle_heredoc(t_data *data);
 
+/**fd_utils.c ****************************************************************/
+int			add_fd(t_data *data, int fd);
+void		remove_fd(t_data *data, int fd);
+void		close_all_fds(t_data *data);
+void		write_line_to_fd(int *fd1, char *line);
+void		exit_cleanup(t_data *data, int *fd1, int exit_code);
 /**organize_final_cmd_array.c*************************************************/
 int			organize_final_cmd_array(t_data *data);
 
@@ -204,6 +210,7 @@ void		free_list(t_list *list);
 void		free_commands(t_data *data);
 void		free_tokens(t_data *data);
 void		free_env_and_path(t_data *data);
+void		free_structures(t_data *data);
 
 /**print_message.c************************************************************/
 int			print_error_code(char *message, char tkn, int exit_code);
