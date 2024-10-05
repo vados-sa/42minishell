@@ -6,15 +6,23 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:23:31 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 17:45:12 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:18:23 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	exit_cleanup(t_data *data, int *fd1, int exit_code)
+{
+	free_data(data);
+	free_env_and_path(data);
+	close(*fd1);
+	exit(exit_code);
+}
+
 void	eof_error(char *limiter, int line_num)
 {
-	char *nb;
+	char	*nb;
 
 	nb = ft_itoa(line_num);
 	ft_putstr_fd("minishell: warning: here-document at line ", 2);
@@ -25,21 +33,30 @@ void	eof_error(char *limiter, int line_num)
 	free(nb);
 }
 
-void	get_all_file(int fd1, char *limiter)
+void	write_line_to_fd(int *fd1, char *line)
+{
+	write(*fd1, line, ft_strlen(line));
+	write(*fd1, "\n", 1);
+	free(line);
+}
+
+void	get_all_file(int *fd1, char *limiter, t_data *data)
 {
 	char	*line;
 	int		line_num;
 
 	line_num = 0;
+	signals_heredoc_handler();
 	while (1)
 	{
-		signals_heredoc_handler();
 		line = readline("> ");
 		if (!line)
-    	{
-        	eof_error(limiter, line_num);
-        	exit(EXIT_SUCCESS);
-    	}
+		{
+			if (g_exit_status == SIGINT)
+				exit_cleanup(data, fd1, 130);
+			eof_error(limiter, line_num);
+			break ;
+		}
 		line_num++;
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0 && \
 			ft_strlen(line) == ft_strlen(limiter))
@@ -47,37 +64,42 @@ void	get_all_file(int fd1, char *limiter)
 			free(line);
 			break ;
 		}
-		write(fd1, line, ft_strlen(line));
-		write(fd1, "\n", 1);
-		free(line);
+		write_line_to_fd(fd1, line);
 	}
-	close(fd1);
+	close(*fd1);
 }
 
 int	handle_heredoc(t_data *data)
 {
-	int fd[2];
-    pid_t pid;
-    int status;
+	int		fd[2];
+	pid_t	pid;
+	int		status;
 
-    if (pipe(fd) < 0)
-        return (perror_return_error("heredoc pipe"));
-    pid = fork();
-    if (pid == -1)
-        return (perror_return_error("heredoc fork failed"));
-    else if (pid == 0)
-    {
-        close(fd[0]);
-        get_all_file(fd[1], data->input_value);
-        exit(EXIT_SUCCESS);
-    }
-    else
-    {
-        close(fd[1]);
-        waitpid(pid, &status, 0);
-        if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
-            return (EXIT_FAILURE);
-        data->input_fd = fd[0];
-        return (EXIT_SUCC);
-    }
+	if (pipe(fd) < 0)
+		return (perror_return_error("heredoc pipe"));
+	pid = fork();
+	if (pid == -1)
+		return (perror_return_error("fork failed"));
+	else if (pid == 0)
+	{
+		close(fd[0]);
+		get_all_file(&fd[1], data->input_value, data);
+		free_data(data);
+		free_env_and_path(data);
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+		close(fd[1]);
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		{
+			close(fd[0]);
+			data->exit_status = 130;
+			return (EXIT_FAIL);
+		}
+		data->input_fd = fd[0];
+		//close(fd[0]); // this one is left open
+		return (EXIT_SUCC);
+	}
 }

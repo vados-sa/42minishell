@@ -6,11 +6,13 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 15:59:18 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:45:48 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	g_exit_status;
 
 void	minishell_loop(t_data *data)
 {

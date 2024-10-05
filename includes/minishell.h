@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 17:04:12 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:18:39 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # define PIPE_STX_ERROR "syntax error near unexpected token "
 # define QUOTE_STX_ERROR "syntax error: unclosed quote "
 # define OTHER_STX_ERROR "syntax error near unexpected token"
-//check macros above:
 # define FD_E -1
 # define FD_R 0
 # define FD_W 1
@@ -50,10 +49,14 @@
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <termios.h>
+# include <sys/ioctl.h>
 
 # include "../includes/libft.h"
 # include "../includes/get_next_line.h"
 # include "../includes/structures.h"
+
+extern int	g_exit_status;
 
 /**main.c*********************************************************************/
 void		minishell_loop(t_data *data);
@@ -121,7 +124,6 @@ int			handle_export_builtin_arg(t_command *cmd_node, t_token *token);
 void		closed_quote(char *str, int *add_new_node);
 
 /**handle_heredoc.c***********************************************************/
-void		get_all_file(int fd1, char *limiter);
 int			handle_heredoc(t_data *data);
 
 /**organize_final_cmd_array.c*************************************************/
