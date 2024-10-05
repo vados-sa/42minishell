@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 17:10:48 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:20:43 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static int	update_env_array(char *var, t_data *data)
 	while (data->env[i])
 	{
 		equal_pos = ft_strchr(data->env[i], '=');
-		if (equal_pos && !ft_strncmp(data->env[i], var, var_len) &&
-			data->env[i][var_len] == '=')
+		if (equal_pos && !ft_strncmp(data->env[i], var, var_len) 
+			&& data->env[i][var_len] == '=')
 		{
 			free(data->env[i]);
 			data->env[i] = ft_strdup(var);

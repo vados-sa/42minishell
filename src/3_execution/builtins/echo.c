@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malu <malu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/02 16:48:21 by malu             ###   ########.fr       */
+/*   Updated: 2024/10/05 18:21:16 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	count_quotes(char *str, int *count, char quote_type)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	*count = 0;
@@ -26,14 +26,15 @@ static void	count_quotes(char *str, int *count, char quote_type)
 	}
 }
 
-static void	copy_without_quotes(char *str, int *src_pos, int *dst_pos, char quote_type)
+static void	copy_without_quotes(char *str, int *src_pos, int *dst_pos, \
+char quote_type)
 {
 	while (str[*src_pos])
 	{
 		if (str[*src_pos] == quote_type)
 		{
 			(*src_pos)++;
-			continue;
+			continue ;
 		}
 		str[(*dst_pos)++] = str[(*src_pos)++];
 	}
@@ -41,9 +42,9 @@ static void	copy_without_quotes(char *str, int *src_pos, int *dst_pos, char quot
 
 static void	remove_even_quotes(char *str, char quote_type)
 {
-	int src_pos;
-	int dst_pos;
-	int count;
+	int	src_pos;
+	int	dst_pos;
+	int	count;
 
 	count_quotes(str, &count, quote_type);
 	src_pos = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_structures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:52:26 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/10/01 17:04:41 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:21:30 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,3 @@ void	free_env_and_path(t_data *data)
 		data->path = NULL;
 	}
 }
-
