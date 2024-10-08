@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/05 14:44:55 by vados-sa          #+#    #+#              #
-#    Updated: 2024/10/08 15:56:53 by mrabelo-         ###   ########.fr        #
+#    Updated: 2024/10/08 18:53:30 by vados-sa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ UTILS_DIR = $(SRCDIR)/utils
 LIBFT_DIR = ./libs/libft
 GNL_DIR = ./libs/get_next_line
 HEADERS_DIR = ./includes
-
 LIBFT = libft.a
 GNL = libgnl.a
 
@@ -51,7 +50,6 @@ SRC = $(SRCDIR)/main.c $(SRCDIR)/init.c $(SRCDIR)/signals.c $(SRCDIR)/signals_he
 	$(EXECUTION_DIR)/pipe.c $(EXECUTION_DIR)/close_fd.c \
 	$(UTILS_DIR)/free.c $(UTILS_DIR)/free_structures.c $(UTILS_DIR)/print_message.c $(UTILS_DIR)/utils.c
 
-
 # Object files
 OBJS = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
@@ -59,12 +57,10 @@ all: $(NAME)
 
 # Building executables
 $(NAME): $(OBJS)
-	@make bonus -C $(LIBFT_DIR)
-	@make -C $(GNL_DIR)
-	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -I$(HEADERS_DIR) $(LIBFT_DIR)/$(LIBFT) $(GNL_DIR)/$(GNL) -o $(NAME)
+	@make --no-print-directory bonus -C $(LIBFT_DIR) > /dev/null 2>&1
+	@make --no-print-directory -C $(GNL_DIR) > /dev/null 2>&1
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -I$(HEADERS_DIR) $(LIBFT_DIR)/$(LIBFT) $(GNL_DIR)/$(GNL) -o $(NAME) 2>/dev/null
 	@echo "\033[32;1mMalu' and Vanessa's Minishell is ready to roll\033[5m ✓ ✓ ✓\033[0m"
-#	@echo "\033[35;1mProgram $(NAME) is ready to run.\033[0m"
-
 
 # Compilation rule for object files
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
@@ -74,14 +70,14 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 # Cleanup
 clean:
 	@$(RM) $(OBJDIR)
-	@make -C ${LIBFT_DIR} clean
-	@make -C ${GNL_DIR} clean
+	@make --no-print-directory -C ${LIBFT_DIR} clean
+	@make --no-print-directory -C ${GNL_DIR} clean
 	@echo "\033[37;1mObject files removed.\033[0m"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@make -C ${LIBFT_DIR} fclean
-	@make -C ${GNL_DIR} fclean
+	@make --no-print-directory -C ${LIBFT_DIR} fclean
+	@make --no-print-directory -C ${GNL_DIR} fclean
 	@echo "\033[37;1mExecutable removed.\033[0m"
 
 re: fclean all
