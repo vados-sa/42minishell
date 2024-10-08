@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/01 17:38:18 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:56:25 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static int	check_exit_arguments(t_command *cmd, t_data *data)
 			ft_putstr_fd("exit\nminishell: exit: ", 2);
 			ft_putstr_fd(cmd->arguments->content, 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
+			free_double_pointer_int(data->fds, ft_lstsize_mod(data->command));
+			free(data->id_p);
 			minishell_exit(data, 2, 1);
 		}
 		return (ft_atoi(cmd->arguments->content));
@@ -76,9 +78,15 @@ int	builtin_exit(t_command *cmd, t_data *data)
 		minishell_exit(data, exit_code, 0);
 	exit_code = check_exit_arguments(cmd, data);
 	if (exit_code != -1)
+	{
+		free_double_pointer_int(data->fds, ft_lstsize_mod(data->command));
+		free(data->id_p);
 		minishell_exit(data, exit_code, 0);
+	}
 	free_double_pointer_int(data->fds, ft_lstsize_mod(data->command));
 	free(data->id_p);
+	if (exit_code == -1)
+		minishell_exit(data, 255, 0);
 	minishell_exit(data, EXIT_SUCC, 0);
 	return (EXIT_SUCC);
 }

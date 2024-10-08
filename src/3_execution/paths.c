@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:08:54 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 15:38:31 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/08 13:46:37 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,14 @@ static char	**get_paths(char **env)
 	char	**paths;
 
 	i = 0;
-	while (ft_strncmp("PATH", env[i], 4))
+	while (env[i])
+	{
+		if (!ft_strncmp("PATH", env[i], 4))
+			break ;
 		i++;
+	}
+	if (!env[i])
+		return (NULL);
 	paths = ft_split(env[i] + 5, ':');
 	return (paths);
 }
