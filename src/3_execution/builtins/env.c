@@ -6,13 +6,11 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 13:38:15 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:04:15 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-// CHECK IF QUOTES ARE BEING PRINTED -> IT SHOULDN'T !
 
 static int	has_an_equal_sign(char *variable)
 {

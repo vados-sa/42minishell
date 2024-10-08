@@ -6,13 +6,12 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:59:13 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/30 15:06:38 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:03:59 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-/*utility function for export*/
 void	print_env_var(t_data *data)
 {
 	int	i;
@@ -25,7 +24,6 @@ void	print_env_var(t_data *data)
 	}
 }
 
-/*utility function for export*/
 void	copy_env_vars(char **new_env, char **old_env, int env_size)
 {
 	int	i;

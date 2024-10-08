@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:13:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/05 19:23:00 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:02:49 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,6 @@ void	free_substr(char **s1, char **s2, char **s3)
 	}
 }
 
-/**
- * @brief Frees the t_data structure and all its dynamically allocated members.
- *
- * @param data Pointer to the t_data structure.
- */
 void	free_data(t_data *data)
 {
 	if (!data)

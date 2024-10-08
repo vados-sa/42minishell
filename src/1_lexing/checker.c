@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 16:24:42 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/11 15:35:15 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:05:54 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	check_input(char *cpy_arg)
 	return (EXIT_SUCC);
 }
 
-/*Checks for any unclosed quotes. I none are found, it returns 0.*/
 int	unclosed_quotes(char *input)
 {
 	int	i;

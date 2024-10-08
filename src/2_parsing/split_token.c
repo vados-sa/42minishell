@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:00:51 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 14:12:52 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:05:43 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int	handle_new_command(t_data *data, t_token *token, int *add_new_cmd,
 	return (EXIT_SUCC);
 }
 
-//check if possible to remove quotes in the argument
 int	split_others_token(t_data *data, t_token *token, int *add_new_cmd)
 {
 	static t_command	*command;

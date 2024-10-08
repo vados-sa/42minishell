@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/08 16:34:04 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:06:12 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int	handle_redirection(char *arg, t_token **token)
 	return (i);
 }
 
-// verify if on line 75 in type quote NULL or NONE
-// check line 81 is correct (return -1)
 int	handle_operator(t_data *data, char *arg)
 {
 	int		i;
@@ -83,7 +81,6 @@ int	handle_operator(t_data *data, char *arg)
 	return (i);
 }
 
-// check line 99 is correct (return -1)
 int	handle_quotes(t_data *data, char *arg)
 {
 	int		i;
@@ -101,7 +98,6 @@ int	handle_quotes(t_data *data, char *arg)
 	return (i + 1);
 }
 
-// check line 115 is correct (return -1)
 int	handle_word(t_data *data, char *arg)
 {
 	int		i;

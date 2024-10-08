@@ -6,18 +6,12 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:39:34 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/10/08 15:26:04 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:02:06 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/**
- * @brief Signal handler for interactive mode. Clears the current input line
- * and redisplays the prompt when SIGINT (Ctrl-C) is received.
- *
- * @param sig The received signal value (unused in this function)
- */
 static void	refresh_line(int sig)
 {
 	(void)sig;
@@ -26,13 +20,6 @@ static void	refresh_line(int sig)
 	write(STDOUT_FILENO, "\n", 1);
 	rl_redisplay();
 }
-
-/**
- * @brief Signal handler for non-interactive mode. Displays a new line when a
- * signal is received and prints a message if SIGQUIT (Ctrl-\) is received.
- *
- * @param sig The received signal value
- */
 
 static void	display_new_line(int sig)
 {
@@ -43,21 +30,11 @@ static void	display_new_line(int sig)
 	rl_on_new_line();
 }
 
-/**
- * @brief Sets signal handlers for interactive mode. SIGINT (Ctrl-C) is set to
- * clear the line and redisplay the prompt. SIGQUIT (Ctrl-\) is ignored.
- */
 void	signals_interactive_handler(void)
 {
 	signal(SIGINT, refresh_line);
 	signal(SIGQUIT, SIG_IGN);
 }
-
-/**
- * @brief Sets signal handlers for non-interactive mode. Both SIGINT (Ctrl-C)
- * and SIGQUIT (Ctrl-\) display a new line and, for SIGQUIT, print a "Core
- * Dump" message.
- */
 
 void	signals_non_interactive_handler(void)
 {
