@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/05 14:44:55 by vados-sa          #+#    #+#              #
-#    Updated: 2024/10/05 19:17:03 by vados-sa         ###   ########.fr        #
+#    Updated: 2024/10/08 15:56:53 by mrabelo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -Iincludes
+CFLAGS	= -Wall -Wextra -Werror -Iincludes -g
 LDFLAGS	= -lreadline
 RM		= rm -rf
 

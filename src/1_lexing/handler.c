@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/02 13:56:17 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:34:04 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,3 @@ int	handle_word(t_data *data, char *arg)
 	create_token_list(data, token);
 	return (i);
 }
-
