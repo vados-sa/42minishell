@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_io.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:07:02 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/30 14:09:39 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/08 17:48:22 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	open_redir_in(t_data *data, t_token *token, int flag)
 		data->input_fd = open(data->input_value, flag, 0644);
 		if (data->input_fd < 0)
 			return (perror_return_error(data->input_value));
+		add_fd(data, data->input_fd);
 	}
 	return (EXIT_SUCC);
 }
@@ -47,5 +48,6 @@ int	open_redir_out(t_data *data, t_token *token, int flag)
 	data->output_fd = open(data->output_value, flag, 0644);
 	if (!data->output_fd)
 		return (perror_return_error(data->output_value));
+	add_fd(data, data->output_fd);
 	return (EXIT_SUCC);
 }
