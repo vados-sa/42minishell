@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:39:34 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/10/01 12:34:17 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/08 15:26:04 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ static void	refresh_line(int sig)
 
 static void	display_new_line(int sig)
 {
-	(void)sig;
-	write(STDOUT_FILENO, "\n", 1);
+	if (sig == SIGQUIT)
+		write(STDERR_FILENO, "Quit (core dumped)\n", 19);
+	if (sig == SIGINT)
+		write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 }
 
@@ -60,5 +62,5 @@ void	signals_interactive_handler(void)
 void	signals_non_interactive_handler(void)
 {
 	signal(SIGINT, display_new_line);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, display_new_line);
 }
