@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   command_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/08 16:37:28 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/08 18:13:46 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static int	check_cat(t_command *cmd, t_data *data)
-{
-	if (!strcmp(cmd->command, "cat") && !data->input_value \
-		&& !data->command->arguments)
-		return (1);
-	return (0);
-}
 
 int	process_not_builtin(int pos, t_data *data)
 {
@@ -40,8 +32,6 @@ int	process_not_builtin(int pos, t_data *data)
 		if (redirect_io(data->fds, pos, data, ft_lstsize_mod(data->command)))
 			exit(EXIT_FAIL);
 		close_unused_fd(data->fds, pos, FD_RW, ft_lstsize_mod(data->command));
-		if (check_cat(cmd, data))
-			exit (EXIT_SUCC);
 		execute_command(cmd, data);
 		free_everything(data);
 		exit (data->exit_status);
