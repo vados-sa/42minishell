@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:23:31 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/09 13:28:42 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:02:41 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	heredoc_child_process(t_data *data, int *fd)
 
 int	heredoc_parent_process(t_data *data, int *fd, int status)
 {
+	signals_parent_heredoc_handler();
 	waitpid(-1, &status, 0);
 	remove_fd(data, fd[1]);
 	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)

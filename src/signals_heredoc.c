@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:47:01 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/10/04 14:45:07 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:02:34 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,10 @@ void	heredoc_sigint_handler(int sig)
 void	signals_heredoc_handler(void)
 {
 	signal(SIGINT, heredoc_sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	signals_parent_heredoc_handler(void)
+{
 	signal(SIGQUIT, SIG_IGN);
 }

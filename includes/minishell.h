@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/09 13:38:02 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:03:05 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void		signals_interactive_handler(void);
 
 /**signals_heredoc.c**********************************************************/
 void		signals_heredoc_handler(void);
+void		heredoc_sigint_handler(int sig);
+void		signals_parent_heredoc_handler(void);
 
 /*1_lexer*********************************************************************/
 /**checker.c******************************************************************/
