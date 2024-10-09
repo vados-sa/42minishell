@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/05 19:43:08 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:46:32 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ char		*get_cmd_path(t_command *cmd, char **env);
 
 /**exec.c**********************************************************************/
 int			exec(t_data*data);
-void		child_exec(int pos, t_data *data);
+void		parent_exec(int pos, t_data *data);
 int			processing(t_data *data);
 
 /**pipe.c**********************************************************************/
@@ -163,6 +163,7 @@ int			**create_pipes(int qt_cmd);
 void		close_fd(int *fd);
 void		close_unused_fd(int **fds, int pos, int keep, int cmds_num);
 int			redirect_io(int **fds, int pos, t_data *data, int cmds_num);
+void		handle_redirect_and_exit(t_data *data, int pos);
 
 /**close_fd.c*****************************************************************/
 void		close_unused_fd(int **fds, int pos, int keep, int cmds_num);

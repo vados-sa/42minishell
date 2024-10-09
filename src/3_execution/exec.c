@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:10:58 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/10/01 16:52:32 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:46:30 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	close_all_pipes(int **fds, int cmds_num)
 	}
 }
 
-void	child_exec(int pos, t_data *data)
+void	parent_exec(int pos, t_data *data)
 {
 	int	i;
 	int	exit_code;
@@ -104,6 +104,6 @@ int	processing(t_data *data)
 	if (process_commands(data) == EXIT_FAIL)
 		return (EXIT_FAIL);
 	close_all_pipes(data->fds, cmds_num);
-	child_exec(cmds_num, data);
+	parent_exec(cmds_num, data);
 	return (EXIT_SUCC);
 }

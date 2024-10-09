@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   command_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:00 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/08 18:13:46 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:45:59 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static void	child_process(t_command *cmd, t_data *data, int pos)
+{
+	handle_redirect_and_exit(data, pos);
+	close_unused_fd(data->fds, pos, FD_RW, ft_lstsize_mod(data->command));
+	execute_command(cmd, data);
+	free_everything(data);
+	exit(data->exit_status);
+}
 
 int	process_not_builtin(int pos, t_data *data)
 {
@@ -28,14 +37,7 @@ int	process_not_builtin(int pos, t_data *data)
 	if (data->id_p[pos] < 0)
 		return (EXIT_FAIL);
 	if (data->id_p[pos] == 0)
-	{
-		if (redirect_io(data->fds, pos, data, ft_lstsize_mod(data->command)))
-			exit(EXIT_FAIL);
-		close_unused_fd(data->fds, pos, FD_RW, ft_lstsize_mod(data->command));
-		execute_command(cmd, data);
-		free_everything(data);
-		exit (data->exit_status);
-	}
+		child_process(cmd, data, pos);
 	return (EXIT_SUCC);
 }
 
