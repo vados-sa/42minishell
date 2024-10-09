@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_io.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:07:02 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/08 17:48:22 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:44:26 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	open_redir_in(t_data *data, t_token *token, int flag)
 	if (ft_strcmp(data->input_type, STDIN) != 0 \
 		&& ft_strcmp(data->input_type, HEREDOC) != 0)
 		close(data->input_fd);
+	if (!token->value)
+		return (print_error_code(OTHER_STX_ERROR, token->type[0], EXIT_FAIL));
 	data->input_value = ft_strdup(token->value);
 	if (!data->input_value)
 		return (perror_return_error("redirection value"));
@@ -38,6 +40,8 @@ int	open_redir_out(t_data *data, t_token *token, int flag)
 {
 	if (ft_strcmp(data->output_type, STDOUT) != 0)
 		close(data->output_fd);
+	if (!token->value)
+		return (print_error_code(OTHER_STX_ERROR, token->type[0], EXIT_FAIL));
 	data->output_value = ft_strdup(token->value);
 	if (!data->output_value)
 		return (perror_return_error("redirection value"));
