@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:39:25 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/09 11:45:43 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:35:59 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,11 @@ void	handle_redirect_and_exit(t_data *data, int pos)
 	if (redirect_io(data->fds, pos, data, ft_lstsize_mod(data->command)))
 	{
 		if (data->input_fd == -1)
-			pe_status(data, data->input_value, ": No such file or directory", 1);
+			pe_status(data, data->input_value, ": \
+			No such file or directory", 1);
 		else if (data->output_fd == -1)
-			pe_status(data, data->output_value, ": No such file or directory", 1);
+			pe_status(data, data->output_value, \
+			": No such file or directory", 1);
 		free_everything(data);
 		exit(EXIT_FAIL);
 	}

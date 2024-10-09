@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 18:36:40 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/10/05 19:41:51 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:36:14 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ void	close_all_fds(t_data *data)
 	data->open_fds = NULL;
 }
 
-void	write_line_to_fd(int *fd1, char *line)
+void	write_line_to_fd(int *fd1, char *line, t_data *data)
 {
+	expand_var(&line, data);
 	write(*fd1, line, ft_strlen(line));
 	write(*fd1, "\n", 1);
 	free(line);

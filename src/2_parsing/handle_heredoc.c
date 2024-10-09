@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:23:31 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/05 19:42:34 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:28:42 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	get_all_file(int *fd1, char *limiter, t_data *data)
 			free(line);
 			break ;
 		}
-		write_line_to_fd(fd1, line);
+		write_line_to_fd(fd1, line, data);
 	}
 	close(*fd1);
 }
