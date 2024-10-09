@@ -6,7 +6,7 @@
 /*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/09 11:46:32 by mrabelo-         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:22:01 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define DOUBLE_Q 34 // int representation of \"
 # define PIPE_STX_ERROR "syntax error near unexpected token "
 # define QUOTE_STX_ERROR "syntax error: unclosed quote "
-# define OTHER_STX_ERROR "syntax error near unexpected token"
+# define OTHER_STX_ERROR "syntax error near unexpected token "
 # define FD_E -1
 # define FD_R 0
 # define FD_W 1

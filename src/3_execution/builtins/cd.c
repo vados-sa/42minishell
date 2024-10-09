@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrabelo- <mrabelo-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 23:20:43 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/09/24 15:59:56 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:32:08 by mrabelo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static char	*set_new_path(t_command *cmd, t_data *data)
 	size_t	i;
 
 	i = 0;
-	if (!cmd->arguments)
+	if (!cmd->arguments || !cmd->arguments->content || \
+		ft_strcmp(cmd->arguments->content, "~") == 0)
 	{
 		while (data->env[i])
 		{
@@ -45,6 +46,7 @@ static char	*set_new_path(t_command *cmd, t_data *data)
 	else
 		return (cmd->arguments->content);
 }
+
 
 int	rewrite_path(char *str, char *pwd, t_data *data)
 {
