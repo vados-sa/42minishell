@@ -6,13 +6,13 @@
 #    By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/05 14:44:55 by vados-sa          #+#    #+#              #
-#    Updated: 2024/10/08 18:53:30 by vados-sa         ###   ########.fr        #
+#    Updated: 2024/10/09 17:38:08 by vados-sa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC		= gcc
+CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -Iincludes -g
 LDFLAGS	= -lreadline
 RM		= rm -rf

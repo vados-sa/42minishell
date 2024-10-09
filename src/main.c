@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:17:19 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/04 14:45:48 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:42:32 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int ac, char *av[], char **env)
 
 	if ((ac != 1))
 	{
-		perror("no arguments");
+		ft_putstr_fd("No arguments allowed.\n", 2);
 		return (EXIT_FAIL);
 	}
 	(void)av;

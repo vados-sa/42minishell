@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:36:22 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/08 19:06:12 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:43:26 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	handle_operator(t_data *data, char *arg)
 	t_token	*token;
 
 	i = 0;
+	token = NULL;
 	if (check_double_operator(&arg[i]))
 		return (-1);
 	if ((arg[i] == '<' || arg[i] == '>'))
