@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:23:31 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/10 12:04:06 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:27:42 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	eof_error(char *limiter, int line_num)
 	free(nb);
 }
 
-void	get_all_file(int *fd1, char *limiter, t_data *data)
+void	get_all_file(int *fd1, char *limiter, t_data *data, int quote_flag)
 {
 	char	*line;
 	int		line_num;
@@ -49,17 +49,25 @@ void	get_all_file(int *fd1, char *limiter, t_data *data)
 			free(line);
 			break ;
 		}
-		write_line_to_fd(fd1, line, data);
+		write_line_to_fd(fd1, line, data, quote_flag);
 	}
 	close(*fd1);
 }
 
 int	heredoc_child_process(t_data *data, int *fd)
 {
+	int	quote_flag;
+
+	quote_flag = 0;
 	remove_fd(data, fd[0]);
-	//check for quotes
-	// change input_value
-	get_all_file(&fd[1], data->input_value, data);
+	if (ft_strchr(data->input_value, '\'') || \
+		ft_strchr(data->input_value, '\"'))
+	{
+		quote_flag = 1;
+		if (remove_quotes_from_limiter(&(data->input_value)) != EXIT_SUCC)
+			exit(EXIT_FAILURE);
+	}
+	get_all_file(&fd[1], data->input_value, data, quote_flag);
 	free_data(data);
 	free_env_and_path(data);
 	exit(EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:36 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/09 18:03:05 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:29:20 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int			env_var_len(char *str);
 char		*get_exp_env(char *str, int len, char **env_arg);
 void		remove_possible_quotes(char *str);
 long		get_nbr_of_elements(t_command *cmd_node);
+int			remove_quotes_from_limiter(char **limiter);
 
 /**expander.c*****************************************************************/
 int			expand_var(char **str, t_data *data);
@@ -132,7 +133,8 @@ int			handle_heredoc(t_data *data);
 int			add_fd(t_data *data, int fd);
 void		remove_fd(t_data *data, int fd);
 void		close_all_fds(t_data *data);
-void		write_line_to_fd(int *fd1, char *line, t_data *data);
+void		write_line_to_fd(int *fd1, char *line, \
+			t_data *data, int quote_flag);
 void		exit_cleanup(t_data *data, int *fd1, int exit_code);
 /**organize_final_cmd_array.c*************************************************/
 int			organize_final_cmd_array(t_data *data);

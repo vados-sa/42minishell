@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 17:23:36 by vados-sa          #+#    #+#             */
-/*   Updated: 2024/09/30 13:13:06 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:28:27 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,30 @@ long	get_nbr_of_elements(t_command *cmd_node)
 		cmd_node = cmd_node->next;
 	}
 	return (count);
+}
+
+int	remove_quotes_from_limiter(char **limiter)
+{
+	char	*new_limiter;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	new_limiter = malloc(ft_strlen(*limiter) - 1);
+	if (!new_limiter)
+		return (perror_return_error("malloc failed"));
+	while ((*limiter)[i])
+	{
+		if ((*limiter)[i] != '\'' && (*limiter)[i] != '\"')
+		{
+			new_limiter[j] = (*limiter)[i];
+			j++;
+		}
+		i++;
+	}
+	new_limiter[j] = '\0';
+	free(*limiter);
+	*limiter = new_limiter;
+	return (EXIT_SUCC);
 }
