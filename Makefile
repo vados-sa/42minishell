@@ -6,7 +6,7 @@
 #    By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/05 14:44:55 by vados-sa          #+#    #+#              #
-#    Updated: 2024/10/09 17:38:08 by vados-sa         ###   ########.fr        #
+#    Updated: 2024/10/10 13:43:12 by vados-sa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,10 @@ SRC = $(SRCDIR)/main.c $(SRCDIR)/init.c $(SRCDIR)/signals.c $(SRCDIR)/signals_he
 	$(EXECUTION_DIR)/pipe.c $(EXECUTION_DIR)/close_fd.c \
 	$(UTILS_DIR)/free.c $(UTILS_DIR)/free_structures.c $(UTILS_DIR)/print_message.c $(UTILS_DIR)/utils.c
 
+# List of headers
+HEADERS = $(HEADERS_DIR)/minishell.h $(HEADERS_DIR)/structures.h \
+          $(HEADERS_DIR)/get_next_line.h $(HEADERS_DIR)/libft.h
+
 # Object files
 OBJS = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
@@ -63,7 +67,7 @@ $(NAME): $(OBJS)
 	@echo "\033[32;1mMalu' and Vanessa's Minishell is ready to roll\033[5m ✓ ✓ ✓\033[0m"
 
 # Compilation rule for object files
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
