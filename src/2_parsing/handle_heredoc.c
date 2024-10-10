@@ -6,7 +6,7 @@
 /*   By: vados-sa <vados-sa@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:23:31 by mrabelo-          #+#    #+#             */
-/*   Updated: 2024/10/09 18:02:41 by vados-sa         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:04:06 by vados-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	get_all_file(int *fd1, char *limiter, t_data *data)
 int	heredoc_child_process(t_data *data, int *fd)
 {
 	remove_fd(data, fd[0]);
+	//check for quotes
+	// change input_value
 	get_all_file(&fd[1], data->input_value, data);
 	free_data(data);
 	free_env_and_path(data);
